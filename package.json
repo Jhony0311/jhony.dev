@@ -1,0 +1,38 @@
+{
+  "name": "jhony.dev",
+  "version": "1.0.0",
+  "private": true,
+  "description": "jhony.dev",
+  "author": "Jonathan Ortega",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.3.1",
+    "gatsby": "^3.9.0",
+    "gatsby-plugin-image": "^1.9.0",
+    "gatsby-plugin-manifest": "^3.9.0",
+    "gatsby-plugin-postcss": "^4.9.0",
+    "gatsby-plugin-react-helmet": "^4.9.0",
+    "gatsby-plugin-sharp": "^3.9.0",
+    "gatsby-plugin-sitemap": "^4.5.0",
+    "gatsby-source-contentful": "^5.9.0",
+    "gatsby-source-filesystem": "^3.9.0",
+    "gatsby-transformer-sharp": "^3.9.0",
+    "postcss": "^8.3.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^2.2.4"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
