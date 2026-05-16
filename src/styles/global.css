@@ -1,0 +1,107 @@
+@import 'tailwindcss';
+
+/* ── Light theme ── */
+:root {
+    color-scheme: light;
+
+    --bg: #f2f1ec;
+    --bg-subtle: #ebe7df;
+    --bg-inset: #e4dfd5;
+    --text: #1f1d1a;
+    --text-muted: #6f6a63;
+    --text-faint: #9f9990;
+    --line: rgba(26, 25, 23, 0.1);
+    --nav-bg: rgba(242, 241, 236, 0.84);
+
+    --accent-green: #1a7a5e;
+    --accent-green-soft: rgba(26, 122, 94, 0.12);
+    --accent-blue: #1e5fa8;
+    --accent-blue-soft: rgba(30, 95, 168, 0.1);
+
+    --seedling: #9a7a1e;
+    --budding: #1a7a5e;
+    --evergreen: #1e5fa8;
+
+    --nav-shadow:
+        0 2px 16px rgba(26, 25, 23, 0.1), 0 0 0 1px rgba(26, 25, 23, 0.06);
+    --card-shadow:
+        0 1px 3px rgba(26, 25, 23, 0.06), 0 4px 16px rgba(26, 25, 23, 0.04);
+}
+
+/* ── Dark theme ── */
+.dark {
+    color-scheme: dark;
+
+    --bg: #171512;
+    --bg-subtle: #1f1b17;
+    --bg-inset: #25211c;
+    --text: #e9e5de;
+    --text-muted: #a39b91;
+    --text-faint: #6c655c;
+    --line: rgba(237, 234, 228, 0.09);
+    --nav-bg: rgba(23, 21, 18, 0.86);
+
+    --accent-green: #3ecf8e;
+    --accent-green-soft: rgba(62, 207, 142, 0.14);
+    --accent-blue: #5fa3e0;
+    --accent-blue-soft: rgba(95, 163, 224, 0.12);
+
+    --seedling: #d4a63a;
+    --budding: #3ecf8e;
+    --evergreen: #5fa3e0;
+
+    --nav-shadow:
+        0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(237, 234, 228, 0.06);
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.16);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    background-color: var(--bg);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+code,
+pre,
+kbd,
+.font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+a {
+    color: inherit;
+}
+
+@theme {
+    --color-canvas: var(--bg);
+    --color-canvas-subtle: var(--bg-subtle);
+    --color-canvas-inset: var(--bg-inset);
+
+    --color-ink: var(--text);
+    --color-ink-muted: var(--text-muted);
+    --color-ink-faint: var(--text-faint);
+    --color-line: var(--line);
+
+    --color-accent-green: var(--accent-green);
+    --color-accent-green-soft: var(--accent-green-soft);
+    --color-accent-blue: var(--accent-blue);
+    --color-accent-blue-soft: var(--accent-blue-soft);
+
+    --color-stage-seedling: var(--seedling);
+    --color-stage-budding: var(--budding);
+    --color-stage-evergreen: var(--evergreen);
+}
