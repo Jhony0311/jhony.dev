@@ -2,12 +2,9 @@ import { useEffect, useState } from 'react';
 import {
     ArrowRight,
     ArrowUpRight,
-    Envelope,
-    GithubLogo,
     Leaf,
     Plant,
     Tree,
-    TwitterLogo,
 } from '@phosphor-icons/react';
 import {
     expertise,
@@ -178,52 +175,6 @@ function GardenSection() {
     );
 }
 
-function ContactSection() {
-    return (
-        <section id="contact" className="bg-canvas">
-            <div className="mx-auto w-full max-w-300 px-8 pt-20 pb-24">
-                <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-blue">
-                    Get in touch
-                </p>
-
-                <h2 className="mb-10 font-mono text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-ink">
-                    Let&apos;s talk
-                </h2>
-
-                <div className="flex flex-wrap gap-3">
-                    <a
-                        href="mailto:hi@jhony.dev"
-                        className="inline-flex items-center gap-2 rounded-full bg-canvas-inset px-5 py-2.5 font-mono text-sm font-medium text-ink no-underline ring-1 ring-line transition-all duration-200 hover:bg-accent-green-soft hover:text-accent-green active:-translate-y-px"
-                    >
-                        <Envelope size={15} weight="bold" />
-                        hi@jhony.dev
-                    </a>
-
-                    <a
-                        href="https://github.com/Jhony0311"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-transparent px-5 py-2.5 font-mono text-sm font-medium text-ink-muted no-underline ring-1 ring-line transition-all duration-200 hover:text-accent-blue hover:ring-accent-blue-soft active:-translate-y-px"
-                    >
-                        <GithubLogo size={15} weight="bold" />
-                        GitHub
-                    </a>
-
-                    <a
-                        href="https://twitter.com/jhony0311"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-transparent px-5 py-2.5 font-mono text-sm font-medium text-ink-muted no-underline ring-1 ring-line transition-all duration-200 hover:text-accent-blue hover:ring-accent-blue-soft active:-translate-y-px"
-                    >
-                        <TwitterLogo size={15} weight="bold" />
-                        Twitter
-                    </a>
-                </div>
-            </div>
-        </section>
-    );
-}
-
 export function HomePage() {
     return (
         <>
@@ -286,7 +237,6 @@ export function HomePage() {
                 </section>
 
                 <GardenSection />
-                <ContactSection />
             </main>
         </>
     );

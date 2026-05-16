@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FloatingNav } from '../components/home/FloatingNav';
+---
+
+<Layout
+    title="About · Jonathan Ortega"
+    description="About Jonathan Ortega, software engineer focused on resilient systems and durable software design."
+>
+    <FloatingNav client:load />
+
+    <main class="bg-canvas">
+        <section class="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
+            <p
+                class="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green"
+            >
+                About
+            </p>
+
+            <h1
+                class="m-0 mb-10 max-w-[16ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink"
+            >
+                Building software
+                <br />
+                <span class="text-ink-muted">that lasts</span>
+            </h1>
+
+            <div
+                class="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16"
+            >
+                <div>
+                    <p
+                        class="mb-5 max-w-[52ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                    >
+                        I design and build systems that stay understandable
+                        under pressure. Most of my day-to-day work sits at the
+                        intersection of TypeScript, React, and backend
+                        infrastructure, where reliability and clarity matter
+                        more than novelty.
+                    </p>
+
+                    <p
+                        class="m-0 max-w-[52ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                    >
+                        This site is my working notebook: a place for essays,
+                        notes, and snippets that capture decisions while they
+                        are still fresh.
+                    </p>
+                </div>
+
+                <div>
+                    <p
+                        class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                    >
+                        Areas of focus
+                    </p>
+
+                    <ul class="m-0 flex list-none flex-col gap-2 p-0">
+                        <li
+                            class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                        >
+                            <span
+                                class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green"
+                            ></span>
+                            TypeScript architecture for long-lived codebases.
+                        </li>
+                        <li
+                            class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                        >
+                            <span
+                                class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green"
+                            ></span>
+                            UI systems with clear information hierarchy.
+                        </li>
+                        <li
+                            class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                        >
+                            <span
+                                class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green"
+                            ></span>
+                            Operational tooling that reduces decision fatigue.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

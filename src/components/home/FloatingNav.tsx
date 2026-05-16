@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from '@phosphor-icons/react';
 import { navigation } from './home-data';
+import { IconAction } from '../ui/IconAction';
 
 export function FloatingNav() {
     const [isDark, setIsDark] = useState(false);
@@ -115,42 +116,24 @@ export function FloatingNav() {
                         </a>
                     ))}
 
-                    <button
+                    <IconAction
                         onClick={toggleTheme}
-                        aria-label={
+                        ariaLabel={
                             isDark
                                 ? 'Switch to light theme'
                                 : 'Switch to dark theme'
                         }
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '2rem',
-                            height: '2rem',
-                            borderRadius: '9999px',
-                            border: 'none',
-                            background: 'var(--bg-inset)',
-                            color: 'var(--text-muted)',
-                            cursor: 'pointer',
-                            marginLeft: '0.25rem',
-                            transition: 'color 0.2s ease, background 0.2s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLButtonElement).style.color =
-                                'var(--text)';
-                        }}
-                        onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLButtonElement).style.color =
-                                'var(--text-muted)';
-                        }}
+                        title={isDark ? 'Light mode' : 'Dark mode'}
+                        className="ml-1 h-8 w-8 text-ink-muted"
+                        hoverBackground="var(--bg-subtle)"
+                        hoverForeground="var(--text)"
                     >
                         {isDark ? (
                             <Sun size={15} weight="bold" />
                         ) : (
                             <Moon size={15} weight="bold" />
                         )}
-                    </button>
+                    </IconAction>
                 </div>
             </nav>
         </header>

@@ -20,8 +20,9 @@ export const expertise = [
 ] as const;
 
 export const navigation = [
-    { label: 'Garden', href: '#garden-preview' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Garden', href: '/#garden-preview' },
+    { label: 'Contact', href: '/#contact' },
+    { label: 'About', href: '/about' },
 ] as const;
 
 export const gardenEntries: readonly GardenEntry[] = [

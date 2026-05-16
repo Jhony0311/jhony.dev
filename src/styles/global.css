@@ -17,6 +17,8 @@
     --accent-green-soft: rgba(26, 122, 94, 0.12);
     --accent-blue: #1e5fa8;
     --accent-blue-soft: rgba(30, 95, 168, 0.1);
+    --icon-action-hover-bg-default: rgba(26, 122, 94, 0.2);
+    --icon-action-hover-fg-default: #1a7a5e;
 
     --seedling: #9a7a1e;
     --budding: #1a7a5e;
@@ -45,6 +47,8 @@
     --accent-green-soft: rgba(62, 207, 142, 0.14);
     --accent-blue: #5fa3e0;
     --accent-blue-soft: rgba(95, 163, 224, 0.12);
+    --icon-action-hover-bg-default: rgba(62, 207, 142, 0.24);
+    --icon-action-hover-fg-default: #3ecf8e;
 
     --seedling: #d4a63a;
     --budding: #3ecf8e;
