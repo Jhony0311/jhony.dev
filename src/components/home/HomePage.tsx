@@ -18,6 +18,7 @@ import {
     type GardenType,
 } from './home-data';
 import { FloatingNav } from './FloatingNav';
+import { GardenCardDecoration } from './GardenCardDecoration';
 
 const STAGE_META: Record<GardenStage, { label: string; className: string }> = {
     Seedling: { label: 'Seedling', className: 'text-stage-seedling' },
@@ -51,72 +52,82 @@ function GardenCard({ entry }: { entry: GardenEntry }) {
     return (
         <a
             href={entry.href}
-            className="group block border-t border-line py-6 text-inherit no-underline"
+            className="group relative block rounded-lg border border-line p-6 text-inherit no-underline overflow-hidden transition-all duration-200 hover:border-line/60"
+            style={{
+                boxShadow: 'var(--card-shadow)',
+            }}
         >
-            <div className="mb-2.5 flex items-center gap-3">
-                <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
-                    {TYPE_META[entry.type].label}
-                </span>
+            <GardenCardDecoration stage={entry.stage} />
 
-                <span className="text-xs text-line">·</span>
+            <div className="relative z-10 flex flex-col gap-6">
+                {/* Top section: Title + summary on left, metadata on right */}
+                <div className="flex flex-col md:flex-row md:gap-6 md:items-start">
+                    {/* Left: Title and summary */}
+                    <div className="flex-1 min-w-0">
+                        <h3 className="m-0 mb-3 font-mono text-lg font-semibold leading-snug text-ink transition-colors duration-200 group-hover:text-accent-blue">
+                            {entry.title}
+                        </h3>
 
-                <span
-                    className={`inline-flex items-center gap-1.5 font-mono text-xs font-medium ${stageMeta.className}`}
-                >
-                    <StageIcon stage={entry.stage} />
-                    {stageMeta.label}
-                </span>
+                        <p className="mb-4 max-w-[52ch] font-sans text-sm leading-relaxed font-light text-ink-muted">
+                            {entry.summary}
+                        </p>
+                    </div>
 
-                <span className="text-xs text-line">·</span>
+                    {/* Right: Metadata */}
+                    <div className="flex flex-col gap-2 text-right shrink-0">
+                        <div className="flex items-center justify-end gap-2">
+                            <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
+                                {TYPE_META[entry.type].label}
+                            </span>
+                        </div>
 
-                <span className="font-mono text-xs text-ink-faint">
-                    {entry.lastEdited}
-                </span>
-            </div>
+                        <div className="flex items-center justify-end gap-2">
+                            <span
+                                className={`inline-flex items-center gap-1 font-mono text-xs font-medium ${stageMeta.className}`}
+                            >
+                                {stageMeta.label}
+                                <StageIcon stage={entry.stage} />
+                            </span>
+                        </div>
 
-            <div className="flex items-start justify-between gap-4">
-                <h3 className="m-0 font-mono text-base font-medium leading-snug text-ink transition-colors duration-200 group-hover:text-accent-blue">
-                    {entry.title}
-                </h3>
-
-                <ArrowUpRight
-                    size={16}
-                    weight="bold"
-                    className="mt-[0.2rem] shrink-0 text-ink-faint transition-colors duration-200 group-hover:text-accent-blue"
-                />
-            </div>
-
-            <p className="mt-2 max-w-[52ch] font-sans text-sm leading-relaxed font-light text-ink-muted">
-                {entry.summary}
-            </p>
-
-            {entry.tags.length > 0 && (
-                <div className="mt-3.5 flex flex-wrap gap-1.5">
-                    {entry.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="rounded bg-canvas-inset px-2 py-[0.2rem] font-mono text-xs font-normal tracking-wide text-ink-faint ring-1 ring-line"
-                        >
-                            #{tag}
+                        <span className="font-mono text-xs text-ink-faint">
+                            {entry.lastEdited}
                         </span>
-                    ))}
+                    </div>
                 </div>
-            )}
+
+                {/* Bottom section: Tags and button */}
+                {entry.tags.length > 0 && (
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
+                            {entry.tags.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="rounded-sm bg-canvas-inset px-2 py-1 font-mono text-xs font-normal tracking-wide text-ink-faint ring-1 ring-line"
+                                >
+                                    #{tag}
+                                </span>
+                            ))}
+                        </div>
+                        <div className="inline-flex items-center gap-1.5 rounded-full bg-accent-green-soft px-3 py-1.5 font-mono text-xs font-medium text-accent-green ring-1 ring-accent-green/30 transition-all duration-200 group-hover:bg-accent-green group-hover:text-canvas">
+                            Read
+                            <ArrowUpRight size={12} weight="bold" />
+                        </div>
+                    </div>
+                )}
+            </div>
         </a>
     );
 }
 
 function GardenSkeleton() {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
             {[0, 1, 2].map((i) => (
-                <div key={i} className="border-t border-line py-6">
-                    <div className="mb-3 flex gap-3">
-                        <div className="h-3 w-12 animate-[shimmer_1.6s_ease-in-out_infinite] rounded-[3px] bg-canvas-inset" />
-                        <div className="h-3 w-16 animate-[shimmer_1.6s_ease-in-out_infinite] rounded-[3px] bg-canvas-inset" />
-                    </div>
-                    <div className="mb-2 h-4.5 w-[70%] animate-[shimmer_1.6s_ease-in-out_infinite] rounded bg-canvas-inset" />
-                    <div className="h-3.5 w-[90%] animate-[shimmer_1.6s_ease-in-out_infinite] rounded bg-canvas-inset" />
+                <div key={i} className="rounded-lg border border-line p-6">
+                    <div className="mb-4 h-5 w-[60%] animate-[shimmer_1.6s_ease-in-out_infinite] rounded bg-canvas-inset" />
+                    <div className="mb-3 h-3.5 w-full animate-[shimmer_1.6s_ease-in-out_infinite] rounded bg-canvas-inset" />
+                    <div className="h-3 w-[85%] animate-[shimmer_1.6s_ease-in-out_infinite] rounded bg-canvas-inset" />
                 </div>
             ))}
         </div>
@@ -156,7 +167,7 @@ function GardenSection() {
                 {loading ? (
                     <GardenSkeleton />
                 ) : (
-                    <div>
+                    <div className="flex flex-col gap-4">
                         {gardenEntries.map((entry) => (
                             <GardenCard key={entry.href} entry={entry} />
                         ))}
@@ -170,7 +181,7 @@ function GardenSection() {
 function ContactSection() {
     return (
         <section id="contact" className="bg-canvas">
-            <div className="mx-auto w-full max-w-300 border-t border-line px-8 pt-20 pb-24">
+            <div className="mx-auto w-full max-w-300 px-8 pt-20 pb-24">
                 <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-blue">
                     Get in touch
                 </p>
