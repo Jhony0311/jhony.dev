@@ -1,0 +1,114 @@
+---
+import {
+    Butterfly,
+    Envelope,
+    GithubLogo,
+    LinkedinLogo,
+    TwitterLogo,
+} from '@phosphor-icons/react';
+import { navigation } from '../home/home-data';
+import { IconAction } from '../ui/IconAction';
+
+const year = new Date().getFullYear();
+---
+
+<footer id="contact" class="bg-canvas">
+    <div class="mx-auto w-full max-w-300 px-8 pt-14 pb-8">
+        <div
+            class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,1fr)_18rem] md:gap-8"
+        >
+            <div>
+                <p
+                    class="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-blue"
+                >
+                    Get in touch
+                </p>
+
+                <h2
+                    class="mb-7 font-mono text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-ink"
+                >
+                    Let&apos;s talk
+                </h2>
+
+                <div class="flex flex-wrap gap-3">
+                    <IconAction
+                        href="mailto:hi@jhony.dev"
+                        ariaLabel="Email Jonathan"
+                        title="Email"
+                        className="h-10 w-10"
+                    >
+                        <Envelope size={15} weight="bold" />
+                    </IconAction>
+
+                    <IconAction
+                        href="https://www.linkedin.com/in/jonathanortega"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ariaLabel="Jonathan on LinkedIn"
+                        title="LinkedIn"
+                        className="h-10 w-10"
+                    >
+                        <LinkedinLogo size={15} weight="bold" />
+                    </IconAction>
+
+                    <IconAction
+                        href="https://github.com/Jhony0311"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ariaLabel="Jonathan on GitHub"
+                        title="GitHub"
+                        className="h-10 w-10"
+                    >
+                        <GithubLogo size={15} weight="bold" />
+                    </IconAction>
+
+                    <IconAction
+                        href="https://twitter.com/jhony0311"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ariaLabel="Jonathan on X"
+                        title="X"
+                        className="h-10 w-10"
+                    >
+                        <TwitterLogo size={15} weight="bold" />
+                    </IconAction>
+
+                    <IconAction
+                        href="https://bsky.app/profile/jhony.dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ariaLabel="Jonathan on Bluesky"
+                        title="Bluesky"
+                        className="h-10 w-10"
+                    >
+                        <Butterfly size={15} weight="bold" />
+                    </IconAction>
+                </div>
+            </div>
+
+            <div class="md:justify-self-end">
+                <nav
+                    aria-label="Footer links"
+                    class="flex flex-col items-start gap-2"
+                >
+                    {
+                        navigation.map((item) => (
+                            <a
+                                href={item.href}
+                                class="inline-flex rounded-full px-3 py-1.5 font-mono text-xs text-ink-muted no-underline transition-all duration-200 hover:bg-canvas-inset hover:text-ink active:-translate-y-px"
+                            >
+                                {item.label}
+                            </a>
+                        ))
+                    }
+                </nav>
+            </div>
+        </div>
+
+        <div class="mt-8 border-t border-line pt-4">
+            <p class="m-0 font-mono text-xs text-ink-faint">
+                &copy; {year} Jonathan Ortega
+            </p>
+        </div>
+    </div>
+</footer>

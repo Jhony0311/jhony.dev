@@ -14,7 +14,6 @@ import {
     type GardenStage,
     type GardenType,
 } from './home-data';
-import { FloatingNav } from './FloatingNav';
 import { GardenCardDecoration } from './GardenCardDecoration';
 
 const STAGE_META: Record<GardenStage, { label: string; className: string }> = {
@@ -178,66 +177,61 @@ function GardenSection() {
 export function HomePage() {
     return (
         <>
-            <FloatingNav />
+            <section className="bg-canvas">
+                <div className="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
+                    <p className="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
+                        Software engineer
+                    </p>
 
-            <main>
-                <section className="bg-canvas">
-                    <div className="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
-                        <p className="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
-                            Software engineer
-                        </p>
+                    <h1 className="m-0 mb-10 max-w-[14ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink">
+                        Jonathan
+                        <br />
+                        <span className="text-ink-muted">Ortega</span>
+                    </h1>
 
-                        <h1 className="m-0 mb-10 max-w-[14ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink">
-                            Jonathan
-                            <br />
-                            <span className="text-ink-muted">Ortega</span>
-                        </h1>
+                    <div className="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16">
+                        <div>
+                            <p className="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted">
+                                Building systems that hold shape over time.
+                                Focused on TypeScript, React, and distributed
+                                infrastructure, with a preference for durable
+                                design over clever shortcuts.
+                            </p>
 
-                        <div className="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16">
-                            <div>
-                                <p className="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted">
-                                    Building systems that hold shape over time.
-                                    Focused on TypeScript, React, and
-                                    distributed infrastructure, with a
-                                    preference for durable design over clever
-                                    shortcuts.
-                                </p>
+                            <ul className="m-0 flex list-none flex-col gap-2 p-0">
+                                {focusNotes.map((note) => (
+                                    <li
+                                        key={note}
+                                        className="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                                    >
+                                        <span className="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green" />
+                                        {note}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                                <ul className="m-0 flex list-none flex-col gap-2 p-0">
-                                    {focusNotes.map((note) => (
-                                        <li
-                                            key={note}
-                                            className="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
-                                        >
-                                            <span className="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green" />
-                                            {note}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                        <div>
+                            <p className="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
+                                Working with
+                            </p>
 
-                            <div>
-                                <p className="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
-                                    Working with
-                                </p>
-
-                                <div className="flex flex-wrap gap-2">
-                                    {expertise.map((skill) => (
-                                        <span
-                                            key={skill}
-                                            className="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
-                                        >
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
+                            <div className="flex flex-wrap gap-2">
+                                {expertise.map((skill) => (
+                                    <span
+                                        key={skill}
+                                        className="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                                    >
+                                        {skill}
+                                    </span>
+                                ))}
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <GardenSection />
-            </main>
+            <GardenSection />
         </>
     );
 }

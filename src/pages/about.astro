@@ -1,16 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { FloatingNav } from '../components/home/FloatingNav';
 ---
 
 <Layout
     title="About · Jonathan Ortega"
     description="About Jonathan Ortega, software engineer focused on resilient systems and durable software design."
 >
-    <FloatingNav client:load />
-
-    <main class="bg-canvas">
-        <section class="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
+    <section class="bg-canvas">
+        <div class="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
             <p
                 class="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green"
             >
@@ -83,6 +80,6 @@ import { FloatingNav } from '../components/home/FloatingNav';
                     </ul>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 </Layout>
