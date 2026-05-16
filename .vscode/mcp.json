@@ -5,7 +5,7 @@
       "type": "http",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer ${env:STITCH_API_KEY}",
+        "X-Goog-Api-Key": "${env:STITCH_API_KEY}",
         "X-Goog-User-Project": "${env:STITCH_PROJECT_ID}"
       }
     }
