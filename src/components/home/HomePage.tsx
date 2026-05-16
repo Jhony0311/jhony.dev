@@ -54,14 +54,14 @@ function GardenCard({ entry }: { entry: GardenEntry }) {
             className="group block border-t border-line py-6 text-inherit no-underline"
         >
             <div className="mb-2.5 flex items-center gap-3">
-                <span className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-ink-faint">
+                <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
                     {TYPE_META[entry.type].label}
                 </span>
 
                 <span className="text-xs text-line">·</span>
 
                 <span
-                    className={`inline-flex items-center gap-1.5 font-mono text-[0.6875rem] font-medium ${stageMeta.className}`}
+                    className={`inline-flex items-center gap-1.5 font-mono text-xs font-medium ${stageMeta.className}`}
                 >
                     <StageIcon stage={entry.stage} />
                     {stageMeta.label}
@@ -69,13 +69,13 @@ function GardenCard({ entry }: { entry: GardenEntry }) {
 
                 <span className="text-xs text-line">·</span>
 
-                <span className="font-mono text-[0.6875rem] text-ink-faint">
+                <span className="font-mono text-xs text-ink-faint">
                     {entry.lastEdited}
                 </span>
             </div>
 
             <div className="flex items-start justify-between gap-4">
-                <h3 className="m-0 font-mono text-base font-medium leading-[1.4] text-ink transition-colors duration-200 group-hover:text-accent-blue">
+                <h3 className="m-0 font-mono text-base font-medium leading-snug text-ink transition-colors duration-200 group-hover:text-accent-blue">
                     {entry.title}
                 </h3>
 
@@ -86,7 +86,7 @@ function GardenCard({ entry }: { entry: GardenEntry }) {
                 />
             </div>
 
-            <p className="mt-2 max-w-[52ch] font-sans text-sm leading-[1.65] font-light text-ink-muted">
+            <p className="mt-2 max-w-[52ch] font-sans text-sm leading-relaxed font-light text-ink-muted">
                 {entry.summary}
             </p>
 
@@ -95,7 +95,7 @@ function GardenCard({ entry }: { entry: GardenEntry }) {
                     {entry.tags.map((tag) => (
                         <span
                             key={tag}
-                            className="rounded bg-canvas-inset px-2 py-[0.2rem] font-mono text-[0.625rem] font-normal tracking-[0.04em] text-ink-faint ring-1 ring-line"
+                            className="rounded bg-canvas-inset px-2 py-[0.2rem] font-mono text-xs font-normal tracking-wide text-ink-faint ring-1 ring-line"
                         >
                             #{tag}
                         </span>
@@ -136,7 +136,7 @@ function GardenSection() {
             <div className="mx-auto w-full max-w-300 px-8 py-20">
                 <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
                     <div>
-                        <p className="mb-2 font-mono text-[0.6875rem] font-medium uppercase tracking-widest text-accent-green">
+                        <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
                             Digital Garden
                         </p>
                         <h2 className="m-0 font-mono text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-ink">
@@ -146,7 +146,7 @@ function GardenSection() {
 
                     <a
                         href="/garden"
-                        className="inline-flex items-center gap-1.5 rounded-full border border-accent-blue-soft bg-accent-blue-soft px-4 py-2 font-mono text-[0.8125rem] font-medium text-accent-blue no-underline transition-all duration-200 hover:border-accent-blue hover:bg-accent-blue hover:text-canvas active:-translate-y-px"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-accent-blue-soft bg-accent-blue-soft px-4 py-2 font-mono text-sm font-medium text-accent-blue no-underline transition-all duration-200 hover:border-accent-blue hover:bg-accent-blue hover:text-canvas active:-translate-y-px"
                     >
                         All entries
                         <ArrowRight size={14} weight="bold" />
@@ -171,7 +171,7 @@ function ContactSection() {
     return (
         <section id="contact" className="bg-canvas">
             <div className="mx-auto w-full max-w-300 border-t border-line px-8 pt-20 pb-24">
-                <p className="mb-2 font-mono text-[0.6875rem] font-medium uppercase tracking-widest text-accent-blue">
+                <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-blue">
                     Get in touch
                 </p>
 
@@ -221,7 +221,7 @@ export function HomePage() {
             <main>
                 <section className="bg-canvas">
                     <div className="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
-                        <p className="mb-8 font-mono text-[0.6875rem] font-medium uppercase tracking-widest text-accent-green">
+                        <p className="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
                             Software engineer
                         </p>
 
@@ -233,7 +233,7 @@ export function HomePage() {
 
                         <div className="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16">
                             <div>
-                                <p className="mb-5 max-w-[44ch] font-sans text-[1.0625rem] leading-[1.7] font-light text-ink-muted">
+                                <p className="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted">
                                     Building systems that hold shape over time.
                                     Focused on TypeScript, React, and
                                     distributed infrastructure, with a
@@ -245,7 +245,7 @@ export function HomePage() {
                                     {focusNotes.map((note) => (
                                         <li
                                             key={note}
-                                            className="flex items-start gap-2 font-sans text-sm leading-[1.55] font-light text-ink-muted"
+                                            className="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
                                         >
                                             <span className="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green" />
                                             {note}
@@ -255,7 +255,7 @@ export function HomePage() {
                             </div>
 
                             <div>
-                                <p className="mb-4 font-mono text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-ink-faint">
+                                <p className="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
                                     Working with
                                 </p>
 
@@ -263,7 +263,7 @@ export function HomePage() {
                                     {expertise.map((skill) => (
                                         <span
                                             key={skill}
-                                            className="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-[0.8125rem] font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                                            className="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
                                         >
                                             {skill}
                                         </span>

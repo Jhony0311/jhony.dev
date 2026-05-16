@@ -64,11 +64,8 @@ export function FloatingNav() {
                 {/* Wordmark */}
                 <a
                     href="/"
+                    className="font-mono text-sm font-semibold tracking-[-0.02em]"
                     style={{
-                        fontFamily: "'JetBrains Mono', monospace",
-                        fontSize: '0.875rem',
-                        fontWeight: 600,
-                        letterSpacing: '-0.02em',
                         color: 'var(--text)',
                         textDecoration: 'none',
                     }}
@@ -88,10 +85,8 @@ export function FloatingNav() {
                         <a
                             key={item.href}
                             href={item.href}
+                            className="font-mono text-xs"
                             style={{
-                                fontFamily: "'JetBrains Mono', monospace",
-                                fontSize: '0.8125rem',
-                                fontWeight: 400,
                                 color: 'var(--text-muted)',
                                 textDecoration: 'none',
                                 padding: '0.375rem 0.75rem',
