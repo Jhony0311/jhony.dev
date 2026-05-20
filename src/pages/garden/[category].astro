@@ -2,25 +2,45 @@
 import Layout from '../../layouts/Layout.astro';
 import { GardenPage } from '../../components/garden/GardenPage';
 
-const categories = {
+const categoryLabelMap = {
     essay: 'Essay',
     note: 'Note',
     snippet: 'Snippet',
 } as const;
 
 export function getStaticPaths() {
-    return Object.entries(categories).map(([category, label]) => ({
+    return Object.keys(categoryLabelMap).map((category) => ({
         params: { category },
-        props: { label },
     }));
 }
 
-const { label } = Astro.props;
+const categoryParam = Astro.params.category ?? '';
+const initialSelectedType =
+    categoryLabelMap[categoryParam as keyof typeof categoryLabelMap] ?? 'All';
+const search = Astro.url.searchParams;
+const stageParam = search.get('stage');
+const initialSelectedStage =
+    stageParam === 'Seedling' ||
+    stageParam === 'Budding' ||
+    stageParam === 'Evergreen'
+        ? stageParam
+        : 'All';
+const initialSelectedTags = (search.get('tags') ?? '')
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+const initialPage = Math.max(1, Number(search.get('page') ?? 1) || 1);
 ---
 
 <Layout
-    title={`${label} · Garden · Jonathan Ortega`}
+    title={`${initialSelectedType} · Garden · Jonathan Ortega`}
     description="A living digital garden of essays, notes, and snippets with maturity stages and evolving ideas."
 >
-    <GardenPage client:load />
+    <GardenPage
+        client:load
+        initialSelectedType={initialSelectedType}
+        initialSelectedStage={initialSelectedStage}
+        initialSelectedTags={initialSelectedTags}
+        initialPage={initialPage}
+    />
 </Layout>

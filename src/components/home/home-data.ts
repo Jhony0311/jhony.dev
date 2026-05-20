@@ -34,7 +34,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['javascript', 'async-await', 'debugging'],
         summary:
             'A short log on where structured error boundaries helped and where they still leak too much detail.',
-        href: '/garden/async-error-handling',
+        href: '/async-error-handling',
     },
     {
         title: 'Designing pull request templates that reviewers actually use',
@@ -44,7 +44,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['workflow', 'git', 'review-culture'],
         summary:
             'How we moved from ceremonial templates to prompts that speed up context transfer and reduce review loops.',
-        href: '/garden/pr-template-design',
+        href: '/pr-template-design',
     },
     {
         title: 'I stopped over-abstracting service layers',
@@ -54,7 +54,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['architecture', 'backend', 'tradeoffs'],
         summary:
             'A working note on leaving more shape in the code until the edge cases actually justify the abstraction.',
-        href: '/garden/service-layer-abstraction',
+        href: '/service-layer-abstraction',
     },
     {
         title: 'Migrating a cache key strategy without invalidating everything',
@@ -64,7 +64,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['caching', 'redis', 'operations'],
         summary:
             'A migration approach that lets old and new keys coexist while traffic gradually shifts to the new shape.',
-        href: '/garden/cache-key-migration',
+        href: '/cache-key-migration',
     },
     {
         title: 'React hook for scroll direction without layout thrash',
@@ -74,7 +74,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['react', 'performance', 'hooks'],
         summary:
             'A small hook that reads direction from passive listeners and keeps layout work off the critical path.',
-        href: '/garden/scroll-direction-hook',
+        href: '/scroll-direction-hook',
     },
     {
         title: 'API endpoint checklist before shipping to production',
@@ -84,7 +84,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['api', 'reliability', 'checklist'],
         summary:
             'A compact checklist for validation, observability, and failure modes I run before exposing new routes.',
-        href: '/garden/api-endpoint-checklist',
+        href: '/api-endpoint-checklist',
     },
     {
         title: 'When feature flags increase complexity more than they reduce risk',
@@ -94,7 +94,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['feature-flags', 'risk', 'product-engineering'],
         summary:
             'Criteria I use to decide whether a flag is buying optionality or creating long-lived branching logic.',
-        href: '/garden/feature-flag-complexity',
+        href: '/feature-flag-complexity',
     },
     {
         title: 'Tracing cold starts across regions with practical dashboards',
@@ -104,7 +104,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['observability', 'serverless', 'latency'],
         summary:
             'Early notes on combining logs and traces so cold start behavior becomes measurable instead of anecdotal.',
-        href: '/garden/cold-start-tracing',
+        href: '/cold-start-tracing',
     },
     {
         title: 'Typed environment variables with runtime validation',
@@ -114,7 +114,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['typescript', 'validation', 'tooling'],
         summary:
             'A repeatable pattern for parsing env vars once at startup and exposing strongly typed config everywhere else.',
-        href: '/garden/typed-env-validation',
+        href: '/typed-env-validation',
     },
     {
         title: 'A note-taking cadence that keeps the garden alive',
@@ -124,7 +124,7 @@ export const gardenEntries: readonly GardenEntry[] = [
         tags: ['writing', 'knowledge-management', 'habits'],
         summary:
             'The workflow I use to turn daily implementation notes into durable entries without turning writing into overhead.',
-        href: '/garden/note-taking-cadence',
+        href: '/note-taking-cadence',
     },
 ] as const;
 

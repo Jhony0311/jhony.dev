@@ -31,6 +31,13 @@ type GardenFilterState = {
     page: number;
 };
 
+type GardenPageProps = {
+    initialSelectedType?: FilterOption;
+    initialSelectedStage?: FilterOption;
+    initialSelectedTags?: readonly string[];
+    initialPage?: number;
+};
+
 const STAGE_OPTIONS: readonly GardenStage[] = [
     'Seedling',
     'Budding',
@@ -77,7 +84,8 @@ function parseTypeFromPathname(pathname: string): FilterOption {
         return ALL_FILTER;
     }
 
-    const categorySegment = segments[gardenIndex + 1];
+    const categoryIndex = segments.indexOf('category', gardenIndex + 1);
+    const categorySegment = segments[categoryIndex + 1];
 
     if (!categorySegment) {
         return ALL_FILTER;
@@ -278,30 +286,22 @@ function TagFilterGroup({
     );
 }
 
-export function GardenPage() {
-    const initialState =
-        typeof window !== 'undefined'
-            ? parseStateFromLocation(
-                  window.location.pathname,
-                  window.location.search,
-              )
-            : {
-                  selectedType: ALL_FILTER,
-                  selectedStage: ALL_FILTER,
-                  selectedTags: [],
-                  page: 1,
-              };
-
+export function GardenPage({
+    initialSelectedType = ALL_FILTER,
+    initialSelectedStage = ALL_FILTER,
+    initialSelectedTags = [],
+    initialPage = 1,
+}: GardenPageProps) {
     const [selectedType, setSelectedType] = useState<FilterOption>(
-        initialState.selectedType,
+        initialSelectedType,
     );
     const [selectedStage, setSelectedStage] = useState<FilterOption>(
-        initialState.selectedStage,
+        initialSelectedStage,
     );
     const [selectedTags, setSelectedTags] = useState<string[]>(
-        initialState.selectedTags,
+        [...initialSelectedTags],
     );
-    const [page, setPage] = useState(initialState.page);
+    const [page, setPage] = useState(initialPage);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -381,7 +381,7 @@ export function GardenPage() {
         const categoryPath =
             selectedType === ALL_FILTER
                 ? '/garden'
-                : `/garden/${CATEGORY_SEGMENT_BY_TYPE[selectedType]}`;
+                : `/garden/category/${CATEGORY_SEGMENT_BY_TYPE[selectedType]}`;
         const nextSearch = params.toString();
         const nextUrl = `${categoryPath}${nextSearch ? `?${nextSearch}` : ''}`;
         window.history.replaceState(null, '', nextUrl);

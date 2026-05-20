@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { GardenPostPage } from '../components/garden/GardenPostPage';
+import { gardenEntries } from '../components/home/home-data';
+import { getGardenPostDetail } from '../components/garden/garden-post-data';
+
+export function getStaticPaths() {
+    return gardenEntries.map((entry) => {
+        const slug = entry.href.split('/').filter(Boolean).at(-1) ?? '';
+
+        return {
+            params: { slug },
+        };
+    });
+}
+
+const { slug } = Astro.params;
+const entry = gardenEntries.find((item) => item.href.endsWith(`/${slug}`));
+
+if (!entry) {
+    throw new Error(`Garden post not found: ${slug}`);
+}
+
+const detail = getGardenPostDetail(entry);
+---
+
+<Layout
+    title={`${entry.title} · Garden · Jonathan Ortega`}
+    description={detail.tagline}
+>
+    <GardenPostPage entry={entry} tagline={detail.tagline} blocks={detail.blocks} />
+</Layout>

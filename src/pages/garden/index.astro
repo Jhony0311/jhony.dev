@@ -1,11 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { GardenPage } from '../../components/garden/GardenPage';
+
+const search = Astro.url.searchParams;
+const stageParam = search.get('stage');
+const initialSelectedStage = stageParam === 'Seedling' || stageParam === 'Budding' || stageParam === 'Evergreen'
+    ? stageParam
+    : 'All';
+const initialSelectedTags = (search.get('tags') ?? '')
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+const initialPage = Math.max(1, Number(search.get('page') ?? 1) || 1);
 ---
 
 <Layout
     title="Garden · Jonathan Ortega"
     description="A living digital garden of essays, notes, and snippets with maturity stages and evolving ideas."
 >
-    <GardenPage client:load />
+    <GardenPage
+        client:load
+        initialSelectedStage={initialSelectedStage}
+        initialSelectedTags={initialSelectedTags}
+        initialPage={initialPage}
+    />
 </Layout>
