@@ -1,85 +1,577 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { ArrowUpRight } from '@phosphor-icons/react';
+import { PillLink } from '../components/ui/PillLink';
 ---
 
 <Layout
     title="About · Jonathan Ortega"
-    description="About Jonathan Ortega, software engineer focused on resilient systems and durable software design."
+    description="About Jonathan Ortega: experience, core technologies, and the story behind his software engineering work."
 >
     <section class="bg-canvas">
-        <div class="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
+        <div class="mx-auto w-full max-w-300 px-5 pt-36 pb-20 sm:px-8 md:pt-40">
             <p
                 class="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green"
             >
-                About
+                Software engineer
             </p>
 
-            <h1
-                class="m-0 mb-10 max-w-[16ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink"
-            >
-                Building software
-                <br />
-                <span class="text-ink-muted">that lasts</span>
-            </h1>
-
             <div
-                class="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16"
+                class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:gap-16"
             >
                 <div>
-                    <p
-                        class="mb-5 max-w-[52ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                    <h1
+                        class="m-0 mb-10 max-w-[14ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink"
                     >
-                        I design and build systems that stay understandable
-                        under pressure. Most of my day-to-day work sits at the
-                        intersection of TypeScript, React, and backend
-                        infrastructure, where reliability and clarity matter
-                        more than novelty.
+                        Jonathan
+                        <br />
+                        <span class="text-ink-muted">Ortega</span>
+                    </h1>
+
+                    <p
+                        class="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                    >
+                        I build products that stay clear under load and readable
+                        months later. My work usually sits at the seam between
+                        frontend architecture and backend reliability, where
+                        tradeoffs are practical and every decision leaves a
+                        maintenance footprint.
                     </p>
 
                     <p
-                        class="m-0 max-w-[52ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                        class="m-0 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
                     >
-                        This site is my working notebook: a place for essays,
-                        notes, and snippets that capture decisions while they
-                        are still fresh.
+                        This page is a compact profile of how I work today, what
+                        I have built so far, and the principles that guide my
+                        decisions when systems need to scale without getting
+                        fragile.
                     </p>
+
+                    <PillLink
+                        href="https://www.linkedin.com/in/jmoj/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-8"
+                    >
+                        Full LinkedIn profile
+                        <ArrowUpRight size={14} weight="bold" />
+                    </PillLink>
                 </div>
 
                 <div>
                     <p
                         class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
                     >
-                        Areas of focus
+                        Working with
                     </p>
 
-                    <ul class="m-0 flex list-none flex-col gap-2 p-0">
-                        <li
-                            class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
                         >
-                            <span
-                                class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green"
-                            ></span>
-                            TypeScript architecture for long-lived codebases.
-                        </li>
-                        <li
-                            class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                            TypeScript
+                        </span>
+                        <span
+                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
                         >
-                            <span
-                                class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green"
-                            ></span>
-                            UI systems with clear information hierarchy.
-                        </li>
-                        <li
-                            class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted"
+                            React
+                        </span>
+                        <span
+                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
                         >
-                            <span
-                                class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green"
-                            ></span>
-                            Operational tooling that reduces decision fatigue.
-                        </li>
-                    </ul>
+                            Node.js
+                        </span>
+                        <span
+                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                        >
+                            Distributed systems
+                        </span>
+                        <span
+                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                        >
+                            Developer tooling
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="relative overflow-hidden bg-canvas-subtle">
+        <div class="about-radial" aria-hidden="true"></div>
+
+        <div class="mx-auto w-full max-w-300 px-5 pb-20 sm:px-8">
+            <div
+                class="grid grid-cols-1 gap-12 border-t border-line pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
+            >
+                <section>
+                    <p
+                        class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                    >
+                        Experience snapshot
+                    </p>
+
+                    <ol class="timeline-list m-0 list-none space-y-11 p-0">
+                        <li class="timeline-item timeline-item-current">
+                            <p
+                                class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                            >
+                                2024 - Present
+                            </p>
+                            <span class="timeline-dot" aria-hidden="true"
+                            ></span>
+                            <div>
+                                <p
+                                    class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                >
+                                    Vectorly Labs
+                                </p>
+                                <h2
+                                    class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
+                                >
+                                    Senior Software Engineer
+                                </h2>
+                                <p
+                                    class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                                >
+                                    Leading product delivery across React and
+                                    backend platform services, with a focus on
+                                    reliability, maintainability, and release
+                                    confidence.
+                                </p>
+                            </div>
+                        </li>
+
+                        <li class="timeline-item">
+                            <p
+                                class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                            >
+                                2021 - 2024
+                            </p>
+                            <span class="timeline-dot" aria-hidden="true"
+                            ></span>
+                            <div>
+                                <p
+                                    class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                >
+                                    Northline Commerce
+                                </p>
+                                <h2
+                                    class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
+                                >
+                                    Frontend Platform Engineer
+                                </h2>
+                                <p
+                                    class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                                >
+                                    Built reusable UI foundations and developer
+                                    tooling that improved consistency and
+                                    reduced delivery friction across teams.
+                                </p>
+                            </div>
+                        </li>
+
+                        <li class="timeline-item">
+                            <p
+                                class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                            >
+                                2018 - 2021
+                            </p>
+                            <span class="timeline-dot" aria-hidden="true"
+                            ></span>
+                            <div>
+                                <p
+                                    class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                >
+                                    Meridian Product Studio
+                                </p>
+                                <h2
+                                    class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
+                                >
+                                    Software Engineer
+                                </h2>
+                                <ul class="mt-3 mb-0 list-none space-y-3 p-0">
+                                    <li>
+                                        <p
+                                            class="m-0 text-sm font-medium text-ink"
+                                        >
+                                            Full-stack Engineer
+                                        </p>
+                                        <p
+                                            class="mt-1 mb-0 text-xs leading-relaxed text-ink-faint"
+                                        >
+                                            API design, release automation, and
+                                            production hardening.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p
+                                            class="m-0 text-sm font-medium text-ink"
+                                        >
+                                            Junior Software Engineer
+                                        </p>
+                                        <p
+                                            class="mt-1 mb-0 text-xs leading-relaxed text-ink-faint"
+                                        >
+                                            UI delivery, debugging, and internal
+                                            tooling support.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <p
+                        class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                    >
+                        My story
+                    </p>
+
+                    <p
+                        class="m-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                    >
+                        I moved into software through curiosity and kept growing
+                        by writing things down. Over time, that habit became my
+                        edge: I treat code as a long conversation between teams,
+                        not a one-time output. I enjoy translating business
+                        pressure into clear technical choices and leaving
+                        systems easier to understand after each release.
+                    </p>
+                </section>
+            </div>
+
+            <section class="mt-16 border-t border-line pt-12">
+                <p
+                    class="mb-6 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                >
+                    Facts about me
+                </p>
+
+                <div
+                    class="facts-bento-grid grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[8rem]"
+                >
+                    <article
+                        class="fact-bento-card fact-bento-a md:col-span-3 md:row-span-3"
+                    >
+                        <div class="fact-bento-media">
+                            <img
+                                src="https://picsum.photos/seed/jhony-fact-01/900/640"
+                                alt="Open notebook and keyboard on a work desk"
+                                class="fact-bento-image"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="fact-bento-copy">
+                            <p class="fact-bento-index">01</p>
+                            <p class="fact-bento-text">
+                                I write engineering notes while building, so
+                                decisions stay traceable.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article
+                        class="fact-bento-card fact-bento-b md:col-span-3 md:row-span-2"
+                    >
+                        <div class="fact-bento-media">
+                            <img
+                                src="https://picsum.photos/seed/jhony-fact-02/900/640"
+                                alt="Code editor with structured component files"
+                                class="fact-bento-image"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="fact-bento-copy">
+                            <p class="fact-bento-index">02</p>
+                            <p class="fact-bento-text">
+                                Naming and structure matter to me as much as raw
+                                throughput.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article
+                        class="fact-bento-card fact-bento-c md:col-span-2 md:row-span-2"
+                    >
+                        <div class="fact-bento-media">
+                            <img
+                                src="https://picsum.photos/seed/jhony-fact-03/900/640"
+                                alt="Two engineers collaborating at a desk"
+                                class="fact-bento-image"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="fact-bento-copy">
+                            <p class="fact-bento-index">03</p>
+                            <p class="fact-bento-text">
+                                Mentoring and pair debugging are regular parts
+                                of my week.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article
+                        class="fact-bento-card fact-bento-d md:col-span-2 md:row-span-3"
+                    >
+                        <div class="fact-bento-media">
+                            <img
+                                src="https://picsum.photos/seed/jhony-fact-04/900/640"
+                                alt="Release checklist and deployment dashboard"
+                                class="fact-bento-image"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="fact-bento-copy">
+                            <p class="fact-bento-index">04</p>
+                            <p class="fact-bento-text">
+                                I prefer small, measurable releases over risky
+                                big batch launches.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article
+                        class="fact-bento-card fact-bento-e md:col-span-2 md:row-span-2"
+                    >
+                        <div class="fact-bento-media">
+                            <img
+                                src="https://picsum.photos/seed/jhony-fact-05/900/640"
+                                alt="Collection of technical notes pinned on a wall"
+                                class="fact-bento-image"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="fact-bento-copy">
+                            <p class="fact-bento-index">05</p>
+                            <p class="fact-bento-text">
+                                Most ideas start as rough garden entries before
+                                they become polished writeups.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </section>
 </Layout>
+
+<style>
+    .timeline-list {
+        --timeline-year-width: 7.5rem;
+        --timeline-dot-col-width: 1.5rem;
+        --timeline-gap: 1rem;
+        --timeline-line-width: 3px;
+        position: relative;
+    }
+
+    .timeline-list::before {
+        content: '';
+        position: absolute;
+        top: 0.55rem;
+        bottom: 0.55rem;
+        left: calc(
+            var(--timeline-year-width) + (var(--timeline-dot-col-width) / 2) -
+                (var(--timeline-line-width) / 2)
+        );
+        width: var(--timeline-line-width);
+        background-color: color-mix(
+            in srgb,
+            var(--accent-green) 70%,
+            var(--line)
+        );
+        opacity: 1;
+        border-radius: 9999px;
+    }
+
+    .timeline-item {
+        position: relative;
+        display: grid;
+        grid-template-columns:
+            var(--timeline-year-width) var(--timeline-dot-col-width)
+            minmax(0, 1fr);
+        column-gap: var(--timeline-gap);
+        align-items: start;
+    }
+
+    .timeline-year {
+        line-height: 1rem;
+        padding-top: 0.06rem;
+    }
+
+    .timeline-dot {
+        display: block;
+        position: relative;
+        z-index: 1;
+        justify-self: center;
+        margin-top: 0.06rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 9999px;
+        border: 2px solid var(--accent-green);
+        background-color: var(--bg);
+        box-shadow: 0 0 0 2px var(--bg-subtle);
+    }
+
+    .timeline-item-current .timeline-dot {
+        background-color: var(--accent-green);
+    }
+
+    .about-radial {
+        position: absolute;
+        top: -6rem;
+        right: -9rem;
+        width: 30rem;
+        height: 30rem;
+        pointer-events: none;
+        border-radius: 9999px;
+        background:
+            radial-gradient(
+                circle at 30% 30%,
+                var(--accent-green-soft),
+                transparent 62%
+            ),
+            radial-gradient(
+                circle at 70% 70%,
+                var(--accent-blue-soft),
+                transparent 55%
+            );
+        opacity: 0.9;
+    }
+
+    .facts-bento-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .fact-bento-card {
+        display: grid;
+        grid-template-rows: 2fr 1fr;
+        height: 100%;
+        min-height: 19rem;
+        overflow: hidden;
+        border-radius: 1rem;
+        border: 1px solid var(--line);
+        background-color: var(--bg);
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background-color 0.25s ease;
+    }
+
+    .fact-bento-card:hover {
+        transform: translateY(-2px);
+        border-color: color-mix(in srgb, var(--accent-blue) 40%, var(--line));
+        background-color: var(--bg-subtle);
+    }
+
+    .fact-bento-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .fact-bento-media {
+        min-height: 0;
+        overflow: hidden;
+        background: linear-gradient(140deg, var(--bg-inset), var(--bg-subtle));
+    }
+
+    .fact-bento-copy {
+        padding: 0.9rem 1rem 1rem;
+    }
+
+    .fact-bento-index {
+        margin: 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--accent-green);
+    }
+
+    .fact-bento-text {
+        margin: 0.65rem 0 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+    }
+
+    @media (min-width: 768px) {
+        .facts-bento-grid {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-auto-rows: 7.5rem;
+        }
+
+        .fact-bento-a {
+            grid-column: span 3;
+            grid-row: span 3;
+        }
+
+        .fact-bento-b {
+            grid-column: span 3;
+            grid-row: span 2;
+        }
+
+        .fact-bento-c {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .fact-bento-d {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        .fact-bento-e {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .timeline-list {
+            --timeline-year-width: 100%;
+            --timeline-dot-col-width: 1rem;
+            --timeline-gap: 0.9rem;
+        }
+
+        .timeline-list::before {
+            top: 1.95rem;
+            left: calc(
+                (var(--timeline-dot-col-width) / 2) -
+                    (var(--timeline-line-width) / 2)
+            );
+        }
+
+        .timeline-item {
+            grid-template-columns: var(--timeline-dot-col-width) minmax(0, 1fr);
+            row-gap: 0.4rem;
+        }
+
+        .timeline-year {
+            grid-column: 2;
+            padding-top: 0;
+        }
+
+        .timeline-dot {
+            grid-row: 1 / span 2;
+            margin-top: 0.06rem;
+        }
+
+        .about-radial {
+            right: -10rem;
+            width: 24rem;
+            height: 24rem;
+        }
+
+        .fact-bento-card {
+            min-height: 17rem;
+        }
+    }
+</style>
