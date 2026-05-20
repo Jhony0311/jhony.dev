@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { GardenPage } from '../../components/garden/GardenPage';
+
+const categories = {
+    essay: 'Essay',
+    note: 'Note',
+    snippet: 'Snippet',
+} as const;
+
+export function getStaticPaths() {
+    return Object.entries(categories).map(([category, label]) => ({
+        params: { category },
+        props: { label },
+    }));
+}
+
+const { label } = Astro.props;
+---
+
+<Layout
+    title={`${label} · Garden · Jonathan Ortega`}
+    description="A living digital garden of essays, notes, and snippets with maturity stages and evolving ideas."
+>
+    <GardenPage client:load />
+</Layout>
