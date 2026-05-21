@@ -2,21 +2,22 @@
 import Layout from '../../layouts/Layout.astro';
 import { GardenPage } from '../../components/garden/GardenPage';
 
-const categoryLabelMap = {
-    essay: 'Essay',
-    note: 'Note',
-    snippet: 'Snippet',
-} as const;
-
 export function getStaticPaths() {
-    return Object.keys(categoryLabelMap).map((category) => ({
+    const categories = ['essay', 'note', 'snippet'];
+    return categories.map((category) => ({
         params: { category },
     }));
 }
 
 const categoryParam = Astro.params.category ?? '';
 const initialSelectedType =
-    categoryLabelMap[categoryParam as keyof typeof categoryLabelMap] ?? 'All';
+    categoryParam === 'essay'
+        ? 'Essay'
+        : categoryParam === 'note'
+          ? 'Note'
+          : categoryParam === 'snippet'
+            ? 'Snippet'
+            : 'All';
 const search = Astro.url.searchParams;
 const stageParam = search.get('stage');
 const initialSelectedStage =
