@@ -1,11 +1,65 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { HomePage } from '../components/home/HomePage.tsx';
+import { HomeGardenSection } from '../components/home/HomePage.tsx';
+import { expertise, focusNotes } from '../components/home/home-data';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteContent from '../components/layout/SiteContent.astro';
 ---
 
 <Layout
     title="Jonathan Ortega · Software Engineer"
     description="Software engineer writing notes, essays, and snippets in a living digital garden."
 >
-    <HomePage client:load />
+    <SiteHeader
+        eyebrow="Software engineer"
+        titleLeading="Jonathan"
+        titleMuted="Ortega"
+    >
+        <div
+            class="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16"
+        >
+            <div>
+                <p
+                    class="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                >
+                    Building systems that hold shape over time. Focused on
+                    TypeScript, React, and distributed infrastructure, with a
+                    preference for durable design over clever shortcuts.
+                </p>
+
+                <ul class="m-0 flex list-none flex-col gap-2 p-0">
+                    {
+                        focusNotes.map((note) => (
+                            <li class="flex items-start gap-2 font-sans text-sm leading-relaxed font-light text-ink-muted">
+                                <span class="mt-[0.55rem] inline-block h-1 w-1 shrink-0 rounded-full bg-accent-green" />
+                                {note}
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <div>
+                <p
+                    class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                >
+                    Working with
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    {
+                        expertise.map((skill) => (
+                            <span class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue">
+                                {skill}
+                            </span>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </SiteHeader>
+
+    <SiteContent>
+        <HomeGardenSection client:load />
+    </SiteContent>
 </Layout>

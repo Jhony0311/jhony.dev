@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { GardenPage } from '../../components/garden/GardenPage';
+import SiteHeader from '../../components/layout/SiteHeader.astro';
+import SiteContent from '../../components/layout/SiteContent.astro';
 
 export function getStaticPaths() {
     const categories = ['essay', 'note', 'snippet'];
@@ -37,11 +39,27 @@ const initialPage = Math.max(1, Number(search.get('page') ?? 1) || 1);
     title={`${initialSelectedType} · Garden · Jonathan Ortega`}
     description="A living digital garden of essays, notes, and snippets with maturity stages and evolving ideas."
 >
-    <GardenPage
-        client:load
-        initialSelectedType={initialSelectedType}
-        initialSelectedStage={initialSelectedStage}
-        initialSelectedTags={initialSelectedTags}
-        initialPage={initialPage}
-    />
+    <SiteHeader
+        eyebrow="Digital Garden"
+        titleLeading="A living map of"
+        titleMuted="ongoing work"
+    >
+        <p
+            class="m-0 max-w-[62ch] font-sans text-base font-light leading-relaxed text-ink-muted"
+        >
+            This is the center of gravity for my notes, essays, and snippets.
+            Every entry reflects work in motion, with visible maturity stages
+            and last edited dates so ideas stay useful as they evolve.
+        </p>
+    </SiteHeader>
+
+    <SiteContent>
+        <GardenPage
+            client:load
+            initialSelectedType={initialSelectedType}
+            initialSelectedStage={initialSelectedStage}
+            initialSelectedTags={initialSelectedTags}
+            initialPage={initialPage}
+        />
+    </SiteContent>
 </Layout>

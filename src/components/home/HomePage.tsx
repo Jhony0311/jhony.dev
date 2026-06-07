@@ -18,7 +18,7 @@ function GardenSkeleton() {
     );
 }
 
-function GardenSection() {
+export function HomeGardenSection() {
     const [loading, setLoading] = useState(true);
     const previewEntries = gardenEntries.slice(0, 4);
 
@@ -117,7 +117,7 @@ export function HomePage() {
                 </div>
             </section>
 
-            <GardenSection />
+            <HomeGardenSection />
         </>
     );
 }
