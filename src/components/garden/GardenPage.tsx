@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
-    ArrowLeft,
-    ArrowRight,
-    Leaf,
-    Plant,
-    SlidersHorizontal,
-    Tree,
-    X,
+    ArrowLeftIcon,
+    ArrowRightIcon,
+    LeafIcon,
+    PlantIcon,
+    SlidersHorizontalIcon,
+    TreeIcon,
+    XIcon,
 } from '@phosphor-icons/react';
 import { Button, Dialog, DialogTrigger, Popover } from 'react-aria-components';
 import { GardenCard } from './GardenCard';
@@ -60,11 +60,11 @@ const TYPE_BY_CATEGORY_SEGMENT: Record<string, GardenType> = {
 
 const MATURITY_META: Record<
     GardenStage,
-    { icon: typeof Leaf; className: string }
+    { icon: typeof LeafIcon; className: string }
 > = {
-    Seedling: { icon: Leaf, className: 'text-stage-seedling' },
-    Budding: { icon: Plant, className: 'text-stage-budding' },
-    Evergreen: { icon: Tree, className: 'text-stage-evergreen' },
+    Seedling: { icon: LeafIcon, className: 'text-stage-seedling' },
+    Budding: { icon: PlantIcon, className: 'text-stage-budding' },
+    Evergreen: { icon: TreeIcon, className: 'text-stage-evergreen' },
 };
 
 function isStage(value: string | null): value is GardenStage {
@@ -230,7 +230,7 @@ function TagFilterGroup({
                         className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-canvas-inset text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
                         aria-label="Adjust tag filters"
                     >
-                        <SlidersHorizontal size={14} weight="bold" />
+                        <SlidersHorizontalIcon size={14} weight="bold" />
                     </Button>
 
                     <Popover
@@ -250,7 +250,7 @@ function TagFilterGroup({
                                         onClick={onClearTags}
                                         className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-2 py-1 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
                                     >
-                                        <X size={10} weight="bold" />
+                                        <XIcon size={10} weight="bold" />
                                         Clear
                                     </button>
                                 )}
@@ -529,7 +529,7 @@ export function GardenPage({
                                     disabled={clampedPage === 1}
                                     className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
                                 >
-                                    <ArrowLeft size={12} weight="bold" />
+                                    <ArrowLeftIcon size={12} weight="bold" />
                                     Prev
                                 </button>
 
@@ -560,7 +560,7 @@ export function GardenPage({
                                     className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
                                 >
                                     Next
-                                    <ArrowRight size={12} weight="bold" />
+                                    <ArrowRightIcon size={12} weight="bold" />
                                 </button>
                             </div>
                         )}

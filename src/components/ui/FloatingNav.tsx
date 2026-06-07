@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Moon, Sun } from '@phosphor-icons/react';
-import { navigation } from './home-data';
-import { IconAction } from '../ui/IconAction';
+import { MoonIcon, SunIcon } from '@phosphor-icons/react';
+import { navigation } from '../home/home-data';
+import { IconAction } from './IconAction';
 
 export function FloatingNav() {
     const [isDark, setIsDark] = useState(false);
@@ -129,9 +129,9 @@ export function FloatingNav() {
                         hoverForeground="var(--text)"
                     >
                         {isDark ? (
-                            <Sun size={15} weight="bold" />
+                            <SunIcon size={15} weight="bold" />
                         ) : (
-                            <Moon size={15} weight="bold" />
+                            <MoonIcon size={15} weight="bold" />
                         )}
                     </IconAction>
                 </div>

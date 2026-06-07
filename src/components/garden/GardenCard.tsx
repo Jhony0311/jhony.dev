@@ -1,4 +1,9 @@
-import { ArrowUpRight, Leaf, Plant, Tree } from '@phosphor-icons/react';
+import {
+    ArrowUpRightIcon,
+    LeafIcon,
+    PlantIcon,
+    TreeIcon,
+} from '@phosphor-icons/react';
 import type { GardenEntry, GardenStage, GardenType } from '../home/home-data';
 import { GardenCardDecoration } from '../home/GardenCardDecoration';
 
@@ -21,14 +26,14 @@ function StageIcon({ stage }: { stage: GardenStage }) {
     const className = STAGE_META[stage].className;
 
     if (stage === 'Seedling') {
-        return <Leaf size={12} weight="fill" className={className} />;
+        return <LeafIcon size={12} weight="fill" className={className} />;
     }
 
     if (stage === 'Budding') {
-        return <Plant size={12} weight="fill" className={className} />;
+        return <PlantIcon size={12} weight="fill" className={className} />;
     }
 
-    return <Tree size={12} weight="fill" className={className} />;
+    return <TreeIcon size={12} weight="fill" className={className} />;
 }
 
 export function GardenCard({ entry }: { entry: GardenEntry }) {
@@ -92,7 +97,7 @@ export function GardenCard({ entry }: { entry: GardenEntry }) {
                         </div>
                         <div className="inline-flex items-center gap-1.5 rounded-full bg-accent-green-soft px-3 py-1.5 font-mono text-xs font-medium text-accent-green ring-1 ring-accent-green/30 transition-all duration-200 group-hover:bg-accent-green group-hover:text-canvas">
                             Read
-                            <ArrowUpRight size={12} weight="bold" />
+                            <ArrowUpRightIcon size={12} weight="bold" />
                         </div>
                     </div>
                 )}

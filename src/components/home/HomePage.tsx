@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRightIcon } from '@phosphor-icons/react';
 import { expertise, focusNotes, gardenEntries } from './home-data';
 import { GardenCard } from '../garden/GardenCard';
 import { PillLink } from '../ui/PillLink';
@@ -42,7 +42,7 @@ function GardenSection() {
 
                     <PillLink href="/garden">
                         All entries
-                        <ArrowRight size={14} weight="bold" />
+                        <ArrowRightIcon size={14} weight="bold" />
                     </PillLink>
                 </div>
 
