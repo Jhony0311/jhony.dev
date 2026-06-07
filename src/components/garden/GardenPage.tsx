@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
-    ArrowLeft,
-    ArrowRight,
-    Leaf,
-    Plant,
-    SlidersHorizontal,
-    Tree,
-    X,
+    ArrowLeftIcon,
+    ArrowRightIcon,
+    LeafIcon,
+    PlantIcon,
+    SlidersHorizontalIcon,
+    TreeIcon,
+    XIcon,
 } from '@phosphor-icons/react';
 import { Button, Dialog, DialogTrigger, Popover } from 'react-aria-components';
 import { GardenCard } from './GardenCard';
@@ -60,11 +60,11 @@ const TYPE_BY_CATEGORY_SEGMENT: Record<string, GardenType> = {
 
 const MATURITY_META: Record<
     GardenStage,
-    { icon: typeof Leaf; className: string }
+    { icon: typeof LeafIcon; className: string }
 > = {
-    Seedling: { icon: Leaf, className: 'text-stage-seedling' },
-    Budding: { icon: Plant, className: 'text-stage-budding' },
-    Evergreen: { icon: Tree, className: 'text-stage-evergreen' },
+    Seedling: { icon: LeafIcon, className: 'text-stage-seedling' },
+    Budding: { icon: PlantIcon, className: 'text-stage-budding' },
+    Evergreen: { icon: TreeIcon, className: 'text-stage-evergreen' },
 };
 
 function isStage(value: string | null): value is GardenStage {
@@ -84,8 +84,9 @@ function parseTypeFromPathname(pathname: string): FilterOption {
         return ALL_FILTER;
     }
 
-    const categoryIndex = segments.indexOf('category', gardenIndex + 1);
-    const categorySegment = segments[categoryIndex + 1];
+    const nextSegment = segments[gardenIndex + 1];
+    const categorySegment =
+        nextSegment === 'category' ? segments[gardenIndex + 2] : nextSegment;
 
     if (!categorySegment) {
         return ALL_FILTER;
@@ -230,7 +231,7 @@ function TagFilterGroup({
                         className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-canvas-inset text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
                         aria-label="Adjust tag filters"
                     >
-                        <SlidersHorizontal size={14} weight="bold" />
+                        <SlidersHorizontalIcon size={14} weight="bold" />
                     </Button>
 
                     <Popover
@@ -250,7 +251,7 @@ function TagFilterGroup({
                                         onClick={onClearTags}
                                         className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-2 py-1 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
                                     >
-                                        <X size={10} weight="bold" />
+                                        <XIcon size={10} weight="bold" />
                                         Clear
                                     </button>
                                 )}
@@ -292,15 +293,13 @@ export function GardenPage({
     initialSelectedTags = [],
     initialPage = 1,
 }: GardenPageProps) {
-    const [selectedType, setSelectedType] = useState<FilterOption>(
-        initialSelectedType,
-    );
-    const [selectedStage, setSelectedStage] = useState<FilterOption>(
-        initialSelectedStage,
-    );
-    const [selectedTags, setSelectedTags] = useState<string[]>(
-        [...initialSelectedTags],
-    );
+    const [selectedType, setSelectedType] =
+        useState<FilterOption>(initialSelectedType);
+    const [selectedStage, setSelectedStage] =
+        useState<FilterOption>(initialSelectedStage);
+    const [selectedTags, setSelectedTags] = useState<string[]>([
+        ...initialSelectedTags,
+    ]);
     const [page, setPage] = useState(initialPage);
     const [loading, setLoading] = useState(true);
 
@@ -381,7 +380,7 @@ export function GardenPage({
         const categoryPath =
             selectedType === ALL_FILTER
                 ? '/garden'
-                : `/garden/category/${CATEGORY_SEGMENT_BY_TYPE[selectedType]}`;
+                : `/garden/${CATEGORY_SEGMENT_BY_TYPE[selectedType]}`;
         const nextSearch = params.toString();
         const nextUrl = `${categoryPath}${nextSearch ? `?${nextSearch}` : ''}`;
         window.history.replaceState(null, '', nextUrl);
@@ -404,168 +403,133 @@ export function GardenPage({
     }, []);
 
     return (
-        <>
-            <section className="border-b border-line/60 bg-canvas">
-                <div className="mx-auto w-full max-w-300 px-8 pt-36 pb-16">
-                    <p className="mb-4 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
-                        Digital Garden
+        <div className="mx-auto w-full max-w-300 px-8 py-14">
+            <div className="mb-8 grid grid-cols-1 gap-6 border-b border-line pb-8 md:grid-cols-3">
+                <FilterGroup
+                    label="Category"
+                    options={[ALL_FILTER, 'Essay', 'Note', 'Snippet']}
+                    selected={selectedType}
+                    onSelect={setSelectedType}
+                />
+
+                <FilterGroup
+                    label="Maturity"
+                    options={[ALL_FILTER, 'Seedling', 'Budding', 'Evergreen']}
+                    selected={selectedStage}
+                    onSelect={setSelectedStage}
+                    renderOption={(option) => {
+                        if (option === ALL_FILTER) {
+                            return option;
+                        }
+
+                        const stage = option as GardenStage;
+                        const { icon: StageIcon, className } =
+                            MATURITY_META[stage];
+
+                        return (
+                            <span className="inline-flex items-center gap-1.5">
+                                <span>{option}</span>
+                                <StageIcon
+                                    size={12}
+                                    weight="fill"
+                                    className={className}
+                                />
+                            </span>
+                        );
+                    }}
+                />
+
+                <TagFilterGroup
+                    allTags={allTags}
+                    selectedTags={selectedTags}
+                    onToggleTag={toggleTag}
+                    onClearTags={() => setSelectedTags([])}
+                />
+            </div>
+
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <p className="m-0 font-mono text-xs text-ink-faint">
+                    {filteredEntries.length}{' '}
+                    {filteredEntries.length === 1 ? 'entry' : 'entries'}
+                </p>
+
+                {(selectedType !== ALL_FILTER ||
+                    selectedStage !== ALL_FILTER ||
+                    selectedTags.length > 0) && (
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setSelectedType(ALL_FILTER);
+                            setSelectedStage(ALL_FILTER);
+                            setSelectedTags([]);
+                        }}
+                        className="rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
+                    >
+                        Reset filters
+                    </button>
+                )}
+            </div>
+
+            {loading ? (
+                <GardenSkeleton />
+            ) : paginatedEntries.length === 0 ? (
+                <div className="rounded-lg border border-line bg-canvas p-10 text-center">
+                    <p className="m-0 mb-2 font-mono text-sm font-medium text-ink">
+                        No entries match these filters
                     </p>
-
-                    <h1 className="m-0 mb-6 max-w-[15ch] font-mono text-[clamp(2.75rem,7vw,5.25rem)] font-bold leading-[0.95] tracking-[-0.04em] text-ink">
-                        A living map of ongoing work
-                    </h1>
-
-                    <p className="m-0 max-w-[62ch] font-sans text-base font-light leading-relaxed text-ink-muted">
-                        This is the center of gravity for my notes, essays, and
-                        snippets. Every entry reflects work in motion, with
-                        visible maturity stages and last edited dates so ideas
-                        stay useful as they evolve.
+                    <p className="m-0 font-sans text-sm font-light leading-relaxed text-ink-muted">
+                        Try a different category, maturity stage, or tag.
                     </p>
                 </div>
-            </section>
-
-            <section className="bg-canvas-subtle">
-                <div className="mx-auto w-full max-w-300 px-8 py-14">
-                    <div className="mb-8 grid grid-cols-1 gap-6 border-b border-line pb-8 md:grid-cols-3">
-                        <FilterGroup
-                            label="Category"
-                            options={[ALL_FILTER, 'Essay', 'Note', 'Snippet']}
-                            selected={selectedType}
-                            onSelect={setSelectedType}
-                        />
-
-                        <FilterGroup
-                            label="Maturity"
-                            options={[
-                                ALL_FILTER,
-                                'Seedling',
-                                'Budding',
-                                'Evergreen',
-                            ]}
-                            selected={selectedStage}
-                            onSelect={setSelectedStage}
-                            renderOption={(option) => {
-                                if (option === ALL_FILTER) {
-                                    return option;
-                                }
-
-                                const stage = option as GardenStage;
-                                const { icon: StageIcon, className } =
-                                    MATURITY_META[stage];
-
-                                return (
-                                    <span className="inline-flex items-center gap-1.5">
-                                        <span>{option}</span>
-                                        <StageIcon
-                                            size={12}
-                                            weight="fill"
-                                            className={className}
-                                        />
-                                    </span>
-                                );
-                            }}
-                        />
-
-                        <TagFilterGroup
-                            allTags={allTags}
-                            selectedTags={selectedTags}
-                            onToggleTag={toggleTag}
-                            onClearTags={() => setSelectedTags([])}
-                        />
-                    </div>
-
-                    <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-                        <p className="m-0 font-mono text-xs text-ink-faint">
-                            {filteredEntries.length}{' '}
-                            {filteredEntries.length === 1 ? 'entry' : 'entries'}
-                        </p>
-
-                        {(selectedType !== ALL_FILTER ||
-                            selectedStage !== ALL_FILTER ||
-                            selectedTags.length > 0) && (
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setSelectedType(ALL_FILTER);
-                                    setSelectedStage(ALL_FILTER);
-                                    setSelectedTags([]);
-                                }}
-                                className="rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
-                            >
-                                Reset filters
-                            </button>
-                        )}
-                    </div>
-
-                    {loading ? (
-                        <GardenSkeleton />
-                    ) : paginatedEntries.length === 0 ? (
-                        <div className="rounded-lg border border-line bg-canvas p-10 text-center">
-                            <p className="m-0 mb-2 font-mono text-sm font-medium text-ink">
-                                No entries match these filters
-                            </p>
-                            <p className="m-0 font-sans text-sm font-light leading-relaxed text-ink-muted">
-                                Try a different category, maturity stage, or
-                                tag.
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="flex flex-col gap-4">
-                            {paginatedEntries.map((entry) => (
-                                <GardenCard key={entry.href} entry={entry} />
-                            ))}
-                        </div>
-                    )}
-
-                    {pageCount > 1 &&
-                        !loading &&
-                        paginatedEntries.length > 0 && (
-                            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 border-t border-line pt-6">
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        setPage((prev) => Math.max(1, prev - 1))
-                                    }
-                                    disabled={clampedPage === 1}
-                                    className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    <ArrowLeft size={12} weight="bold" />
-                                    Prev
-                                </button>
-
-                                {pageNumbers.map((pageNumber) => (
-                                    <button
-                                        key={pageNumber}
-                                        type="button"
-                                        onClick={() => setPage(pageNumber)}
-                                        className={[
-                                            'h-8 min-w-8 rounded-full px-2 font-mono text-xs ring-1 transition-all duration-200 active:-translate-y-px',
-                                            pageNumber === clampedPage
-                                                ? 'bg-accent-blue text-canvas ring-accent-blue/20'
-                                                : 'bg-canvas-inset text-ink-muted ring-line hover:bg-accent-blue-soft hover:text-accent-blue',
-                                        ].join(' ')}
-                                    >
-                                        {pageNumber}
-                                    </button>
-                                ))}
-
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        setPage((prev) =>
-                                            Math.min(pageCount, prev + 1),
-                                        )
-                                    }
-                                    disabled={clampedPage === pageCount}
-                                    className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    Next
-                                    <ArrowRight size={12} weight="bold" />
-                                </button>
-                            </div>
-                        )}
+            ) : (
+                <div className="flex flex-col gap-4">
+                    {paginatedEntries.map((entry) => (
+                        <GardenCard key={entry.href} entry={entry} />
+                    ))}
                 </div>
-            </section>
-        </>
+            )}
+
+            {pageCount > 1 && !loading && paginatedEntries.length > 0 && (
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-2 border-t border-line pt-6">
+                    <button
+                        type="button"
+                        onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+                        disabled={clampedPage === 1}
+                        className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                        <ArrowLeftIcon size={12} weight="bold" />
+                        Prev
+                    </button>
+
+                    {pageNumbers.map((pageNumber) => (
+                        <button
+                            key={pageNumber}
+                            type="button"
+                            onClick={() => setPage(pageNumber)}
+                            className={[
+                                'h-8 min-w-8 rounded-full px-2 font-mono text-xs ring-1 transition-all duration-200 active:-translate-y-px',
+                                pageNumber === clampedPage
+                                    ? 'bg-accent-blue text-canvas ring-accent-blue/20'
+                                    : 'bg-canvas-inset text-ink-muted ring-line hover:bg-accent-blue-soft hover:text-accent-blue',
+                            ].join(' ')}
+                        >
+                            {pageNumber}
+                        </button>
+                    ))}
+
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setPage((prev) => Math.min(pageCount, prev + 1))
+                        }
+                        disabled={clampedPage === pageCount}
+                        className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                        Next
+                        <ArrowRightIcon size={12} weight="bold" />
+                    </button>
+                </div>
+            )}
+        </div>
     );
 }

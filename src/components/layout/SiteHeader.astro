@@ -1,0 +1,38 @@
+---
+interface Props {
+    eyebrow: string;
+    titleLeading: string;
+    titleMuted?: string;
+}
+
+const { eyebrow, titleLeading, titleMuted = '' } = Astro.props;
+const hasMutedTitle = titleMuted.trim().length > 0;
+---
+
+<header class="bg-canvas">
+    <div class="mx-auto w-full max-w-300 px-8 pt-36 pb-16">
+        <p
+            class="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green"
+        >
+            {eyebrow}
+        </p>
+
+        <h1
+            class="m-0 mb-6 max-w-[15ch] font-mono text-[clamp(2.75rem,7vw,5.25rem)] font-bold leading-none tracking-[-0.04em] text-ink"
+        >
+            {
+                hasMutedTitle ? (
+                    <>
+                        {titleLeading}
+                        <br />
+                        <span class="text-ink-muted">{titleMuted}</span>
+                    </>
+                ) : (
+                    titleLeading
+                )
+            }
+        </h1>
+
+        <slot />
+    </div>
+</header>

@@ -1,361 +1,357 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { ArrowUpRight } from '@phosphor-icons/react';
+import { ArrowUpRightIcon } from '@phosphor-icons/react';
 import { PillLink } from '../components/ui/PillLink';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteContent from '../components/layout/SiteContent.astro';
 ---
 
 <Layout
     title="About · Jonathan Ortega"
     description="About Jonathan Ortega: experience, core technologies, and the story behind his software engineering work."
 >
-    <section class="bg-canvas">
-        <div class="mx-auto w-full max-w-300 px-5 pt-36 pb-20 sm:px-8 md:pt-40">
-            <p
-                class="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green"
-            >
-                Software engineer
-            </p>
-
-            <div
-                class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:gap-16"
-            >
-                <div>
-                    <h1
-                        class="m-0 mb-10 max-w-[14ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink"
-                    >
-                        Jonathan
-                        <br />
-                        <span class="text-ink-muted">Ortega</span>
-                    </h1>
-
-                    <p
-                        class="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
-                    >
-                        I build products that stay clear under load and readable
-                        months later. My work usually sits at the seam between
-                        frontend architecture and backend reliability, where
-                        tradeoffs are practical and every decision leaves a
-                        maintenance footprint.
-                    </p>
-
-                    <p
-                        class="m-0 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
-                    >
-                        This page is a compact profile of how I work today, what
-                        I have built so far, and the principles that guide my
-                        decisions when systems need to scale without getting
-                        fragile.
-                    </p>
-
-                    <PillLink
-                        href="https://www.linkedin.com/in/jmoj/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-8"
-                    >
-                        Full LinkedIn profile
-                        <ArrowUpRight size={14} weight="bold" />
-                    </PillLink>
-                </div>
-
-                <div>
-                    <p
-                        class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
-                    >
-                        Working with
-                    </p>
-
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
-                        >
-                            TypeScript
-                        </span>
-                        <span
-                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
-                        >
-                            React
-                        </span>
-                        <span
-                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
-                        >
-                            Node.js
-                        </span>
-                        <span
-                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
-                        >
-                            Distributed systems
-                        </span>
-                        <span
-                            class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
-                        >
-                            Developer tooling
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="relative overflow-hidden bg-canvas-subtle">
-        <div class="about-radial" aria-hidden="true"></div>
-
-        <div class="mx-auto w-full max-w-300 px-5 pb-20 sm:px-8">
-            <div
-                class="grid grid-cols-1 gap-12 border-t border-line pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
-            >
-                <section>
-                    <p
-                        class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
-                    >
-                        Experience snapshot
-                    </p>
-
-                    <ol class="timeline-list m-0 list-none space-y-11 p-0">
-                        <li class="timeline-item timeline-item-current">
-                            <p
-                                class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
-                            >
-                                2024 - Present
-                            </p>
-                            <span class="timeline-dot" aria-hidden="true"
-                            ></span>
-                            <div>
-                                <p
-                                    class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
-                                >
-                                    Vectorly Labs
-                                </p>
-                                <h2
-                                    class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
-                                >
-                                    Senior Software Engineer
-                                </h2>
-                                <p
-                                    class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
-                                >
-                                    Leading product delivery across React and
-                                    backend platform services, with a focus on
-                                    reliability, maintainability, and release
-                                    confidence.
-                                </p>
-                            </div>
-                        </li>
-
-                        <li class="timeline-item">
-                            <p
-                                class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
-                            >
-                                2021 - 2024
-                            </p>
-                            <span class="timeline-dot" aria-hidden="true"
-                            ></span>
-                            <div>
-                                <p
-                                    class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
-                                >
-                                    Northline Commerce
-                                </p>
-                                <h2
-                                    class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
-                                >
-                                    Frontend Platform Engineer
-                                </h2>
-                                <p
-                                    class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
-                                >
-                                    Built reusable UI foundations and developer
-                                    tooling that improved consistency and
-                                    reduced delivery friction across teams.
-                                </p>
-                            </div>
-                        </li>
-
-                        <li class="timeline-item">
-                            <p
-                                class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
-                            >
-                                2018 - 2021
-                            </p>
-                            <span class="timeline-dot" aria-hidden="true"
-                            ></span>
-                            <div>
-                                <p
-                                    class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
-                                >
-                                    Meridian Product Studio
-                                </p>
-                                <h2
-                                    class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
-                                >
-                                    Software Engineer
-                                </h2>
-                                <ul class="mt-3 mb-0 list-none space-y-3 p-0">
-                                    <li>
-                                        <p
-                                            class="m-0 text-sm font-medium text-ink"
-                                        >
-                                            Full-stack Engineer
-                                        </p>
-                                        <p
-                                            class="mt-1 mb-0 text-xs leading-relaxed text-ink-faint"
-                                        >
-                                            API design, release automation, and
-                                            production hardening.
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p
-                                            class="m-0 text-sm font-medium text-ink"
-                                        >
-                                            Junior Software Engineer
-                                        </p>
-                                        <p
-                                            class="mt-1 mb-0 text-xs leading-relaxed text-ink-faint"
-                                        >
-                                            UI delivery, debugging, and internal
-                                            tooling support.
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ol>
-                </section>
-
-                <section>
-                    <p
-                        class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
-                    >
-                        My story
-                    </p>
-
-                    <p
-                        class="m-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
-                    >
-                        I moved into software through curiosity and kept growing
-                        by writing things down. Over time, that habit became my
-                        edge: I treat code as a long conversation between teams,
-                        not a one-time output. I enjoy translating business
-                        pressure into clear technical choices and leaving
-                        systems easier to understand after each release.
-                    </p>
-                </section>
-            </div>
-
-            <section class="mt-16 border-t border-line pt-12">
+    <SiteHeader
+        eyebrow="Software engineer"
+        titleLeading="Jonathan"
+        titleMuted="Ortega"
+    >
+        <div
+            class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:gap-16"
+        >
+            <div>
                 <p
-                    class="mb-6 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                    class="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
                 >
-                    Facts about me
+                    I build products that stay clear under load and readable
+                    months later. My work usually sits at the seam between
+                    frontend architecture and backend reliability, where
+                    tradeoffs are practical and every decision leaves a
+                    maintenance footprint.
                 </p>
 
-                <div
-                    class="facts-bento-grid grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[8rem]"
+                <p
+                    class="m-0 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
                 >
-                    <article
-                        class="fact-bento-card fact-bento-a md:col-span-3 md:row-span-3"
-                    >
-                        <div class="fact-bento-media">
-                            <img
-                                src="https://picsum.photos/seed/jhony-fact-01/900/640"
-                                alt="Open notebook and keyboard on a work desk"
-                                class="fact-bento-image"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="fact-bento-copy">
-                            <p class="fact-bento-index">01</p>
-                            <p class="fact-bento-text">
-                                I write engineering notes while building, so
-                                decisions stay traceable.
-                            </p>
-                        </div>
-                    </article>
+                    This page is a compact profile of how I work today, what I
+                    have built so far, and the principles that guide my
+                    decisions when systems need to scale without getting
+                    fragile.
+                </p>
 
-                    <article
-                        class="fact-bento-card fact-bento-b md:col-span-3 md:row-span-2"
-                    >
-                        <div class="fact-bento-media">
-                            <img
-                                src="https://picsum.photos/seed/jhony-fact-02/900/640"
-                                alt="Code editor with structured component files"
-                                class="fact-bento-image"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="fact-bento-copy">
-                            <p class="fact-bento-index">02</p>
-                            <p class="fact-bento-text">
-                                Naming and structure matter to me as much as raw
-                                throughput.
-                            </p>
-                        </div>
-                    </article>
+                <PillLink
+                    href="https://www.linkedin.com/in/jmoj/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-8"
+                >
+                    Full LinkedIn profile
+                    <ArrowUpRightIcon size={14} weight="bold" />
+                </PillLink>
+            </div>
 
-                    <article
-                        class="fact-bento-card fact-bento-c md:col-span-2 md:row-span-2"
-                    >
-                        <div class="fact-bento-media">
-                            <img
-                                src="https://picsum.photos/seed/jhony-fact-03/900/640"
-                                alt="Two engineers collaborating at a desk"
-                                class="fact-bento-image"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="fact-bento-copy">
-                            <p class="fact-bento-index">03</p>
-                            <p class="fact-bento-text">
-                                Mentoring and pair debugging are regular parts
-                                of my week.
-                            </p>
-                        </div>
-                    </article>
+            <div>
+                <p
+                    class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                >
+                    Working with
+                </p>
 
-                    <article
-                        class="fact-bento-card fact-bento-d md:col-span-2 md:row-span-3"
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
                     >
-                        <div class="fact-bento-media">
-                            <img
-                                src="https://picsum.photos/seed/jhony-fact-04/900/640"
-                                alt="Release checklist and deployment dashboard"
-                                class="fact-bento-image"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="fact-bento-copy">
-                            <p class="fact-bento-index">04</p>
-                            <p class="fact-bento-text">
-                                I prefer small, measurable releases over risky
-                                big batch launches.
-                            </p>
-                        </div>
-                    </article>
-
-                    <article
-                        class="fact-bento-card fact-bento-e md:col-span-2 md:row-span-2"
+                        TypeScript
+                    </span>
+                    <span
+                        class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
                     >
-                        <div class="fact-bento-media">
-                            <img
-                                src="https://picsum.photos/seed/jhony-fact-05/900/640"
-                                alt="Collection of technical notes pinned on a wall"
-                                class="fact-bento-image"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="fact-bento-copy">
-                            <p class="fact-bento-index">05</p>
-                            <p class="fact-bento-text">
-                                Most ideas start as rough garden entries before
-                                they become polished writeups.
-                            </p>
-                        </div>
-                    </article>
+                        React
+                    </span>
+                    <span
+                        class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                    >
+                        Node.js
+                    </span>
+                    <span
+                        class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                    >
+                        Distributed systems
+                    </span>
+                    <span
+                        class="rounded-md bg-canvas-inset px-3 py-1.5 font-mono text-sm font-normal text-ink-muted ring-1 ring-line transition-colors duration-200 hover:bg-accent-blue-soft hover:text-accent-blue"
+                    >
+                        Developer tooling
+                    </span>
                 </div>
-            </section>
+            </div>
         </div>
-    </section>
+    </SiteHeader>
+
+    <SiteContent>
+        <section class="relative overflow-hidden">
+            <div class="about-radial" aria-hidden="true"></div>
+
+            <div class="mx-auto w-full max-w-300 px-5 pb-20 sm:px-8">
+                <div
+                    class="grid grid-cols-1 gap-12 pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
+                >
+                    <section>
+                        <p
+                            class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                        >
+                            Experience snapshot
+                        </p>
+
+                        <ol class="timeline-list m-0 list-none space-y-11 p-0">
+                            <li class="timeline-item timeline-item-current">
+                                <p
+                                    class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                >
+                                    2024 - Present
+                                </p>
+                                <span class="timeline-dot" aria-hidden="true"
+                                ></span>
+                                <div>
+                                    <p
+                                        class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                    >
+                                        Vectorly Labs
+                                    </p>
+                                    <h2
+                                        class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
+                                    >
+                                        Senior Software Engineer
+                                    </h2>
+                                    <p
+                                        class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                                    >
+                                        Leading product delivery across React
+                                        and backend platform services, with a
+                                        focus on reliability, maintainability,
+                                        and release confidence.
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li class="timeline-item">
+                                <p
+                                    class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                >
+                                    2021 - 2024
+                                </p>
+                                <span class="timeline-dot" aria-hidden="true"
+                                ></span>
+                                <div>
+                                    <p
+                                        class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                    >
+                                        Northline Commerce
+                                    </p>
+                                    <h2
+                                        class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
+                                    >
+                                        Frontend Platform Engineer
+                                    </h2>
+                                    <p
+                                        class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                                    >
+                                        Built reusable UI foundations and
+                                        developer tooling that improved
+                                        consistency and reduced delivery
+                                        friction across teams.
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li class="timeline-item">
+                                <p
+                                    class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                >
+                                    2018 - 2021
+                                </p>
+                                <span class="timeline-dot" aria-hidden="true"
+                                ></span>
+                                <div>
+                                    <p
+                                        class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                    >
+                                        Meridian Product Studio
+                                    </p>
+                                    <h2
+                                        class="mt-2 mb-0 text-lg font-medium tracking-tight text-ink"
+                                    >
+                                        Software Engineer
+                                    </h2>
+                                    <ul
+                                        class="mt-3 mb-0 list-none space-y-3 p-0"
+                                    >
+                                        <li>
+                                            <p
+                                                class="m-0 text-sm font-medium text-ink"
+                                            >
+                                                Full-stack Engineer
+                                            </p>
+                                            <p
+                                                class="mt-1 mb-0 text-xs leading-relaxed text-ink-faint"
+                                            >
+                                                API design, release automation,
+                                                and production hardening.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p
+                                                class="m-0 text-sm font-medium text-ink"
+                                            >
+                                                Junior Software Engineer
+                                            </p>
+                                            <p
+                                                class="mt-1 mb-0 text-xs leading-relaxed text-ink-faint"
+                                            >
+                                                UI delivery, debugging, and
+                                                internal tooling support.
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <p
+                            class="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                        >
+                            My story
+                        </p>
+
+                        <p
+                            class="m-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                        >
+                            I moved into software through curiosity and kept
+                            growing by writing things down. Over time, that
+                            habit became my edge: I treat code as a long
+                            conversation between teams, not a one-time output. I
+                            enjoy translating business pressure into clear
+                            technical choices and leaving systems easier to
+                            understand after each release.
+                        </p>
+                    </section>
+                </div>
+
+                <section class="mt-16 border-t border-line pt-12">
+                    <p
+                        class="mb-6 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint"
+                    >
+                        Facts about me
+                    </p>
+
+                    <div
+                        class="facts-bento-grid grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[8rem]"
+                    >
+                        <article
+                            class="fact-bento-card fact-bento-a md:col-span-3 md:row-span-3"
+                        >
+                            <div class="fact-bento-media">
+                                <img
+                                    src="https://picsum.photos/seed/jhony-fact-01/900/640"
+                                    alt="Open notebook and keyboard on a work desk"
+                                    class="fact-bento-image"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="fact-bento-copy">
+                                <p class="fact-bento-index">01</p>
+                                <p class="fact-bento-text">
+                                    I write engineering notes while building, so
+                                    decisions stay traceable.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article
+                            class="fact-bento-card fact-bento-b md:col-span-3 md:row-span-2"
+                        >
+                            <div class="fact-bento-media">
+                                <img
+                                    src="https://picsum.photos/seed/jhony-fact-02/900/640"
+                                    alt="Code editor with structured component files"
+                                    class="fact-bento-image"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="fact-bento-copy">
+                                <p class="fact-bento-index">02</p>
+                                <p class="fact-bento-text">
+                                    Naming and structure matter to me as much as
+                                    raw throughput.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article
+                            class="fact-bento-card fact-bento-c md:col-span-2 md:row-span-2"
+                        >
+                            <div class="fact-bento-media">
+                                <img
+                                    src="https://picsum.photos/seed/jhony-fact-03/900/640"
+                                    alt="Two engineers collaborating at a desk"
+                                    class="fact-bento-image"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="fact-bento-copy">
+                                <p class="fact-bento-index">03</p>
+                                <p class="fact-bento-text">
+                                    Mentoring and pair debugging are regular
+                                    parts of my week.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article
+                            class="fact-bento-card fact-bento-d md:col-span-2 md:row-span-3"
+                        >
+                            <div class="fact-bento-media">
+                                <img
+                                    src="https://picsum.photos/seed/jhony-fact-04/900/640"
+                                    alt="Release checklist and deployment dashboard"
+                                    class="fact-bento-image"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="fact-bento-copy">
+                                <p class="fact-bento-index">04</p>
+                                <p class="fact-bento-text">
+                                    I prefer small, measurable releases over
+                                    risky big batch launches.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article
+                            class="fact-bento-card fact-bento-e md:col-span-2 md:row-span-2"
+                        >
+                            <div class="fact-bento-media">
+                                <img
+                                    src="https://picsum.photos/seed/jhony-fact-05/900/640"
+                                    alt="Collection of technical notes pinned on a wall"
+                                    class="fact-bento-image"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="fact-bento-copy">
+                                <p class="fact-bento-index">05</p>
+                                <p class="fact-bento-text">
+                                    Most ideas start as rough garden entries
+                                    before they become polished writeups.
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </SiteContent>
 </Layout>
 
 <style>

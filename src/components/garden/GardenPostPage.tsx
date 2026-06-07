@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, Leaf, Plant, Tree } from '@phosphor-icons/react';
+import { ArrowLeftIcon, ArrowUpRightIcon, LeafIcon, PlantIcon, TreeIcon } from '@phosphor-icons/react';
 import type { GardenEntry, GardenStage, GardenType } from '../home/home-data';
 import { STAGE_META } from './GardenCard';
 import {
@@ -27,14 +27,14 @@ function StageIcon({ stage }: { stage: GardenStage }) {
     const className = STAGE_META[stage].className;
 
     if (stage === 'Seedling') {
-        return <Leaf size={12} weight="fill" className={className} />;
+        return <LeafIcon size={12} weight="fill" className={className} />;
     }
 
     if (stage === 'Budding') {
-        return <Plant size={12} weight="fill" className={className} />;
+        return <PlantIcon size={12} weight="fill" className={className} />;
     }
 
-    return <Tree size={12} weight="fill" className={className} />;
+    return <TreeIcon size={12} weight="fill" className={className} />;
 }
 
 function widthClass(width: GardenDetailBlock['width'] = 'narrow') {
@@ -82,7 +82,7 @@ function renderQuote(block: GardenQuoteBlock) {
                             </p>
                         )}
                     </div>
-                    <ArrowUpRight size={14} weight="bold" className="text-accent-blue" />
+                    <ArrowUpRightIcon size={14} weight="bold" className="text-accent-blue" />
                 </footer>
             </blockquote>
         </div>
@@ -241,7 +241,7 @@ export function GardenPostPage({ entry, tagline, blocks }: GardenPostPageProps) 
                             href="/garden"
                             className="mb-6 inline-flex items-center gap-2 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
                         >
-                            <ArrowLeft size={12} weight="bold" />
+                            <ArrowLeftIcon size={12} weight="bold" />
                             Back to garden
                         </a>
 
