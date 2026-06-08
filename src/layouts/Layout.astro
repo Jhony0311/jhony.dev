@@ -19,6 +19,36 @@ const {
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
+        <!-- Anti-flicker: set dark class before first paint from cookie, fallback to system -->
+        <script is:inline>
+            (function () {
+                function getCookie(name) {
+                    var re = new RegExp(
+                        '(?:^|; )' +
+                            name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
+                            '=([^;]*)',
+                    );
+                    var m = document.cookie.match(re);
+                    return m ? decodeURIComponent(m[1]) : undefined;
+                }
+                var theme = getCookie('theme');
+                var isDark;
+                if (theme === 'dark') {
+                    isDark = true;
+                } else if (theme === 'light') {
+                    isDark = false;
+                } else {
+                    isDark = window.matchMedia(
+                        '(prefers-color-scheme: dark)',
+                    ).matches;
+                    if (!theme) {
+                        document.cookie =
+                            'theme=system; max-age=31536000; path=/; SameSite=Lax';
+                    }
+                }
+                document.documentElement.classList.toggle('dark', isDark);
+            })();
+        </script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
