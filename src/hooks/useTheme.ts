@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 export type Theme = 'dark' | 'light' | 'system';
 
@@ -32,35 +32,51 @@ function parseTheme(val: string | undefined): Theme {
     return 'system';
 }
 
-function getInitialState(): ThemeState {
-    const theme = parseTheme(getCookie(COOKIE_NAME));
-    // Source of truth: document class (set by the inline script before hydration)
-    const isDark = document.documentElement.classList.contains('dark');
-    return { theme, isDark, isLight: !isDark };
+function getInitialTheme(): Theme {
+    return parseTheme(getCookie(COOKIE_NAME));
+}
+
+function getIsDark(theme: Theme): boolean {
+    if (theme === 'dark') return true;
+    if (theme === 'light') return false;
+    // In system mode, document class is the source of truth.
+    return document.documentElement.classList.contains('dark');
+}
+
+function getSystemThemeSnapshot(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
 export function useTheme(): [ThemeState, (theme: Theme) => void] {
-    const [state, setState] = useState<ThemeState>(() => {
+    const [theme, setThemeState] = useState<Theme>(() => {
         if (typeof window === 'undefined') {
-            return { theme: 'system', isDark: false, isLight: true };
+            return 'system';
         }
-        return getInitialState();
+        return getInitialTheme();
     });
 
-    // Respond to system preference changes only when theme is 'system'
-    useEffect(() => {
-        if (state.theme !== 'system') return;
+    const systemIsDark = useSyncExternalStore(
+        (onStoreChange) => {
+            if (typeof window === 'undefined') return () => {};
 
-        const mq = window.matchMedia('(prefers-color-scheme: dark)');
-        const handler = (e: MediaQueryListEvent) => {
-            const isDark = e.matches;
-            document.documentElement.classList.toggle('dark', isDark);
-            setState({ theme: 'system', isDark, isLight: !isDark });
-        };
+            const mq = window.matchMedia('(prefers-color-scheme: dark)');
+            const handler = (e: MediaQueryListEvent) => {
+                if (theme === 'system') {
+                    document.documentElement.classList.toggle(
+                        'dark',
+                        e.matches,
+                    );
+                }
+                onStoreChange();
+            };
 
-        mq.addEventListener('change', handler);
-        return () => mq.removeEventListener('change', handler);
-    }, [state.theme]);
+            mq.addEventListener('change', handler);
+            return () => mq.removeEventListener('change', handler);
+        },
+        getSystemThemeSnapshot,
+        () => false,
+    );
 
     const setTheme = (nextTheme: Theme): void => {
         let isDark: boolean;
@@ -69,13 +85,20 @@ export function useTheme(): [ThemeState, (theme: Theme) => void] {
         } else if (nextTheme === 'light') {
             isDark = false;
         } else {
-            isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            isDark = getSystemThemeSnapshot();
         }
 
         document.documentElement.classList.toggle('dark', isDark);
         setCookie(COOKIE_NAME, nextTheme);
-        setState({ theme: nextTheme, isDark, isLight: !isDark });
+        setThemeState(nextTheme);
     };
 
-    return [state, setTheme];
+    const isDark =
+        typeof window === 'undefined'
+            ? false
+            : theme === 'system'
+              ? systemIsDark
+              : getIsDark(theme);
+
+    return [{ theme, isDark, isLight: !isDark }, setTheme];
 }
