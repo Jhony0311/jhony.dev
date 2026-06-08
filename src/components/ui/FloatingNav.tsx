@@ -3,22 +3,12 @@
 import { useEffect, useState } from 'react';
 import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { navigation } from '../home/home-data';
+import { useTheme } from '../../hooks/useTheme';
 import { IconAction } from './IconAction';
 
 export function FloatingNav() {
-    const [isDark, setIsDark] = useState(false);
+    const [{ isDark }, setTheme] = useTheme();
     const [scrolled, setScrolled] = useState(false);
-
-    // Initialise theme from system preference
-    useEffect(() => {
-        const prefersDark = window.matchMedia(
-            '(prefers-color-scheme: dark)',
-        ).matches;
-        const stored = localStorage.getItem('theme');
-        const dark = stored ? stored === 'dark' : prefersDark;
-        setIsDark(dark);
-        document.documentElement.classList.toggle('dark', dark);
-    }, []);
 
     // Detect scroll to tighten the nav background
     useEffect(() => {
@@ -28,10 +18,7 @@ export function FloatingNav() {
     }, []);
 
     function toggleTheme() {
-        const next = !isDark;
-        setIsDark(next);
-        document.documentElement.classList.toggle('dark', next);
-        localStorage.setItem('theme', next ? 'dark' : 'light');
+        setTheme(isDark ? 'light' : 'dark');
     }
 
     return (
