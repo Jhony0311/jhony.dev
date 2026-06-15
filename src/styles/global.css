@@ -3,29 +3,145 @@
 /* Enable class-based dark mode per Tailwind v4 docs */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Light theme ── */
+@theme {
+    --font-sans: Inter, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'ui-monospace', 'SFMono-Regular', monospace;
+
+    --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+    --color-canvas-50: #f8f7f3;
+    --color-canvas-100: #f2f1ec;
+    --color-canvas-200: #ebe7df;
+    --color-canvas-300: #e4dfd5;
+    --color-canvas-400: #d6cfc3;
+    --color-canvas-500: #c6bdb1;
+    --color-canvas-600: #b1a79b;
+    --color-canvas-700: #958a7c;
+    --color-canvas-800: #7b7064;
+    --color-canvas-900: #61574c;
+    --color-canvas-950: #40382f;
+
+    --color-accent-green-50: #edf7f2;
+    --color-accent-green-100: #d7efe7;
+    --color-accent-green-200: #b7e3d4;
+    --color-accent-green-300: #8fd2bb;
+    --color-accent-green-400: #63be9f;
+    --color-accent-green-500: #3ea984;
+    --color-accent-green-600: #29886a;
+    --color-accent-green-700: #1a7a5e;
+    --color-accent-green-800: #155f49;
+    --color-accent-green-900: #114936;
+    --color-accent-green-950: #0c2f23;
+
+    --color-accent-blue-50: #eef4fb;
+    --color-accent-blue-100: #d7e6f7;
+    --color-accent-blue-200: #b7d2f0;
+    --color-accent-blue-300: #8bb7e5;
+    --color-accent-blue-400: #629bd8;
+    --color-accent-blue-500: #3d81c6;
+    --color-accent-blue-600: #2a69b0;
+    --color-accent-blue-700: #1e5fa8;
+    --color-accent-blue-800: #1a4e88;
+    --color-accent-blue-900: #153b66;
+    --color-accent-blue-950: #0f2742;
+
+    --color-stage-seedling: #9a7a1e;
+    --color-stage-budding: #1a7a5e;
+    --color-stage-evergreen: #1e5fa8;
+
+    --color-canvas: var(--color-canvas-100);
+    --color-canvas-subtle: var(--color-canvas-200);
+    --color-canvas-inset: var(--color-canvas-300);
+    --color-ink: #1f1d1a;
+    --color-ink-muted: #6f6a63;
+    --color-ink-faint: #9f9990;
+    --color-line: rgba(26, 25, 23, 0.1);
+
+    --color-accent-green: var(--color-accent-green-700);
+    --color-accent-green-soft: var(--color-accent-green-50);
+    --color-accent-blue: var(--color-accent-blue-700);
+    --color-accent-blue-soft: var(--color-accent-blue-50);
+}
+
+.dark {
+    color-scheme: dark;
+
+    --color-canvas-50: #2c2823;
+    --color-canvas-100: #25211c;
+    --color-canvas-200: #1f1b17;
+    --color-canvas-300: #171512;
+    --color-canvas-400: #120f0d;
+    --color-canvas-500: #100d0b;
+    --color-canvas-600: #0e0c0a;
+    --color-canvas-700: #0c0a08;
+    --color-canvas-800: #0a0806;
+    --color-canvas-900: #080705;
+    --color-canvas-950: #060504;
+
+    --color-accent-green-50: #123529;
+    --color-accent-green-100: #163e30;
+    --color-accent-green-200: #184838;
+    --color-accent-green-300: #1b5742;
+    --color-accent-green-400: #3ecf8e;
+    --color-accent-green-500: #32bb7d;
+    --color-accent-green-600: #289f6b;
+    --color-accent-green-700: #1f8358;
+    --color-accent-green-800: #186645;
+    --color-accent-green-900: #124d34;
+    --color-accent-green-950: #0b3424;
+
+    --color-accent-blue-50: #12263c;
+    --color-accent-blue-100: #15314d;
+    --color-accent-blue-200: #173c5f;
+    --color-accent-blue-300: #194871;
+    --color-accent-blue-400: #5fa3e0;
+    --color-accent-blue-500: #4b92d3;
+    --color-accent-blue-600: #3982c5;
+    --color-accent-blue-700: #2c6fae;
+    --color-accent-blue-800: #205b90;
+    --color-accent-blue-900: #184771;
+    --color-accent-blue-950: #11314d;
+
+    --color-stage-seedling: #d4a63a;
+    --color-stage-budding: #3ecf8e;
+    --color-stage-evergreen: #5fa3e0;
+
+    --color-canvas: var(--color-canvas-300);
+    --color-canvas-subtle: var(--color-canvas-200);
+    --color-canvas-inset: var(--color-canvas-100);
+    --color-ink: #e9e5de;
+    --color-ink-muted: #a39b91;
+    --color-ink-faint: #6c655c;
+    --color-line: rgba(237, 234, 228, 0.09);
+
+    --color-accent-green: var(--color-accent-green-400);
+    --color-accent-green-soft: var(--color-accent-green-900);
+    --color-accent-blue: var(--color-accent-blue-400);
+    --color-accent-blue-soft: var(--color-accent-blue-900);
+}
+
 :root {
     color-scheme: light;
 
-    --bg: #f2f1ec;
-    --bg-subtle: #ebe7df;
-    --bg-inset: #e4dfd5;
-    --text: #1f1d1a;
-    --text-muted: #6f6a63;
-    --text-faint: #9f9990;
-    --line: rgba(26, 25, 23, 0.1);
+    --bg: var(--color-canvas);
+    --bg-subtle: var(--color-canvas-subtle);
+    --bg-inset: var(--color-canvas-inset);
+    --text: var(--color-ink);
+    --text-muted: var(--color-ink-muted);
+    --text-faint: var(--color-ink-faint);
+    --line: var(--color-line);
     --nav-bg: rgba(242, 241, 236, 0.84);
 
-    --accent-green: #1a7a5e;
-    --accent-green-soft: rgba(26, 122, 94, 0.12);
-    --accent-blue: #1e5fa8;
-    --accent-blue-soft: rgba(30, 95, 168, 0.1);
+    --accent-green: var(--color-accent-green);
+    --accent-green-soft: var(--color-accent-green-soft);
+    --accent-blue: var(--color-accent-blue);
+    --accent-blue-soft: var(--color-accent-blue-soft);
     --icon-action-hover-bg-default: rgba(26, 122, 94, 0.2);
     --icon-action-hover-fg-default: #1a7a5e;
 
-    --seedling: #9a7a1e;
-    --budding: #1a7a5e;
-    --evergreen: #1e5fa8;
+    --seedling: var(--color-stage-seedling);
+    --budding: var(--color-stage-budding);
+    --evergreen: var(--color-stage-evergreen);
 
     --nav-shadow:
         0 2px 16px rgba(26, 25, 23, 0.1), 0 0 0 1px rgba(26, 25, 23, 0.06);
@@ -33,29 +149,26 @@
         0 1px 3px rgba(26, 25, 23, 0.06), 0 4px 16px rgba(26, 25, 23, 0.04);
 }
 
-/* ── Dark theme ── */
 .dark {
-    color-scheme: dark;
-
-    --bg: #171512;
-    --bg-subtle: #1f1b17;
-    --bg-inset: #25211c;
-    --text: #e9e5de;
-    --text-muted: #a39b91;
-    --text-faint: #6c655c;
-    --line: rgba(237, 234, 228, 0.09);
+    --bg: var(--color-canvas);
+    --bg-subtle: var(--color-canvas-subtle);
+    --bg-inset: var(--color-canvas-inset);
+    --text: var(--color-ink);
+    --text-muted: var(--color-ink-muted);
+    --text-faint: var(--color-ink-faint);
+    --line: var(--color-line);
     --nav-bg: rgba(23, 21, 18, 0.86);
 
-    --accent-green: #3ecf8e;
-    --accent-green-soft: rgba(62, 207, 142, 0.14);
-    --accent-blue: #5fa3e0;
-    --accent-blue-soft: rgba(95, 163, 224, 0.12);
+    --accent-green: var(--color-accent-green);
+    --accent-green-soft: var(--color-accent-green-soft);
+    --accent-blue: var(--color-accent-blue);
+    --accent-blue-soft: var(--color-accent-blue-soft);
     --icon-action-hover-bg-default: rgba(62, 207, 142, 0.24);
     --icon-action-hover-fg-default: #3ecf8e;
 
-    --seedling: #d4a63a;
-    --budding: #3ecf8e;
-    --evergreen: #5fa3e0;
+    --seedling: var(--color-stage-seedling);
+    --budding: var(--color-stage-budding);
+    --evergreen: var(--color-stage-evergreen);
 
     --nav-shadow:
         0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(237, 234, 228, 0.06);
@@ -72,8 +185,8 @@ html {
 
 body {
     margin: 0;
-    color: var(--text);
-    background-color: var(--bg);
+    color: var(--color-ink);
+    background-color: var(--color-canvas);
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     transition:
@@ -85,34 +198,31 @@ a {
     color: inherit;
 }
 
-@layer base {
-    body {
-        @apply font-sans;
-    }
+body {
+    font-family: var(--font-sans);
+}
 
-    code,
-    pre,
-    kbd {
-        @apply font-mono;
-    }
+code,
+pre,
+kbd {
+    font-family: var(--font-mono);
 }
 
 @theme {
-    --color-canvas: var(--bg);
-    --color-canvas-subtle: var(--bg-subtle);
-    --color-canvas-inset: var(--bg-inset);
+    --shadow-nav: var(--nav-shadow);
+    --shadow-card: var(--card-shadow);
+}
 
-    --color-ink: var(--text);
-    --color-ink-muted: var(--text-muted);
-    --color-ink-faint: var(--text-faint);
-    --color-line: var(--line);
+@keyframes shimmer {
+    0% {
+        opacity: 0.5;
+    }
 
-    --color-accent-green: var(--accent-green);
-    --color-accent-green-soft: var(--accent-green-soft);
-    --color-accent-blue: var(--accent-blue);
-    --color-accent-blue-soft: var(--accent-blue-soft);
+    50% {
+        opacity: 1;
+    }
 
-    --color-stage-seedling: var(--seedling);
-    --color-stage-budding: var(--budding);
-    --color-stage-evergreen: var(--evergreen);
+    100% {
+        opacity: 0.5;
+    }
 }
