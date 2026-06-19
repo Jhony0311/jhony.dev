@@ -49,10 +49,10 @@ function widthClass(width: GardenDetailBlock["width"] = "narrow") {
   }
 
   if (width === "wide") {
-    return "mx-auto w-full max-w-300 px-8";
+    return "mx-auto w-full max-w-site px-8";
   }
 
-  return "mx-auto w-full max-w-[68ch] px-8";
+  return "mx-auto w-full max-w-reading px-8";
 }
 
 function renderParagraph(block: GardenParagraphBlock) {
@@ -94,7 +94,7 @@ function renderQuote(block: GardenQuoteBlock) {
 function renderCode(block: GardenCodeBlock) {
   return (
     <div className={widthClass(block.width)}>
-      <section className="overflow-hidden rounded-3xl border border-line bg-canvas shadow-[0_20px_40px_-24px_rgba(26,25,23,0.16)]">
+      <section className="overflow-hidden rounded-3xl border border-line bg-canvas shadow-elevated">
         {block.title && (
           <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3">
             <p className="m-0 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
@@ -121,7 +121,7 @@ function renderImage(block: GardenImageBlock) {
       <figure className="m-0 overflow-hidden border-y border-line bg-canvas md:rounded-none">
         <img src={block.src} alt={block.alt} className="block h-auto w-full object-cover" />
         {block.caption && (
-          <figcaption className="mx-auto w-full max-w-300 px-8 py-4 font-mono text-xs text-ink-faint">
+          <figcaption className="mx-auto w-full max-w-site px-8 py-4 font-mono text-xs text-ink-faint">
             {block.caption}
           </figcaption>
         )}
@@ -136,7 +136,7 @@ function renderYoutube(block: GardenYoutubeBlock) {
   return (
     <div className={containerClass}>
       <div className="overflow-hidden border-y border-line bg-canvas">
-        <div className="mx-auto w-full max-w-300 px-8 py-8">
+        <div className="mx-auto w-full max-w-site px-8 py-8">
           {block.title && (
             <div className="mb-4 flex items-center justify-between gap-3">
               <p className="m-0 font-mono text-xs font-medium uppercase tracking-wider text-ink-faint">
@@ -159,7 +159,7 @@ function renderYoutube(block: GardenYoutubeBlock) {
             </div>
           </div>
           {block.caption && (
-            <p className="m-0 mt-4 max-w-[68ch] font-sans text-sm leading-relaxed text-ink-muted">
+            <p className="m-0 mt-4 max-w-reading font-sans text-sm leading-relaxed text-ink-muted">
               {block.caption}
             </p>
           )}
@@ -172,7 +172,7 @@ function renderYoutube(block: GardenYoutubeBlock) {
 function renderComponent(block: GardenComponentBlock) {
   return (
     <div className={widthClass(block.width)}>
-      <section className="rounded-4xl border border-line bg-canvas p-8 shadow-[0_20px_40px_-24px_rgba(26,25,23,0.16)]">
+      <section className="rounded-4xl border border-line bg-canvas p-8 shadow-elevated">
         <p className="mb-3 font-mono text-xs font-medium uppercase tracking-wider text-accent-blue">
           {block.label}
         </p>
@@ -229,7 +229,7 @@ export function GardenPostPage({ entry, tagline, blocks }: GardenPostPageProps) 
   return (
     <article className="bg-canvas-subtle">
       <section className="border-b border-line/60 bg-canvas">
-        <div className="mx-auto grid w-full max-w-300 grid-cols-1 gap-10 px-8 pt-36 pb-16 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="mx-auto grid w-full max-w-site grid-cols-1 gap-10 px-8 pt-36 pb-16 lg:grid-cols-[minmax(0,1fr)_18rem]">
           <div>
             <a
               href="/garden"
@@ -243,7 +243,7 @@ export function GardenPostPage({ entry, tagline, blocks }: GardenPostPageProps) 
               {TYPE_META[entry.type].label}
             </p>
 
-            <h1 className="m-0 max-w-[14ch] font-mono text-[clamp(2.9rem,7vw,5.75rem)] font-bold leading-[0.95] tracking-tighter text-ink">
+            <h1 className="m-0 max-w-headline font-mono text-[clamp(2.9rem,7vw,5.75rem)] font-bold leading-[0.95] tracking-tighter text-ink">
               {entry.title}
             </h1>
 

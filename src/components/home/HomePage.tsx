@@ -29,7 +29,7 @@ export function HomeGardenSection() {
 
   return (
     <section id="garden-preview" className="bg-canvas-subtle">
-      <div className="mx-auto w-full max-w-300 px-8 py-20">
+      <div className="mx-auto w-full max-w-site px-8 py-20">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
@@ -64,12 +64,12 @@ export function HomePage() {
   return (
     <>
       <section className="bg-canvas">
-        <div className="mx-auto w-full max-w-300 px-8 pt-40 pb-20">
+        <div className="mx-auto w-full max-w-site px-8 pt-40 pb-20">
           <p className="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
             Software engineer
           </p>
 
-          <h1 className="m-0 mb-10 max-w-[14ch] font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink">
+          <h1 className="m-0 mb-10 max-w-headline font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink">
             Jonathan
             <br />
             <span className="text-ink-muted">Ortega</span>
@@ -77,7 +77,7 @@ export function HomePage() {
 
           <div className="grid grid-cols-1 gap-12 border-t border-line pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16">
             <div>
-              <p className="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted">
+              <p className="mb-5 max-w-compact font-sans text-base leading-relaxed font-light text-ink-muted">
                 Building systems that hold shape over time. Focused on TypeScript, React, and
                 distributed infrastructure, with a preference for durable design over clever
                 shortcuts.

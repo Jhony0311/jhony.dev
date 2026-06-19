@@ -365,7 +365,7 @@ export function GardenPage({
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-300 px-8 py-14">
+    <div className="mx-auto w-full max-w-site px-8 py-14">
       <div className="mb-8 grid grid-cols-1 gap-6 border-b border-line pb-8 md:grid-cols-3">
         <FilterGroup
           label="Category"
