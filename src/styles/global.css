@@ -63,8 +63,10 @@
     --color-accent-blue: var(--color-accent-blue-700);
     --color-accent-blue-soft: var(--color-accent-blue-50);
 
-    --shadow-nav: 0 2px 16px rgba(26, 25, 23, 0.1), 0 0 0 1px rgba(26, 25, 23, 0.06);
-    --shadow-card: 0 1px 3px rgba(26, 25, 23, 0.06), 0 4px 16px rgba(26, 25, 23, 0.04);
+    --shadow-nav:
+        0 2px 16px rgba(26, 25, 23, 0.1), 0 0 0 1px rgba(26, 25, 23, 0.06);
+    --shadow-card:
+        0 1px 3px rgba(26, 25, 23, 0.06), 0 4px 16px rgba(26, 25, 23, 0.04);
 }
 
 .dark {
@@ -124,7 +126,8 @@
     --color-accent-blue: var(--color-accent-blue-400);
     --color-accent-blue-soft: var(--color-accent-blue-900);
 
-    --shadow-nav: 0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(237, 234, 228, 0.06);
+    --shadow-nav:
+        0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(237, 234, 228, 0.06);
     --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.16);
 }
 
@@ -142,9 +145,10 @@ html {
 
 body {
     margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 300;
     color: var(--color-ink);
     background-color: var(--color-canvas);
-    font-weight: 300;
     -webkit-font-smoothing: antialiased;
     transition:
         background-color 0.25s ease,
@@ -153,10 +157,6 @@ body {
 
 a {
     color: inherit;
-}
-
-body {
-    font-family: var(--font-sans);
 }
 
 code,

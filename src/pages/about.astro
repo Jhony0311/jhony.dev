@@ -460,7 +460,11 @@ import SiteContent from '../components/layout/SiteContent.astro';
 
     .fact-bento-card:hover {
         transform: translateY(-2px);
-        border-color: color-mix(in srgb, var(--color-accent-blue) 40%, var(--color-line));
+        border-color: color-mix(
+            in srgb,
+            var(--color-accent-blue) 40%,
+            var(--color-line)
+        );
         background-color: var(--color-canvas-subtle);
     }
 
@@ -475,7 +479,11 @@ import SiteContent from '../components/layout/SiteContent.astro';
     .fact-bento-media {
         min-height: 0;
         overflow: hidden;
-        background: linear-gradient(140deg, var(--color-canvas-inset), var(--color-canvas-subtle));
+        background: linear-gradient(
+            140deg,
+            var(--color-canvas-inset),
+            var(--color-canvas-subtle)
+        );
     }
 
     .fact-bento-copy {

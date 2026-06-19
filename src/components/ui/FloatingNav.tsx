@@ -49,11 +49,7 @@ export function FloatingNav() {
         {/* Wordmark */}
         <a
           href="/"
-          className="font-mono text-sm font-semibold tracking-[-0.02em]"
-          style={{
-            color: "var(--color-ink)",
-            textDecoration: "none",
-          }}
+          className="font-mono text-sm font-semibold tracking-[-0.02em] text-ink no-underline"
         >
           jhony.dev
         </a>
@@ -80,7 +76,8 @@ export function FloatingNav() {
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-ink)";
-                (e.currentTarget as HTMLAnchorElement).style.background = "var(--color-canvas-inset)";
+                (e.currentTarget as HTMLAnchorElement).style.background =
+                  "var(--color-canvas-inset)";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-ink-muted)";
