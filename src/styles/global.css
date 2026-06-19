@@ -45,9 +45,21 @@
     --color-accent-blue-900: #153b66;
     --color-accent-blue-950: #0f2742;
 
-    --color-stage-seedling: #9a7a1e;
-    --color-stage-budding: #1a7a5e;
-    --color-stage-evergreen: #1e5fa8;
+    --color-accent-yellow-50: #fdf8ec;
+    --color-accent-yellow-100: #faf0d0;
+    --color-accent-yellow-200: #f4dea3;
+    --color-accent-yellow-300: #e8c96f;
+    --color-accent-yellow-400: #d4a63a;
+    --color-accent-yellow-500: #c08d22;
+    --color-accent-yellow-600: #b08218;
+    --color-accent-yellow-700: #9a7a1e;
+    --color-accent-yellow-800: #785c0f;
+    --color-accent-yellow-900: #594510;
+    --color-accent-yellow-950: #3d2f0b;
+
+    --color-stage-seedling: var(--color-accent-yellow-700);
+    --color-stage-budding: var(--color-accent-green-700);
+    --color-stage-evergreen: var(--color-accent-blue-700);
 
     --color-canvas: var(--color-canvas-100);
     --color-canvas-subtle: var(--color-canvas-200);
@@ -108,9 +120,21 @@
     --color-accent-blue-900: #184771;
     --color-accent-blue-950: #11314d;
 
-    --color-stage-seedling: #d4a63a;
-    --color-stage-budding: #3ecf8e;
-    --color-stage-evergreen: #5fa3e0;
+    --color-accent-yellow-50: #2b1f08;
+    --color-accent-yellow-100: #3d2c0c;
+    --color-accent-yellow-200: #4e3910;
+    --color-accent-yellow-300: #614814;
+    --color-accent-yellow-400: #d4a63a;
+    --color-accent-yellow-500: #c29228;
+    --color-accent-yellow-600: #ad7e1e;
+    --color-accent-yellow-700: #966c18;
+    --color-accent-yellow-800: #7a5513;
+    --color-accent-yellow-900: #5e400e;
+    --color-accent-yellow-950: #422d09;
+
+    --color-stage-seedling: var(--color-accent-yellow-400);
+    --color-stage-budding: var(--color-accent-green-400);
+    --color-stage-evergreen: var(--color-accent-blue-400);
 
     --color-canvas: var(--color-canvas-300);
     --color-canvas-subtle: var(--color-canvas-200);
