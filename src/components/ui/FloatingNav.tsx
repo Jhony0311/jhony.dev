@@ -34,16 +34,15 @@ export function FloatingNav() {
       }}
     >
       <nav
+        className={scrolled ? "bg-nav shadow-nav" : "bg-nav ring-1 ring-line"}
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           padding: "0.625rem 1.25rem",
           borderRadius: "9999px",
-          background: "var(--nav-bg)",
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
-          boxShadow: scrolled ? "var(--nav-shadow)" : "0 0 0 1px var(--line)",
           transition: "box-shadow 0.3s ease",
         }}
       >

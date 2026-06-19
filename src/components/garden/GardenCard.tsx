@@ -42,10 +42,7 @@ export function GardenCard({ entry }: { entry: GardenEntry }) {
     return (
         <a
             href={entry.href}
-            className="group relative block overflow-hidden rounded-lg border border-line p-6 text-inherit no-underline transition-all duration-200 hover:border-line/60"
-            style={{
-                boxShadow: 'var(--card-shadow)',
-            }}
+            className="group relative block overflow-hidden rounded-lg border border-line p-6 text-inherit no-underline shadow-card transition-all duration-200 hover:border-line/60"
         >
             <GardenCardDecoration stage={entry.stage} />
 

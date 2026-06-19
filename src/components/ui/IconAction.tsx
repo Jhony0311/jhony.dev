@@ -35,13 +35,13 @@ export function IconAction({
     title,
     children,
     className,
-    hoverBackground = 'var(--icon-action-hover-bg-default)',
-    hoverForeground = 'var(--icon-action-hover-fg-default)',
+    hoverBackground = 'var(--color-canvas-subtle)',
+    hoverForeground = 'var(--color-ink)',
     ...props
 }: IconActionProps) {
     const style = {
-        '--icon-action-bg': 'var(--bg-inset)',
-        '--icon-action-fg': 'var(--text)',
+        '--icon-action-bg': 'var(--color-canvas-inset)',
+        '--icon-action-fg': 'var(--color-ink)',
         '--icon-action-hover-bg': hoverBackground,
         '--icon-action-hover-fg': hoverForeground,
     } as CSSProperties;
