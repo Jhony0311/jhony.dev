@@ -375,8 +375,8 @@ import SiteContent from '../components/layout/SiteContent.astro';
         width: var(--timeline-line-width);
         background-color: color-mix(
             in srgb,
-            var(--accent-green) 70%,
-            var(--line)
+            var(--color-accent-green) 70%,
+            var(--color-line)
         );
         opacity: 1;
         border-radius: 9999px;
@@ -406,13 +406,13 @@ import SiteContent from '../components/layout/SiteContent.astro';
         width: 1rem;
         height: 1rem;
         border-radius: 9999px;
-        border: 2px solid var(--accent-green);
-        background-color: var(--bg);
-        box-shadow: 0 0 0 2px var(--bg-subtle);
+        border: 2px solid var(--color-accent-green);
+        background-color: var(--color-canvas);
+        box-shadow: 0 0 0 2px var(--color-canvas-subtle);
     }
 
     .timeline-item-current .timeline-dot {
-        background-color: var(--accent-green);
+        background-color: var(--color-accent-green);
     }
 
     .about-radial {
@@ -426,12 +426,12 @@ import SiteContent from '../components/layout/SiteContent.astro';
         background:
             radial-gradient(
                 circle at 30% 30%,
-                var(--accent-green-soft),
+                var(--color-accent-green-soft),
                 transparent 62%
             ),
             radial-gradient(
                 circle at 70% 70%,
-                var(--accent-blue-soft),
+                var(--color-accent-blue-soft),
                 transparent 55%
             );
         opacity: 0.9;
@@ -450,8 +450,8 @@ import SiteContent from '../components/layout/SiteContent.astro';
         min-height: 19rem;
         overflow: hidden;
         border-radius: 1rem;
-        border: 1px solid var(--line);
-        background-color: var(--bg);
+        border: 1px solid var(--color-line);
+        background-color: var(--color-canvas);
         transition:
             transform 0.25s ease,
             border-color 0.25s ease,
@@ -460,8 +460,8 @@ import SiteContent from '../components/layout/SiteContent.astro';
 
     .fact-bento-card:hover {
         transform: translateY(-2px);
-        border-color: color-mix(in srgb, var(--accent-blue) 40%, var(--line));
-        background-color: var(--bg-subtle);
+        border-color: color-mix(in srgb, var(--color-accent-blue) 40%, var(--color-line));
+        background-color: var(--color-canvas-subtle);
     }
 
     .fact-bento-image {
@@ -469,13 +469,13 @@ import SiteContent from '../components/layout/SiteContent.astro';
         height: 100%;
         object-fit: cover;
         display: block;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid var(--color-line);
     }
 
     .fact-bento-media {
         min-height: 0;
         overflow: hidden;
-        background: linear-gradient(140deg, var(--bg-inset), var(--bg-subtle));
+        background: linear-gradient(140deg, var(--color-canvas-inset), var(--color-canvas-subtle));
     }
 
     .fact-bento-copy {
@@ -488,14 +488,14 @@ import SiteContent from '../components/layout/SiteContent.astro';
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.18em;
-        color: var(--accent-green);
+        color: var(--color-accent-green);
     }
 
     .fact-bento-text {
         margin: 0.65rem 0 0;
         font-size: 0.9rem;
         line-height: 1.5;
-        color: var(--text-muted);
+        color: var(--color-ink-muted);
     }
 
     @media (min-width: 768px) {

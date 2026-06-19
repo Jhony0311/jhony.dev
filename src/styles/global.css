@@ -130,46 +130,6 @@
 
 :root {
     color-scheme: light;
-
-    --bg: var(--color-canvas);
-    --bg-subtle: var(--color-canvas-subtle);
-    --bg-inset: var(--color-canvas-inset);
-    --text: var(--color-ink);
-    --text-muted: var(--color-ink-muted);
-    --text-faint: var(--color-ink-faint);
-    --line: var(--color-line);
-
-    --accent-green: var(--color-accent-green);
-    --accent-green-soft: var(--color-accent-green-soft);
-    --accent-blue: var(--color-accent-blue);
-    --accent-blue-soft: var(--color-accent-blue-soft);
-    --icon-action-hover-bg-default: rgba(26, 122, 94, 0.2);
-    --icon-action-hover-fg-default: #1a7a5e;
-
-    --seedling: var(--color-stage-seedling);
-    --budding: var(--color-stage-budding);
-    --evergreen: var(--color-stage-evergreen);
-}
-
-.dark {
-    --bg: var(--color-canvas);
-    --bg-subtle: var(--color-canvas-subtle);
-    --bg-inset: var(--color-canvas-inset);
-    --text: var(--color-ink);
-    --text-muted: var(--color-ink-muted);
-    --text-faint: var(--color-ink-faint);
-    --line: var(--color-line);
-
-    --accent-green: var(--color-accent-green);
-    --accent-green-soft: var(--color-accent-green-soft);
-    --accent-blue: var(--color-accent-blue);
-    --accent-blue-soft: var(--color-accent-blue-soft);
-    --icon-action-hover-bg-default: rgba(62, 207, 142, 0.24);
-    --icon-action-hover-fg-default: #3ecf8e;
-
-    --seedling: var(--color-stage-seedling);
-    --budding: var(--color-stage-budding);
-    --evergreen: var(--color-stage-evergreen);
 }
 
 * {

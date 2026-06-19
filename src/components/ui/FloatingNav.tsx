@@ -51,7 +51,7 @@ export function FloatingNav() {
           href="/"
           className="font-mono text-sm font-semibold tracking-[-0.02em]"
           style={{
-            color: "var(--text)",
+            color: "var(--color-ink)",
             textDecoration: "none",
           }}
         >
@@ -72,18 +72,18 @@ export function FloatingNav() {
               href={item.href}
               className="font-mono text-xs"
               style={{
-                color: "var(--text-muted)",
+                color: "var(--color-ink-muted)",
                 textDecoration: "none",
                 padding: "0.375rem 0.75rem",
                 borderRadius: "9999px",
                 transition: "color 0.2s ease, background 0.2s ease",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--text)";
-                (e.currentTarget as HTMLAnchorElement).style.background = "var(--bg-inset)";
+                (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-ink)";
+                (e.currentTarget as HTMLAnchorElement).style.background = "var(--color-canvas-inset)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-muted)";
+                (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-ink-muted)";
                 (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
               }}
             >
@@ -96,8 +96,8 @@ export function FloatingNav() {
             ariaLabel={isDark ? "Switch to light theme" : "Switch to dark theme"}
             title={isDark ? "Light mode" : "Dark mode"}
             className="ml-1 h-8 w-8 text-ink-muted"
-            hoverBackground="var(--bg-subtle)"
-            hoverForeground="var(--text)"
+            hoverBackground="var(--color-canvas-subtle)"
+            hoverForeground="var(--color-ink)"
           >
             {isDark ? <SunIcon size={15} weight="bold" /> : <MoonIcon size={15} weight="bold" />}
           </IconAction>
