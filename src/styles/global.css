@@ -7,6 +7,15 @@
     --font-sans: Inter, 'Segoe UI', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', 'ui-monospace', 'SFMono-Regular', monospace;
 
+    /* Semantic container widths for layout consistency */
+    --container-site: 75rem;
+    --container-reading: 68ch;
+    --container-copy: 62ch;
+    --container-measure: 58ch;
+    --container-narrative: 52ch;
+    --container-compact: 44ch;
+    --container-headline: 14ch;
+
     --animate-shimmer: shimmer 1.6s ease-in-out infinite;
 
     --color-canvas-50: #f8f7f3;
@@ -79,6 +88,10 @@
         0 2px 16px rgba(26, 25, 23, 0.1), 0 0 0 1px rgba(26, 25, 23, 0.06);
     --shadow-card:
         0 1px 3px rgba(26, 25, 23, 0.06), 0 4px 16px rgba(26, 25, 23, 0.04);
+    --shadow-elevated: 0 20px 40px -24px rgba(26, 25, 23, 0.16);
+
+    --radius-3xl: 1.5rem;
+    --radius-4xl: 2rem;
 }
 
 .dark {
@@ -153,6 +166,7 @@
     --shadow-nav:
         0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(237, 234, 228, 0.06);
     --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.16);
+    --shadow-elevated: 0 20px 40px -24px rgba(0, 0, 0, 0.42);
 }
 
 :root {
