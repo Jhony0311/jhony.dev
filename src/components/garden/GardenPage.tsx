@@ -215,7 +215,7 @@ function TagFilterGroup({
           <Popover
             placement="bottom end"
             offset={8}
-            className="w-88 rounded-xl border border-line bg-canvas p-3 shadow-[0_10px_30px_-14px_rgba(26,25,23,0.35)]"
+            className="w-88 rounded-xl border border-line bg-canvas p-3 shadow-popover"
           >
             <Dialog className="h-88 outline-none">
               <div className="mb-3 flex items-center justify-between border-b border-line pb-2">

@@ -28,13 +28,7 @@ type IconActionProps = LinkProps | ButtonProps;
 const BASE_CLASSNAME =
   "inline-flex h-10 w-10 items-center justify-center rounded-full bg-canvas-inset text-ink no-underline transition-[background-color,color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-canvas-subtle hover:text-ink active:-translate-y-px";
 
-export function IconAction({
-  ariaLabel,
-  title,
-  children,
-  className,
-  ...props
-}: IconActionProps) {
+export function IconAction({ ariaLabel, title, children, className, ...props }: IconActionProps) {
   const mergedClassName = `${BASE_CLASSNAME} ${className ?? ""}`.trim();
 
   if ("href" in props) {

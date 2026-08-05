@@ -89,6 +89,7 @@
     --shadow-card:
         0 1px 3px rgba(26, 25, 23, 0.06), 0 4px 16px rgba(26, 25, 23, 0.04);
     --shadow-elevated: 0 20px 40px -24px rgba(26, 25, 23, 0.16);
+    --shadow-popover: 0 10px 30px -14px rgba(26, 25, 23, 0.35);
 
     --radius-3xl: 1.5rem;
     --radius-4xl: 2rem;
@@ -167,6 +168,7 @@
         0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(237, 234, 228, 0.06);
     --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.16);
     --shadow-elevated: 0 20px 40px -24px rgba(0, 0, 0, 0.42);
+    --shadow-popover: 0 10px 30px -14px rgba(0, 0, 0, 0.5);
 }
 
 :root {

@@ -179,7 +179,7 @@ function renderComponent(block: GardenComponentBlock) {
         <h3 className="m-0 mb-3 font-mono text-2xl leading-tight tracking-tight text-ink">
           {block.title}
         </h3>
-        <p className="m-0 max-w-[60ch] font-sans text-sm leading-relaxed text-ink-muted">
+        <p className="m-0 max-w-copy font-sans text-sm leading-relaxed text-ink-muted">
           {block.description}
         </p>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -247,9 +247,7 @@ export function GardenPostPage({ entry, tagline, blocks }: GardenPostPageProps) 
               {entry.title}
             </h1>
 
-            <p className="mt-6 max-w-[64ch] font-sans text-lg leading-8 text-ink-muted">
-              {tagline}
-            </p>
+            <p className="mt-6 max-w-copy font-sans text-lg leading-8 text-ink-muted">{tagline}</p>
           </div>
 
           <aside className="flex flex-col gap-4 border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">

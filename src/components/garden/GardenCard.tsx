@@ -45,7 +45,7 @@ export function GardenCard({ entry }: { entry: GardenEntry }) {
               {entry.title}
             </h3>
 
-            <p className="mb-4 max-w-[52ch] font-sans text-sm font-light leading-relaxed text-ink-muted">
+            <p className="mb-4 max-w-narrative font-sans text-sm font-light leading-relaxed text-ink-muted">
               {entry.summary}
             </p>
           </div>
