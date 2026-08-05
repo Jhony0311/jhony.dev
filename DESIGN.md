@@ -35,6 +35,11 @@ Primary typography is a dual-family system defined in Tailwind theme config:
 - Sans family: Inter stack for body copy and long-form readability.
 - Mono family: JetBrains Mono stack for identity, headings, metadata, tags, and compact interface labels.
 
+Fluid display typography is centralized in semantic Tailwind theme tokens instead of inline clamp values:
+- `text-display-fluid`: `clamp(2rem, 5vw, 3.5rem)` with line-height `1.05`.
+- `text-hero-fluid`: `clamp(2.75rem, 8vw, 6.5rem)` with line-height `1`.
+- `text-post-hero-fluid`: `clamp(2.9rem, 7vw, 5.75rem)` with line-height `0.95`.
+
 Hierarchy and weight behavior:
 - Hero and section headlines use mono with strong weight (`font-bold`) and tight tracking for editorial character.
 - Eyebrows and metadata use mono in uppercase at `text-xs` with wider tracking for navigational clarity.
@@ -49,16 +54,36 @@ Spacing and rhythm characteristics:
 ## 4. Component Stylings
 * **Buttons:** Predominantly pill-shaped (`rounded-full`) controls with line-based boundaries and soft tint fills. Primary action buttons begin as low-intensity accent washes and intensify to solid accent states on hover. Active state uses slight upward press feedback (`active:-translate-y-px`) to create tactile confirmation.
 
-* **Cards/Containers:** The system avoids heavy card stacking and relies on sectional backgrounds plus `border-t` separators. Containers are restrained, with subtle corner rounding on chips and pills rather than large elevated panels. Shadows are whisper-soft and used mainly in the floating navigation context.
+* **Cards/Containers:** The system avoids heavy card stacking and relies on sectional backgrounds plus `border-t` separators. Containers are restrained, with subtle corner rounding on chips and pills rather than large elevated panels. Elevation is semantic and tokenized:
+	- `shadow-nav` for floating navigation.
+	- `shadow-card` for low-elevation cards.
+	- `shadow-elevated` for emphasized editorial blocks.
+	- `shadow-popover` for transient overlays.
 
 * **Inputs/Forms:** The current homepage has no persistent form fields. Interaction language for future inputs should follow existing system logic: soft inset backgrounds, low-contrast structural lines, monospace label treatment for utility metadata, and accent-tinted hover/focus states that avoid harsh glows.
 
+* **Interaction Architecture:** Interactive components follow a utility-first policy with no runtime style mutation for hover/focus states. Visual state changes are expressed through stable Tailwind classes and semantic tokens instead of `style` objects or variable-driven arbitrary utilities.
+
 ## 5. Layout Principles
 The page is built as a wide but controlled narrative frame:
-- Content is centered and constrained to a 1200px max width.
+- Content is centered and constrained through semantic container tokens.
 - Sectional separation uses tonal background shifts and line dividers instead of boxed card mosaics.
 - Layout defaults to single-column continuity, then introduces measured two-column splits for supporting detail blocks.
 - Spacing strategy prioritizes editorial rhythm (`py-20`, strong vertical intervals, and generous top framing in the hero).
 - Visual hierarchy is driven by typography first, color second, and motion last.
 
+Container sizing is standardized through Tailwind theme aliases:
+- `max-w-site` (`75rem`) for primary page shells.
+- `max-w-reading` (`68ch`) for long-form reading width.
+- `max-w-copy` (`62ch`) for body copy blocks.
+- `max-w-measure` (`58ch`) and `max-w-narrative` (`52ch`) for tighter prose.
+- `max-w-compact` (`44ch`) for intro/support text.
+- `max-w-headline` (`14ch`) for display headline wraps.
+
 The resulting system favors clarity, calm, and identity consistency: soft neutrals for structure, selective blue/green accents for intent, and a mono-led voice for brand recognition.
+
+## 6. Tailwind Consistency Rules
+- Prefer semantic token utilities (`max-w-site`, `text-hero-fluid`, `shadow-elevated`) over arbitrary values.
+- Use Tailwind base typography utilities (`text-xs`, `text-sm`, `text-base`, `text-lg`) for non-fluid text whenever close matches exist.
+- Keep fluid typography changes centralized in `@theme` text tokens, not in inline class-level `clamp(...)` definitions.
+- Avoid inline style objects for component presentation unless a value cannot be represented by existing theme tokens.
