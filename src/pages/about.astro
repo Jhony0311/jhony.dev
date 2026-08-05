@@ -20,7 +20,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
         >
             <div>
                 <p
-                    class="mb-5 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                    class="mb-5 max-w-compact font-sans text-base leading-relaxed font-light text-ink-muted"
                 >
                     I build products that stay clear under load and readable
                     months later. My work usually sits at the seam between
@@ -30,7 +30,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                 </p>
 
                 <p
-                    class="m-0 max-w-[44ch] font-sans text-base leading-relaxed font-light text-ink-muted"
+                    class="m-0 max-w-compact font-sans text-base leading-relaxed font-light text-ink-muted"
                 >
                     This page is a compact profile of how I work today, what I
                     have built so far, and the principles that guide my
@@ -91,7 +91,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
         <section class="relative overflow-hidden">
             <div class="about-radial" aria-hidden="true"></div>
 
-            <div class="mx-auto w-full max-w-300 px-5 pb-20 sm:px-8">
+            <div class="mx-auto w-full max-w-site px-5 pb-20 sm:px-8">
                 <div
                     class="grid grid-cols-1 gap-12 pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
                 >
@@ -105,7 +105,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                         <ol class="timeline-list m-0 list-none space-y-11 p-0">
                             <li class="timeline-item timeline-item-current">
                                 <p
-                                    class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                    class="timeline-year m-0 font-mono text-xs uppercase tracking-[0.2em] text-ink-faint"
                                 >
                                     2024 - Present
                                 </p>
@@ -113,7 +113,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                                 ></span>
                                 <div>
                                     <p
-                                        class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                        class="m-0 font-mono text-xs uppercase tracking-[0.2em] text-ink-faint"
                                     >
                                         Vectorly Labs
                                     </p>
@@ -123,7 +123,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                                         Senior Software Engineer
                                     </h2>
                                     <p
-                                        class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                                        class="mt-2 mb-0 max-w-measure text-sm leading-relaxed text-ink-muted"
                                     >
                                         Leading product delivery across React
                                         and backend platform services, with a
@@ -135,7 +135,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
 
                             <li class="timeline-item">
                                 <p
-                                    class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                    class="timeline-year m-0 font-mono text-xs uppercase tracking-[0.2em] text-ink-faint"
                                 >
                                     2021 - 2024
                                 </p>
@@ -143,7 +143,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                                 ></span>
                                 <div>
                                     <p
-                                        class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                        class="m-0 font-mono text-xs uppercase tracking-[0.2em] text-ink-faint"
                                     >
                                         Northline Commerce
                                     </p>
@@ -153,7 +153,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                                         Frontend Platform Engineer
                                     </h2>
                                     <p
-                                        class="mt-2 mb-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                                        class="mt-2 mb-0 max-w-measure text-sm leading-relaxed text-ink-muted"
                                     >
                                         Built reusable UI foundations and
                                         developer tooling that improved
@@ -165,7 +165,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
 
                             <li class="timeline-item">
                                 <p
-                                    class="timeline-year m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                    class="timeline-year m-0 font-mono text-xs uppercase tracking-[0.2em] text-ink-faint"
                                 >
                                     2018 - 2021
                                 </p>
@@ -173,7 +173,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                                 ></span>
                                 <div>
                                     <p
-                                        class="m-0 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink-faint"
+                                        class="m-0 font-mono text-xs uppercase tracking-[0.2em] text-ink-faint"
                                     >
                                         Meridian Product Studio
                                     </p>
@@ -225,7 +225,7 @@ import SiteContent from '../components/layout/SiteContent.astro';
                         </p>
 
                         <p
-                            class="m-0 max-w-[58ch] text-sm leading-relaxed text-ink-muted"
+                            class="m-0 max-w-measure text-sm leading-relaxed text-ink-muted"
                         >
                             I moved into software through curiosity and kept
                             growing by writing things down. Over time, that
@@ -375,8 +375,8 @@ import SiteContent from '../components/layout/SiteContent.astro';
         width: var(--timeline-line-width);
         background-color: color-mix(
             in srgb,
-            var(--accent-green) 70%,
-            var(--line)
+            var(--color-accent-green) 70%,
+            var(--color-line)
         );
         opacity: 1;
         border-radius: 9999px;
@@ -406,13 +406,13 @@ import SiteContent from '../components/layout/SiteContent.astro';
         width: 1rem;
         height: 1rem;
         border-radius: 9999px;
-        border: 2px solid var(--accent-green);
-        background-color: var(--bg);
-        box-shadow: 0 0 0 2px var(--bg-subtle);
+        border: 2px solid var(--color-accent-green);
+        background-color: var(--color-canvas);
+        box-shadow: 0 0 0 2px var(--color-canvas-subtle);
     }
 
     .timeline-item-current .timeline-dot {
-        background-color: var(--accent-green);
+        background-color: var(--color-accent-green);
     }
 
     .about-radial {
@@ -426,12 +426,12 @@ import SiteContent from '../components/layout/SiteContent.astro';
         background:
             radial-gradient(
                 circle at 30% 30%,
-                var(--accent-green-soft),
+                var(--color-accent-green-soft),
                 transparent 62%
             ),
             radial-gradient(
                 circle at 70% 70%,
-                var(--accent-blue-soft),
+                var(--color-accent-blue-soft),
                 transparent 55%
             );
         opacity: 0.9;
@@ -450,8 +450,8 @@ import SiteContent from '../components/layout/SiteContent.astro';
         min-height: 19rem;
         overflow: hidden;
         border-radius: 1rem;
-        border: 1px solid var(--line);
-        background-color: var(--bg);
+        border: 1px solid var(--color-line);
+        background-color: var(--color-canvas);
         transition:
             transform 0.25s ease,
             border-color 0.25s ease,
@@ -460,8 +460,12 @@ import SiteContent from '../components/layout/SiteContent.astro';
 
     .fact-bento-card:hover {
         transform: translateY(-2px);
-        border-color: color-mix(in srgb, var(--accent-blue) 40%, var(--line));
-        background-color: var(--bg-subtle);
+        border-color: color-mix(
+            in srgb,
+            var(--color-accent-blue) 40%,
+            var(--color-line)
+        );
+        background-color: var(--color-canvas-subtle);
     }
 
     .fact-bento-image {
@@ -469,13 +473,17 @@ import SiteContent from '../components/layout/SiteContent.astro';
         height: 100%;
         object-fit: cover;
         display: block;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid var(--color-line);
     }
 
     .fact-bento-media {
         min-height: 0;
         overflow: hidden;
-        background: linear-gradient(140deg, var(--bg-inset), var(--bg-subtle));
+        background: linear-gradient(
+            140deg,
+            var(--color-canvas-inset),
+            var(--color-canvas-subtle)
+        );
     }
 
     .fact-bento-copy {
@@ -488,14 +496,14 @@ import SiteContent from '../components/layout/SiteContent.astro';
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.18em;
-        color: var(--accent-green);
+        color: var(--color-accent-green);
     }
 
     .fact-bento-text {
         margin: 0.65rem 0 0;
         font-size: 0.9rem;
         line-height: 1.5;
-        color: var(--text-muted);
+        color: var(--color-ink-muted);
     }
 
     @media (min-width: 768px) {

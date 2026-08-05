@@ -10,7 +10,7 @@ const hasMutedTitle = titleMuted.trim().length > 0;
 ---
 
 <header class="bg-canvas">
-    <div class="mx-auto w-full max-w-300 px-8 pt-36 pb-16">
+    <div class="mx-auto w-full max-w-site px-8 pt-36 pb-16">
         <p
             class="mb-8 font-mono text-xs font-medium uppercase tracking-widest text-accent-green"
         >
@@ -18,7 +18,7 @@ const hasMutedTitle = titleMuted.trim().length > 0;
         </p>
 
         <h1
-            class="m-0 mb-6 max-w-[15ch] font-mono text-[clamp(2.75rem,7vw,5.25rem)] font-bold leading-none tracking-[-0.04em] text-ink"
+            class="m-0 mb-6 max-w-headline font-mono text-hero-fluid font-bold tracking-[-0.04em] text-ink"
         >
             {
                 hasMutedTitle ? (
