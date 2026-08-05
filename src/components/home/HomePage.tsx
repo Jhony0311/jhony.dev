@@ -35,7 +35,7 @@ export function HomeGardenSection() {
             <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-accent-green">
               Digital Garden
             </p>
-            <h2 className="m-0 font-mono text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-ink">
+            <h2 className="m-0 font-mono text-display-fluid font-bold tracking-[-0.03em] text-ink">
               Notes &amp; essays
             </h2>
           </div>
@@ -69,7 +69,7 @@ export function HomePage() {
             Software engineer
           </p>
 
-          <h1 className="m-0 mb-10 max-w-headline font-mono text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-none tracking-[-0.04em] text-ink">
+          <h1 className="m-0 mb-10 max-w-headline font-mono text-hero-fluid font-bold tracking-[-0.04em] text-ink">
             Jonathan
             <br />
             <span className="text-ink-muted">Ortega</span>

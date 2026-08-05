@@ -16,6 +16,14 @@
     --container-compact: 44ch;
     --container-headline: 14ch;
 
+    /* Fluid display scale tokens */
+    --text-display-fluid: clamp(2rem, 5vw, 3.5rem);
+    --text-display-fluid--line-height: 1.05;
+    --text-hero-fluid: clamp(2.75rem, 8vw, 6.5rem);
+    --text-hero-fluid--line-height: 1;
+    --text-post-hero-fluid: clamp(2.9rem, 7vw, 5.75rem);
+    --text-post-hero-fluid--line-height: 0.95;
+
     --animate-shimmer: shimmer 1.6s ease-in-out infinite;
 
     --color-canvas-50: #f8f7f3;

@@ -243,7 +243,7 @@ export function GardenPostPage({ entry, tagline, blocks }: GardenPostPageProps) 
               {TYPE_META[entry.type].label}
             </p>
 
-            <h1 className="m-0 max-w-headline font-mono text-[clamp(2.9rem,7vw,5.75rem)] font-bold leading-[0.95] tracking-tighter text-ink">
+            <h1 className="m-0 max-w-headline font-mono text-post-hero-fluid font-bold tracking-tighter text-ink">
               {entry.title}
             </h1>
 
