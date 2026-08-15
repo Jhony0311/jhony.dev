@@ -1,14 +1,4 @@
 {
-  "servers": {
-    "stitch": {
-      "url": "https://stitch.googleapis.com/mcp",
-      "type": "http",
-      "headers": {
-        "Accept": "application/json",
-        "X-Goog-Api-Key": "${env:STITCH_API_KEY}",
-        "X-Goog-User-Project": "${env:STITCH_PROJECT_ID}"
-      }
-    }
-  },
+  "servers": {},
   "inputs": []
 }
