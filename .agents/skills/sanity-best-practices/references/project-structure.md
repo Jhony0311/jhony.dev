@@ -22,6 +22,7 @@ your-project/
 ```
 
 **Use cases:**
+
 - Content modeling with MCP/AI tools (no frontend needed)
 - Headless CMS with external consumers
 - Prototyping and content design
@@ -80,6 +81,7 @@ your-project/
 ```
 
 **Setup:**
+
 1. Add web app URL to CORS origins in [Sanity Manage](https://www.sanity.io/manage)
 2. Configure `typegen` in `sanity.cli.ts` to read schema from `apps/studio` and output types to `apps/web`
 
@@ -109,8 +111,8 @@ schemaTypes/
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `sanity.config.ts` | Studio configuration (plugins, schema, structure) |
-| `sanity.cli.ts` | CLI configuration (project ID, dataset, TypeGen config) |
-| `structure.ts` | Custom desk structure |
+| File               | Purpose                                                 |
+| ------------------ | ------------------------------------------------------- |
+| `sanity.config.ts` | Studio configuration (plugins, schema, structure)       |
+| `sanity.cli.ts`    | CLI configuration (project ID, dataset, TypeGen config) |
+| `structure.ts`     | Custom desk structure                                   |

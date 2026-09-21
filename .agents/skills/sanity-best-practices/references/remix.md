@@ -8,16 +8,17 @@ description: Integration guide for React Router (formerly Remix) with Sanity, in
 ## Version Note
 
 This guide covers both:
+
 - **Remix v2** (`@remix-run/*` packages)
 - **React Router v7** (the successor to Remix, `react-router` package)
 
 The Sanity integration pattern is the same for both. Import paths differ slightly:
 
-| Remix v2 | React Router v7 |
-|----------|-----------------|
-| `@remix-run/node` | `react-router` |
-| `@remix-run/react` | `react-router` |
-| `remix.config.js` | `react-router.config.ts` |
+| Remix v2           | React Router v7          |
+| ------------------ | ------------------------ |
+| `@remix-run/node`  | `react-router`           |
+| `@remix-run/react` | `react-router`           |
+| `remix.config.js`  | `react-router.config.ts` |
 
 The examples below use Remix v2 imports. Adjust if using React Router v7.
 
@@ -26,40 +27,40 @@ The examples below use Remix v2 imports. Adjust if using React Router v7.
 To support both server-side fetching and client-side live previews, use the **Split Loader Pattern**.
 
 ### A. Shared Loader (`app/sanity/loader.ts`)
+
 Defines the store config (SSR enabled, client deferred).
 
 ```typescript
-import { createQueryStore } from '@sanity/react-loader'
+import { createQueryStore } from "@sanity/react-loader";
 
-export const {
-  loadQuery,
-  setServerClient,
-  useQuery,
-  useLiveMode,
-} = createQueryStore({ client: false, ssr: true })
+export const { loadQuery, setServerClient, useQuery, useLiveMode } = createQueryStore({
+  client: false,
+  ssr: true,
+});
 ```
 
 ### B. Server Loader (`app/sanity/loader.server.ts`)
+
 Initializes the server client.
 
 ```typescript
-import { createClient } from '@sanity/client'
-import { loadQuery, setServerClient } from './loader'
+import { createClient } from "@sanity/client";
+import { loadQuery, setServerClient } from "./loader";
 
 const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
   dataset: process.env.SANITY_DATASET,
   useCdn: true,
-  apiVersion: '2026-02-01',
+  apiVersion: "2026-02-01",
   stega: {
     enabled: true,
-    studioUrl: 'https://my-studio-url.com',
+    studioUrl: "https://my-studio-url.com",
   },
-})
+});
 
-setServerClient(client)
+setServerClient(client);
 
-export { loadQuery }
+export { loadQuery };
 ```
 
 ## 2. Data Fetching (Loaders)
@@ -86,6 +87,7 @@ export default function Index() {
 ## 3. Real-time Preview & Visual Editing
 
 ### A. Use `useQuery` in Components
+
 Import `useQuery` from your **shared** loader file.
 
 ```typescript
@@ -107,24 +109,26 @@ export default function Page() {
 ```
 
 ### B. Enable Live Mode (`VisualEditing.tsx`)
+
 Create a component to handle the connection.
 
 ```typescript
-import { enableVisualEditing } from '@sanity/visual-editing'
-import { useLiveMode } from '~/sanity/loader'
-import { client } from '~/sanity/client' // Your browser-safe client
-import { useEffect } from 'react'
+import { enableVisualEditing } from "@sanity/visual-editing";
+import { useLiveMode } from "~/sanity/loader";
+import { client } from "~/sanity/client"; // Your browser-safe client
+import { useEffect } from "react";
 
 export default function VisualEditing() {
-  useEffect(() => enableVisualEditing(), [])
-  useLiveMode({ client })
-  return null
+  useEffect(() => enableVisualEditing(), []);
+  useLiveMode({ client });
+  return null;
 }
 ```
 
 Render this component in `root.tsx` only when valid (e.g., check env vars or user session).
 
 ## 4. Stega Cleaning
+
 When using data for logic (routing, classNames), use `stegaClean`.
 
 ```typescript

@@ -26,8 +26,8 @@ Understand the target format before converting. PT is an array of blocks:
     "_key": "abc123",
     "style": "normal",
     "children": [
-      {"_type": "span", "_key": "def456", "text": "Hello ", "marks": []},
-      {"_type": "span", "_key": "ghi789", "text": "world", "marks": ["strong"]}
+      { "_type": "span", "_key": "def456", "text": "Hello ", "marks": [] },
+      { "_type": "span", "_key": "ghi789", "text": "world", "marks": ["strong"] }
     ],
     "markDefs": []
   },
@@ -35,20 +35,19 @@ Understand the target format before converting. PT is an array of blocks:
     "_type": "block",
     "_key": "jkl012",
     "style": "h2",
-    "children": [
-      {"_type": "span", "_key": "mno345", "text": "A heading", "marks": []}
-    ],
+    "children": [{ "_type": "span", "_key": "mno345", "text": "A heading", "marks": [] }],
     "markDefs": []
   },
   {
     "_type": "image",
     "_key": "pqr678",
-    "asset": {"_type": "reference", "_ref": "image-abc-200x200-png"}
+    "asset": { "_type": "reference", "_ref": "image-abc-200x200-png" }
   }
 ]
 ```
 
 **Key rules:**
+
 - Every block and span needs `_key` (unique within the array)
 - `_type: "block"` is for text blocks; custom types use their own `_type`
 - `markDefs` holds annotation data; `marks` on spans reference `markDefs[*]._key` or are decorator strings
