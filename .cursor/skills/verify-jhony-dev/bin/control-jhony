@@ -1,0 +1,312 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
+RUN_DIR="$SKILL_DIR/.run"
+STATE_FILE="$RUN_DIR/state.env"
+LOG_FILE="$RUN_DIR/astro.log"
+PID_FILE="$RUN_DIR/launch.pid"
+DEFAULT_PORT=4373
+HOST="127.0.0.1"
+
+usage() {
+  cat <<'EOF'
+control-jhony — launch, doctor, HTTP-check, and tear down a disposable jhony.dev instance.
+
+Usage:
+  control-jhony launch [--port <port>]
+  control-jhony doctor
+  control-jhony http GET <path>
+  control-jhony cleanup
+
+State lives in .cursor/skills/verify-jhony-dev/.run/ (removed on cleanup).
+Evidence belongs in .cursor/skills/verify-jhony-dev/artifacts/ (kept on cleanup).
+EOF
+}
+
+die() {
+  echo "error: $*" >&2
+  exit 1
+}
+
+require_repo() {
+  [[ -f "$REPO_ROOT/package.json" ]] || die "could not find package.json at $REPO_ROOT"
+  [[ -f "$REPO_ROOT/.env" ]] || die "missing $REPO_ROOT/.env with SANITY_PROJECT_ID and SANITY_DATASET (required by astro.config.mjs)"
+}
+
+load_state() {
+  [[ -f "$STATE_FILE" ]] || die "no verification instance state at $STATE_FILE — run launch first"
+  # shellcheck disable=SC1090
+  source "$STATE_FILE"
+  [[ -n "${VERIFY_PORT:-}" && -n "${VERIFY_URL:-}" && -n "${VERIFY_LAUNCH_PID:-}" ]] || die "state file is incomplete: $STATE_FILE"
+}
+
+write_state() {
+  local port="$1" launch_pid="$2" url="$3"
+  mkdir -p "$RUN_DIR"
+  cat >"$STATE_FILE" <<EOF
+VERIFY_PORT=$port
+VERIFY_HOST=$HOST
+VERIFY_URL=$url
+VERIFY_LAUNCH_PID=$launch_pid
+VERIFY_LOG=$LOG_FILE
+EOF
+}
+
+listening_pid() {
+  local port="$1"
+  lsof -nP -iTCP:"$port" -sTCP:LISTEN -t 2>/dev/null | head -n 1 || true
+}
+
+pid_alive() {
+  local pid="$1"
+  [[ -n "$pid" ]] && kill -0 "$pid" 2>/dev/null
+}
+
+is_descendant_of() {
+  local child="$1" ancestor="$2"
+  local current="$child"
+  local parent
+  while [[ -n "$current" && "$current" != "1" ]]; do
+    if [[ "$current" == "$ancestor" ]]; then
+      return 0
+    fi
+    parent="$(ps -o ppid= -p "$current" 2>/dev/null | tr -d ' ' || true)"
+    [[ -z "$parent" || "$parent" == "$current" ]] && break
+    current="$parent"
+  done
+  return 1
+}
+
+wait_ready() {
+  local url="$1"
+  local attempts=60
+  local i
+  for i in $(seq 1 "$attempts"); do
+    if curl -fsS --max-time 1 "$url/" >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.25
+  done
+  return 1
+}
+
+cmd_launch() {
+  local port="$DEFAULT_PORT"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --port)
+        [[ $# -ge 2 ]] || die "--port requires a value"
+        port="$2"
+        shift 2
+        ;;
+      *)
+        die "unknown launch argument: $1"
+        ;;
+    esac
+  done
+
+  require_repo
+  mkdir -p "$RUN_DIR"
+
+  if [[ -f "$STATE_FILE" ]]; then
+    # shellcheck disable=SC1090
+    source "$STATE_FILE"
+    if pid_alive "${VERIFY_LAUNCH_PID:-}" && [[ "$(listening_pid "${VERIFY_PORT:-}")" != "" ]]; then
+      echo "already running ${VERIFY_URL} (launch pid ${VERIFY_LAUNCH_PID})"
+      cmd_doctor
+      return 0
+    fi
+    echo "stale state found; removing $STATE_FILE"
+    rm -f "$STATE_FILE" "$PID_FILE"
+  fi
+
+  local existing
+  existing="$(listening_pid "$port")"
+  if [[ -n "$existing" ]]; then
+    die "port $port is already in use by pid $existing — pick another --port or stop that listener. Do not kill a process you did not start."
+  fi
+
+  local url="http://${HOST}:${port}"
+  : >"$LOG_FILE"
+
+  # Double-fork so the Astro process survives the helper (and Cursor shell) exiting.
+  python3 - "$REPO_ROOT" "$LOG_FILE" "$PID_FILE" "$port" "$HOST" <<'PY'
+import os
+import signal
+import sys
+
+repo, log_path, pid_file, port, host = sys.argv[1:6]
+
+if os.fork() > 0:
+    os._exit(0)
+os.setsid()
+signal.signal(signal.SIGHUP, signal.SIG_IGN)
+if os.fork() > 0:
+    os._exit(0)
+
+os.chdir(repo)
+os.umask(0o22)
+with open(pid_file, "w", encoding="utf-8") as handle:
+    handle.write(str(os.getpid()))
+devnull = os.open("/dev/null", os.O_RDONLY)
+log_fd = os.open(log_path, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+os.dup2(devnull, 0)
+os.dup2(log_fd, 1)
+os.dup2(log_fd, 2)
+os.close(devnull)
+os.close(log_fd)
+os.execvp(
+    "pnpm",
+    [
+        "pnpm",
+        "exec",
+        "astro",
+        "dev",
+        "--port",
+        port,
+        "--host",
+        host,
+        "--allowed-hosts",
+        host,
+    ],
+)
+PY
+
+  local i launch_pid=""
+  for i in $(seq 1 50); do
+    if [[ -s "$PID_FILE" ]]; then
+      launch_pid="$(tr -d '[:space:]' <"$PID_FILE")"
+      if pid_alive "$launch_pid"; then
+        break
+      fi
+    fi
+    sleep 0.1
+  done
+  [[ -n "$launch_pid" ]] || die "daemon did not write $PID_FILE"
+  write_state "$port" "$launch_pid" "$url"
+
+  if ! wait_ready "$url"; then
+    echo "launch log (tail):" >&2
+    tail -n 40 "$LOG_FILE" >&2 || true
+    die "server did not become ready at $url — see $LOG_FILE"
+  fi
+
+  echo "launched $url (launch pid $launch_pid)"
+  cmd_doctor
+}
+
+cmd_doctor() {
+  load_state
+  local listen_pid
+  listen_pid="$(listening_pid "$VERIFY_PORT")"
+
+  if ! pid_alive "$VERIFY_LAUNCH_PID"; then
+    die "launch pid $VERIFY_LAUNCH_PID is not running"
+  fi
+  if [[ -z "$listen_pid" ]]; then
+    die "nothing is listening on $VERIFY_HOST:$VERIFY_PORT"
+  fi
+  if [[ "$listen_pid" != "$VERIFY_LAUNCH_PID" ]] && ! is_descendant_of "$listen_pid" "$VERIFY_LAUNCH_PID"; then
+    die "port $VERIFY_PORT is owned by pid $listen_pid, which is not the verification launch pid $VERIFY_LAUNCH_PID — refuse to drive a shared instance"
+  fi
+
+  local body
+  body="$(mktemp)"
+  local code
+  code="$(curl -sS -o "$body" -w "%{http_code}" --max-time 5 "$VERIFY_URL/")" || true
+  if [[ "$code" != "200" ]]; then
+    rm -f "$body"
+    die "GET $VERIFY_URL/ returned HTTP $code"
+  fi
+  if ! grep -q "Jonathan Ortega · Software Engineer" "$body"; then
+    rm -f "$body"
+    die "home HTML is missing the expected document title"
+  fi
+  if ! grep -q ">jhony.dev<" "$body"; then
+    rm -f "$body"
+    die "home HTML is missing the jhony.dev wordmark"
+  fi
+  rm -f "$body"
+
+  echo "doctor ok"
+  echo "url=$VERIFY_URL"
+  echo "port=$VERIFY_PORT"
+  echo "launch_pid=$VERIFY_LAUNCH_PID"
+  echo "listen_pid=$listen_pid"
+  echo "log=$VERIFY_LOG"
+}
+
+cmd_http() {
+  local method="${1:-}"
+  local path="${2:-}"
+  [[ "$method" == "GET" ]] || die "only GET is supported"
+  [[ -n "$path" ]] || die "usage: control-jhony http GET <path>"
+  [[ "$path" == /* ]] || die "path must start with /"
+  load_state
+  local code
+  local body
+  body="$(mktemp)"
+  code="$(curl -sS -o "$body" -w "%{http_code}" --max-time 10 "$VERIFY_URL$path")" || true
+  echo "HTTP $code $method $VERIFY_URL$path"
+  cat "$body"
+  echo
+  rm -f "$body"
+  [[ "$code" == "200" ]]
+}
+
+cmd_cleanup() {
+  if [[ ! -f "$STATE_FILE" ]]; then
+    echo "nothing to clean up"
+    return 0
+  fi
+  # shellcheck disable=SC1090
+  source "$STATE_FILE"
+  local listen_pid=""
+  if [[ -n "${VERIFY_PORT:-}" ]]; then
+    listen_pid="$(listening_pid "$VERIFY_PORT")"
+  fi
+
+  if [[ -n "$listen_pid" && -n "${VERIFY_LAUNCH_PID:-}" ]]; then
+    if [[ "$listen_pid" == "$VERIFY_LAUNCH_PID" ]] || is_descendant_of "$listen_pid" "$VERIFY_LAUNCH_PID"; then
+      kill "$listen_pid" 2>/dev/null || true
+    else
+      echo "warning: not killing listen pid $listen_pid (not owned by launch pid ${VERIFY_LAUNCH_PID})" >&2
+    fi
+  fi
+
+  if pid_alive "${VERIFY_LAUNCH_PID:-}"; then
+    kill "$VERIFY_LAUNCH_PID" 2>/dev/null || true
+  fi
+
+  local i
+  for i in $(seq 1 20); do
+    if ! pid_alive "${VERIFY_LAUNCH_PID:-}" && [[ -z "$(listening_pid "${VERIFY_PORT:-}")" ]]; then
+      break
+    fi
+    sleep 0.15
+  done
+
+  if pid_alive "${VERIFY_LAUNCH_PID:-}"; then
+    die "launch pid $VERIFY_LAUNCH_PID did not exit"
+  fi
+
+  rm -f "$STATE_FILE" "$PID_FILE"
+  echo "cleaned verification instance; evidence under $SKILL_DIR/artifacts/ is unchanged"
+}
+
+main() {
+  local cmd="${1:-}"
+  shift || true
+  case "$cmd" in
+    launch) cmd_launch "$@" ;;
+    doctor) cmd_doctor "$@" ;;
+    http) cmd_http "$@" ;;
+    cleanup|stop) cmd_cleanup "$@" ;;
+    -h|--help|help|"") usage ;;
+    *) die "unknown command: $cmd" ;;
+  esac
+}
+
+main "$@"

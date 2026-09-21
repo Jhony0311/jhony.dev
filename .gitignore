@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# verification skill runtime (keep artifacts out of git; recipes live in the skill)
+.cursor/skills/verify-jhony-dev/.run/
+.cursor/skills/verify-jhony-dev/artifacts/
