@@ -29,6 +29,7 @@ Root array
 ```
 
 **Marks** come in two forms:
+
 - **Decorators**: string values in `marks[]` like `"strong"`, `"em"`, `"underline"`, `"code"`
 - **Annotations**: keys in `marks[]` referencing entries in `markDefs[]` (e.g., links, internal references)
 
@@ -36,14 +37,14 @@ Root array
 
 Every `@portabletext/*` library accepts a `components` object with these keys:
 
-| Key | Renders | Props/Data |
-|-----|---------|------------|
-| `types` | Custom block/inline types (image, code, CTA) | `value` (the block data) |
-| `marks` | Decorators + annotations | `children` + `value` (mark data) |
-| `block` | Block styles (h1, normal, blockquote) | `children` |
-| `list` | List wrappers (ul, ol) | `children` |
-| `listItem` | List items | `children` |
-| `hardBreak` | Line breaks within a block | — |
+| Key         | Renders                                      | Props/Data                       |
+| ----------- | -------------------------------------------- | -------------------------------- |
+| `types`     | Custom block/inline types (image, code, CTA) | `value` (the block data)         |
+| `marks`     | Decorators + annotations                     | `children` + `value` (mark data) |
+| `block`     | Block styles (h1, normal, blockquote)        | `children`                       |
+| `list`      | List wrappers (ul, ol)                       | `children`                       |
+| `listItem`  | List items                                   | `children`                       |
+| `hardBreak` | Line breaks within a block                   | —                                |
 
 ## Framework-Specific Rules
 
@@ -61,17 +62,17 @@ Read the rule file matching your framework:
 
 These are listed on [portabletext.org](https://www.portabletext.org/integrations/serializers/) but don't have dedicated rule files:
 
-| Target | Package |
-|--------|---------|
-| React Native | `@portabletext/react-native-portabletext` |
-| React PDF | `@portabletext/react-pdf-portabletext` |
-| Solid | `solid-portabletext` |
-| Qwik | `portabletext-qwik` |
-| Shopify Liquid | `portable-text-to-liquid` |
-| PHP | `sanity-php` (SanityBlockContent class) |
-| Python | `portabletext-html` |
-| C# / .NET | `dotnet-portable-text` |
-| Dart / Flutter | `flutter_sanity_portable_text` |
+| Target         | Package                                   |
+| -------------- | ----------------------------------------- |
+| React Native   | `@portabletext/react-native-portabletext` |
+| React PDF      | `@portabletext/react-pdf-portabletext`    |
+| Solid          | `solid-portabletext`                      |
+| Qwik           | `portabletext-qwik`                       |
+| Shopify Liquid | `portable-text-to-liquid`                 |
+| PHP            | `sanity-php` (SanityBlockContent class)   |
+| Python         | `portabletext-html`                       |
+| C# / .NET      | `dotnet-portable-text`                    |
+| Dart / Flutter | `flutter_sanity_portable_text`            |
 
 ## Common Patterns (All Frameworks)
 
@@ -86,6 +87,7 @@ In React/Vue, define `components` outside the render function or memoize it. Rec
 ### Handle Missing Components Gracefully
 
 All libraries accept `onMissingComponent` to control behavior when encountering unknown types:
+
 - `false` — suppress warnings
 - Custom function — log or report
 

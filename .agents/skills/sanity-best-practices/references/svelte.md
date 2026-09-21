@@ -8,16 +8,23 @@ description: Integration guide for SvelteKit with Sanity, including @sanity/svel
 ## 1. Setup & Configuration
 
 ### Installation
+
 ```bash
 npm install @sanity/svelte-loader @sanity/client @sanity/visual-editing
 ```
 
 ### Client Configuration (`src/lib/sanity.ts`)
+
 Define the client with `stega` enabled for the studio URL.
 
 ```typescript
-import { createClient } from '@sanity/client'
-import { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET, PUBLIC_SANITY_API_VERSION, PUBLIC_SANITY_STUDIO_URL } from '$env/static/public'
+import { createClient } from "@sanity/client";
+import {
+  PUBLIC_SANITY_PROJECT_ID,
+  PUBLIC_SANITY_DATASET,
+  PUBLIC_SANITY_API_VERSION,
+  PUBLIC_SANITY_STUDIO_URL,
+} from "$env/static/public";
 
 export const client = createClient({
   projectId: PUBLIC_SANITY_PROJECT_ID,
@@ -27,20 +34,21 @@ export const client = createClient({
   stega: {
     studioUrl: PUBLIC_SANITY_STUDIO_URL,
   },
-})
+});
 ```
 
 ### Server Client (`src/lib/server/sanity.ts`)
+
 Use the read token for fetching preview content.
 
 ```typescript
-import { SANITY_API_READ_TOKEN } from '$env/static/private'
-import { client } from '$lib/sanity'
+import { SANITY_API_READ_TOKEN } from "$env/static/private";
+import { client } from "$lib/sanity";
 
 export const serverClient = client.withConfig({
   token: SANITY_API_READ_TOKEN,
   stega: true, // Optional: enable stega on server too if needed
-})
+});
 ```
 
 ## 2. Hooks & Request Handler (Critical)
@@ -49,17 +57,18 @@ You **must** configure `createRequestHandler` in `src/hooks.server.ts` to handle
 
 ```typescript
 // src/hooks.server.ts
-import { createRequestHandler, setServerClient } from '@sanity/svelte-loader'
-import { serverClient } from '$lib/server/sanity'
+import { createRequestHandler, setServerClient } from "@sanity/svelte-loader";
+import { serverClient } from "$lib/server/sanity";
 
-setServerClient(serverClient)
+setServerClient(serverClient);
 
-export const handle = createRequestHandler()
+export const handle = createRequestHandler();
 ```
 
 **Update `app.d.ts` types:**
+
 ```typescript
-import type { LoaderLocals } from '@sanity/svelte-loader'
+import type { LoaderLocals } from "@sanity/svelte-loader";
 
 declare global {
   namespace App {
@@ -73,22 +82,24 @@ declare global {
 Pass the preview state from the server to the client via the root layout.
 
 **Server Layout (`src/routes/+layout.server.ts`):**
+
 ```typescript
-import type { LayoutServerLoad } from './$types'
+import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = ({ locals: { preview } }) => {
-  return { preview }
-}
+  return { preview };
+};
 ```
 
 **Client Layout (`src/routes/+layout.ts`):**
+
 ```typescript
-import { setPreviewing } from '@sanity/svelte-loader'
-import type { LayoutLoad } from './$types'
+import { setPreviewing } from "@sanity/svelte-loader";
+import type { LayoutLoad } from "./$types";
 
 export const load: LayoutLoad = ({ data: { preview } }) => {
-  setPreviewing(preview)
-}
+  setPreviewing(preview);
+};
 ```
 
 ## 4. Data Fetching (Loaders)
@@ -97,17 +108,18 @@ Use `locals.loadQuery` in your page server loaders.
 
 ```typescript
 // src/routes/[slug]/+page.server.ts
-import type { PageServerLoad } from './$types'
+import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ locals: { loadQuery }, params }) => {
-  const initial = await loadQuery(QUERY, params)
-  return { initial }
-}
+  const initial = await loadQuery(QUERY, params);
+  return { initial };
+};
 ```
 
 ## 5. Real-time Preview & Visual Editing
 
 ### Component Usage (`useQuery`)
+
 Use `useQuery` in your Svelte component to handle real-time updates.
 
 ```svelte
@@ -135,6 +147,7 @@ Use `useQuery` in your Svelte component to handle real-time updates.
 ```
 
 ### Enable Visual Editing (`+layout.svelte`)
+
 Enable Visual Editing and Live Mode in your root layout.
 
 ```svelte

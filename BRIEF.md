@@ -1,12 +1,13 @@
 # Design Brief
+
 ## Personal Website · Software Engineer
 
-| | |
-|---|---|
-| **Prepared by** | Creative Team |
-| **Version** | 1.0 · May 2025 |
-| **Project type** | Personal site with digital garden |
-| **Primary audience** | Tech community + recruiters |
+|                      |                                   |
+| -------------------- | --------------------------------- |
+| **Prepared by**      | Creative Team                     |
+| **Version**          | 1.0 · May 2025                    |
+| **Project type**     | Personal site with digital garden |
+| **Primary audience** | Tech community + recruiters       |
 
 ---
 
@@ -53,7 +54,7 @@ The site is organized into three main sections with a clear hierarchy. Navigatio
 ### Section A · Home / Intro
 
 **PURPOSE**
-First impression. Answers in 10 seconds: *"Who are you and why should I stay?"* Also serves as a hub for recent activity.
+First impression. Answers in 10 seconds: _"Who are you and why should I stay?"_ Also serves as a hub for recent activity.
 
 **CONTENT COMPONENTS**
 
@@ -69,7 +70,7 @@ First impression. Answers in 10 seconds: *"Who are you and why should I stay?"* 
 - No "welcome to my site" or any cliché opening lines
 - The bio should end with something that invites exploration of the garden
 
-> **Tone reference for the bio:** *"I write about what I'm learning. If I can't explain something clearly, it means I don't understand it yet."*
+> **Tone reference for the bio:** _"I write about what I'm learning. If I can't explain something clearly, it means I don't understand it yet."_
 
 ---
 
@@ -88,11 +89,11 @@ Each piece of content carries a visible maturity status, following Maggie Applet
 
 **CONTENT TYPES**
 
-| Type | Description | Example |
-|---|---|---|
-| **Essay / Post** | Long-form article with a personal argument | *"Why I prefer X over Y in production"* |
-| **Note** | Short observation, quick reflection | *"Things I didn't know about async/await"* |
-| **Snippet** | Functional code with minimal context | *React hook to detect scroll direction* |
+| Type             | Description                                | Example                                    |
+| ---------------- | ------------------------------------------ | ------------------------------------------ |
+| **Essay / Post** | Long-form article with a personal argument | _"Why I prefer X over Y in production"_    |
+| **Note**         | Short observation, quick reflection        | _"Things I didn't know about async/await"_ |
+| **Snippet**      | Functional code with minimal context       | _React hook to detect scroll direction_    |
 
 **FILTERING SYSTEM**
 
@@ -109,7 +110,7 @@ Each piece of content carries a visible maturity status, following Maggie Applet
 - Notes can be very short — no minimum length requirement
 - The garden should have its own clean URL (e.g. `/garden` or `/notes`)
 
-> **Key differentiator:** Show the *last edited* date, not just the publication date. This communicates that the garden is a living organism, not an archive.
+> **Key differentiator:** Show the _last edited_ date, not just the publication date. This communicates that the garden is a living organism, not an archive.
 
 ---
 
@@ -165,6 +166,5 @@ The site must communicate rigor without coldness. The aesthetic should feel inte
 
 ---
 
-
-*Document prepared by the creative team.*
-*This brief is a living starting point — it will be updated with input from the client.*
+_Document prepared by the creative team._
+_This brief is a living starting point — it will be updated with input from the client._
