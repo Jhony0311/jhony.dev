@@ -1,12 +1,9 @@
 {
   "name": "jhonydev",
-  "version": "1.0.0",
   "private": true,
-  "keywords": [
-    "sanity"
-  ],
-  "license": "UNLICENSED",
+  "version": "1.0.0",
   "main": "package.json",
+  "license": "UNLICENSED",
   "scripts": {
     "build": "sanity build",
     "deploy": "sanity deploy",
@@ -14,6 +11,9 @@
     "dev": "sanity dev",
     "start": "sanity start"
   },
+  "keywords": [
+    "sanity"
+  ],
   "dependencies": {
     "@sanity/vision": "^5.30.0",
     "react": "^19.2.4",
