@@ -1,0 +1,12 @@
+[build]
+command = "pnpm run build"
+publish = "dist"
+
+[build.environment]
+NODE_VERSION = "24.15.0"
+
+[build.processing]
+ignore_html_forms = true
+
+[build.processing.html]
+pretty_urls = true

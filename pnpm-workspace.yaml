@@ -1,4 +1,6 @@
 allowBuilds:
   '@parcel/watcher': false
   esbuild: true
+  netlify-cli: true
   sharp: true
+  unix-dgram: false
