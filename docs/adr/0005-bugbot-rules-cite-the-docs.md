@@ -1,0 +1,3 @@
+# Bugbot rules cite the docs
+
+`.cursor/BUGBOT.md` holds Bugbot's own rules, written as fail conditions. Each rule cites a heading in `docs/coding-guidelines.md` or `DESIGN.md`. A catch-all flags any other violation of those docs and cites the heading. The docs are not pasted into the Bugbot file. A catch-all finding that keeps showing up is promoted into an enumerated rule. The first enumerated rules are shared-UI file type, single-use extraction, changed-line token drift, and a design-system edit that does not update `DESIGN.md`. Bugbot flags violating lines the diff adds or edits. Lines the diff does not touch are out of scope for that review. Cursor rules in `.cursor/rules` do not apply to Bugbot, so this file is the review source.
