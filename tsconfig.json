@@ -5,7 +5,9 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "studio/sanity.config.ts",
+    "studio/sanity.cli.ts"
   ],
   "compilerOptions": {
     "jsx": "react-jsx",

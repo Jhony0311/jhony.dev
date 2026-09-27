@@ -1,0 +1,49 @@
+name: Check
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Lint, format, typecheck, and test
+    runs-on: ubuntu-latest
+    env:
+      SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID || secrets.SANITY_PROJECT_ID }}
+      SANITY_DATASET: ${{ vars.SANITY_DATASET || secrets.SANITY_DATASET }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Require Sanity environment
+        run: |
+          if [ -z "${SANITY_PROJECT_ID}" ] || [ -z "${SANITY_DATASET}" ]; then
+            echo "SANITY_PROJECT_ID and SANITY_DATASET must be set as GitHub Actions variables or secrets." >&2
+            exit 1
+          fi
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Check formatting
+        run: pnpm fmt:check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test

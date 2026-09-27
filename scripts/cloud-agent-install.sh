@@ -15,15 +15,19 @@ corepack install
 # against the active Node runtime, which satisfies the ">=22.12" engines range.
 corepack pnpm install --frozen-lockfile
 
-# Astro resolves the Sanity connection at config load (see astro.config.mjs),
-# so dev/build need these present. They are public, non-secret identifiers
-# (the same values are committed in sanity.config.ts), not credentials.
+# Astro resolves the Sanity connection at config load (see astro.config.mjs).
+# Values come from the environment. Never write them into the script.
 if [ ! -f .env ]; then
-  cat > .env <<'EOF'
-SANITY_PROJECT_ID=y08cu22h
-SANITY_DATASET=production
+  if [ -z "${SANITY_PROJECT_ID:-}" ] || [ -z "${SANITY_DATASET:-}" ]; then
+    echo "cloud-agent-install: SANITY_PROJECT_ID and SANITY_DATASET must be set in the environment" >&2
+    exit 1
+  fi
+  umask 077
+  cat > .env <<EOF
+SANITY_PROJECT_ID=${SANITY_PROJECT_ID}
+SANITY_DATASET=${SANITY_DATASET}
 EOF
-  echo "cloud-agent-install: wrote .env with public Sanity project/dataset"
+  echo "cloud-agent-install: wrote .env from the environment"
 else
   echo "cloud-agent-install: .env already present, leaving it untouched"
 fi
