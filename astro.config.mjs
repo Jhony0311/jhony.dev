@@ -13,10 +13,18 @@ const { SANITY_PROJECT_ID, SANITY_DATASET } = loadEnv(
   "",
 );
 
+if (!SANITY_PROJECT_ID || !SANITY_DATASET) {
+  throw new Error("SANITY_PROJECT_ID and SANITY_DATASET must be set");
+}
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    react(),
+    react({
+      babel: {
+        plugins: [["babel-plugin-react-compiler", { target: "19" }]],
+      },
+    }),
     sanity({
       projectId: SANITY_PROJECT_ID,
       dataset: SANITY_DATASET,
@@ -30,6 +38,10 @@ export default defineConfig({
   ],
 
   vite: {
+    define: {
+      "process.env.SANITY_PROJECT_ID": JSON.stringify(SANITY_PROJECT_ID),
+      "process.env.SANITY_DATASET": JSON.stringify(SANITY_DATASET),
+    },
     plugins: [tailwindcss(), structureTool()],
   },
 });
