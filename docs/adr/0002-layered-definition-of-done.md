@@ -1,0 +1,3 @@
+# Definition of done is a layered gate
+
+A change to the site is finished only when every layer that applies to it has passed. Deterministic rules always block, through a GitHub Actions check on pull requests, using the same commands agents run locally. Bugbot rules block until their findings are addressed in that change. Bugbot is a review loop, not a required GitHub check. Coding guidelines and design guidelines are what those reviews cite. They are not a second checklist. When a guideline becomes mechanically checkable, it is promoted into a rule and the prose is removed. A green lint run alone is not enough, and a prose checklist alone is not verifiable.

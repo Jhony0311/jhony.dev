@@ -1,0 +1,3 @@
+# Shared UI is React
+
+Shared UI is React, including static primitives such as `PillLink`. Astro is for pages and for the layout frames: `Layout`, `SiteHeader`, `SiteFooter`, `SiteNavigation`, and `SiteContent`. A page or frame that renders a shared React component mounts it with `client:load`. Extract a component when a second file needs it, or when it is a React island with its own state. Two copies in the same file stay inline. A page may be long. There is no line cap, and markup that appears once stays in the page. The rejected alternative was React only for components with state, effects, or event handlers. That would keep shared static primitives in Astro, and an island could not render them.
