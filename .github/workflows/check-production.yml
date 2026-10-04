@@ -1,7 +1,9 @@
-name: Check
+name: Check production
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -11,7 +13,7 @@ jobs:
   check:
     name: Lint, format, typecheck, and test
     runs-on: ubuntu-latest
-    environment: Preview
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
