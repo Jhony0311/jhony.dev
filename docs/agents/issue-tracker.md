@@ -1,6 +1,15 @@
 # Issue tracker: GitHub
 
-Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
+Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for issues, pull requests, and labels.
+
+## Credentials
+
+Two environment variables are in play. `gh` reads `GH_TOKEN` and ignores the other one.
+
+- **Issues, pull requests, and issue labels**: run `gh` as usual. It authenticates with `GH_TOKEN`.
+- **Project board**: the board is the user project "Jhony.dev Project". Run that command as `GH_TOKEN="$GH_PROJECT_TOKEN" gh project ...` so only that call uses the project token. Leave `GH_TOKEN` itself unchanged for later `gh issue` and `gh pr` commands.
+
+`GH_PROJECT_TOKEN` can read and update the project. It cannot create or edit issues, pull requests, or labels. Do not write either value into the repo, a commit, or a comment.
 
 ## Conventions
 
