@@ -6,14 +6,37 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
-# Use the package manager pinned in package.json ("packageManager") so the
-# environment matches local development exactly.
-corepack enable
-corepack install
+# package.json#packageManager is the version pin. The executable is the standalone
+# pnpm binary. Corepack skips pnpm's install script, so its shim never gets
+# that binary and then shadows PNPM_HOME after nvm use.
+corepack disable pnpm || true
+
+case "$(uname -s)" in
+  Darwin) default_pnpm_home="$HOME/Library/pnpm" ;;
+  *) default_pnpm_home="$HOME/.local/share/pnpm" ;;
+esac
+export PNPM_HOME="${PNPM_HOME:-$default_pnpm_home}"
+export PATH="$PNPM_HOME/bin:$PATH"
+
+package_manager="$(node -p "require('./package.json').packageManager")"
+case "$package_manager" in
+  pnpm@*) ;;
+  *)
+    echo "cloud-agent-install: packageManager must be pnpm, got ${package_manager}" >&2
+    exit 1
+    ;;
+esac
+pnpm_version="${package_manager#pnpm@}"
+pnpm_version="${pnpm_version%%+*}"
+
+if [[ ! -x "$PNPM_HOME/bin/pnpm" ]] || [[ "$("$PNPM_HOME/bin/pnpm" --version)" != "$pnpm_version" ]]; then
+  curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION="$pnpm_version" sh -
+  export PATH="$PNPM_HOME/bin:$PATH"
+fi
 
 # Install dependencies exactly as locked. Native deps (esbuild, sharp) build
 # against the active Node runtime, which satisfies the ">=22.12" engines range.
-corepack pnpm install --frozen-lockfile
+"$PNPM_HOME/bin/pnpm" install --frozen-lockfile
 
 # Astro resolves the Sanity connection at config load (see astro.config.mjs).
 # Values come from the environment. Never write them into the script.
@@ -32,4 +55,4 @@ else
   echo "cloud-agent-install: .env already present, leaving it untouched"
 fi
 
-echo "cloud-agent-install: done (node $(node -v), pnpm $(corepack pnpm -v))"
+echo "cloud-agent-install: done (node $(node -v), pnpm $("$PNPM_HOME/bin/pnpm" --version))"
