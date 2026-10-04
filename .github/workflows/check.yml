@@ -2,6 +2,9 @@ name: Check
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -10,6 +13,7 @@ jobs:
   check:
     name: Lint, format, typecheck, and test
     runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'pull_request' && 'Preview' || 'Production' }}
     env:
       SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID || secrets.SANITY_PROJECT_ID }}
       SANITY_DATASET: ${{ vars.SANITY_DATASET || secrets.SANITY_DATASET }}
@@ -20,7 +24,7 @@ jobs:
       - name: Require Sanity environment
         run: |
           if [ -z "${SANITY_PROJECT_ID}" ] || [ -z "${SANITY_DATASET}" ]; then
-            echo "SANITY_PROJECT_ID and SANITY_DATASET must be set as GitHub Actions variables or secrets." >&2
+            echo "SANITY_PROJECT_ID and SANITY_DATASET must be set on the selected GitHub environment." >&2
             exit 1
           fi
 
