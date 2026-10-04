@@ -1,0 +1,32 @@
+name: Check
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  check:
+    name: Lint, format, typecheck, and test
+    runs-on: ubuntu-latest
+    environment: Preview
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Require Sanity environment
+        env:
+          SANITY_PROJECT_ID_VAR: ${{ vars.SANITY_PROJECT_ID }}
+          SANITY_PROJECT_ID_SECRET: ${{ secrets.SANITY_PROJECT_ID }}
+          SANITY_DATASET_VAR: ${{ vars.SANITY_DATASET }}
+          SANITY_DATASET_SECRET: ${{ secrets.SANITY_DATASET }}
+          SANITY_STUDIO_PROJECT_ID_VAR: ${{ vars.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_PROJECT_ID_SECRET: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_DATASET_VAR: ${{ vars.SANITY_STUDIO_DATASET }}
+          SANITY_STUDIO_DATASET_SECRET: ${{ secrets.SANITY_STUDIO_DATASET }}
+        run: bash .github/actions/quality-gate/require-sanity-env.sh
+
+      - name: Lint, format, typecheck, and test
+        uses: ./.github/actions/quality-gate

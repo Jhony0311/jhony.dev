@@ -58,6 +58,10 @@ function isStage(value: string | null): value is GardenStage {
   return value !== null && STAGE_OPTIONS.includes(value as GardenStage);
 }
 
+function isGardenType(value: string): value is GardenType {
+  return value === "Essay" || value === "Note" || value === "Snippet";
+}
+
 function parsePage(value: string | null): number {
   const parsed = Number(value);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
@@ -85,7 +89,8 @@ function parseStateFromLocation(pathname: string, search: string): GardenFilterS
   const params = new URLSearchParams(search);
 
   const selectedType = parseTypeFromPathname(pathname);
-  const selectedStage = isStage(params.get(STAGE_PARAM)) ? params.get(STAGE_PARAM) : ALL_FILTER;
+  const stageParam = params.get(STAGE_PARAM);
+  const selectedStage = isStage(stageParam) ? stageParam : ALL_FILTER;
 
   const selectedTags = (params.get(TAGS_PARAM) ?? "")
     .split(",")
@@ -281,11 +286,21 @@ export function GardenPage({
     return () => clearTimeout(timeout);
   }, []);
 
-  useEffect(() => {
-    setPage(1);
-  }, [selectedType, selectedStage, selectedTags]);
-
   const allTags = useMemo(() => ALL_TAGS, []);
+
+  function selectType(value: string) {
+    if (isGardenType(value) || value === ALL_FILTER) {
+      setSelectedType(value);
+      setPage(1);
+    }
+  }
+
+  function selectStage(value: string) {
+    if (isStage(value) || value === ALL_FILTER) {
+      setSelectedStage(value);
+      setPage(1);
+    }
+  }
 
   function toggleTag(tag: string) {
     setSelectedTags((current) => {
@@ -295,6 +310,7 @@ export function GardenPage({
 
       return [...current, tag];
     });
+    setPage(1);
   }
 
   const filteredEntries = useMemo(() => {
@@ -318,12 +334,6 @@ export function GardenPage({
   const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
 
   useEffect(() => {
-    if (page !== clampedPage) {
-      setPage(clampedPage);
-    }
-  }, [page, clampedPage]);
-
-  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
     if (selectedStage === ALL_FILTER) {
@@ -344,8 +354,9 @@ export function GardenPage({
       params.set(PAGE_PARAM, String(clampedPage));
     }
 
-    const categoryPath =
-      selectedType === ALL_FILTER ? "/garden" : `/garden/${CATEGORY_SEGMENT_BY_TYPE[selectedType]}`;
+    const categoryPath = isGardenType(selectedType)
+      ? `/garden/${CATEGORY_SEGMENT_BY_TYPE[selectedType]}`
+      : "/garden";
     const nextSearch = params.toString();
     const nextUrl = `${categoryPath}${nextSearch ? `?${nextSearch}` : ""}`;
     window.history.replaceState(null, "", nextUrl);
@@ -371,14 +382,14 @@ export function GardenPage({
           label="Category"
           options={[ALL_FILTER, "Essay", "Note", "Snippet"]}
           selected={selectedType}
-          onSelect={setSelectedType}
+          onSelect={selectType}
         />
 
         <FilterGroup
           label="Maturity"
           options={[ALL_FILTER, "Seedling", "Budding", "Evergreen"]}
           selected={selectedStage}
-          onSelect={setSelectedStage}
+          onSelect={selectStage}
           renderOption={(option) => {
             if (option === ALL_FILTER) {
               return option;
@@ -400,7 +411,10 @@ export function GardenPage({
           allTags={allTags}
           selectedTags={selectedTags}
           onToggleTag={toggleTag}
-          onClearTags={() => setSelectedTags([])}
+          onClearTags={() => {
+            setSelectedTags([]);
+            setPage(1);
+          }}
         />
       </div>
 
@@ -418,6 +432,7 @@ export function GardenPage({
               setSelectedType(ALL_FILTER);
               setSelectedStage(ALL_FILTER);
               setSelectedTags([]);
+              setPage(1);
             }}
             className="rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue active:-translate-y-px"
           >
@@ -449,7 +464,7 @@ export function GardenPage({
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2 border-t border-line pt-6">
           <button
             type="button"
-            onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+            onClick={() => setPage(Math.max(1, clampedPage - 1))}
             disabled={clampedPage === 1}
             className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
           >
@@ -475,7 +490,7 @@ export function GardenPage({
 
           <button
             type="button"
-            onClick={() => setPage((prev) => Math.min(pageCount, prev + 1))}
+            onClick={() => setPage(Math.min(pageCount, clampedPage + 1))}
             disabled={clampedPage === pageCount}
             className="inline-flex items-center gap-1 rounded-full bg-canvas-inset px-3 py-1.5 font-mono text-xs text-ink-muted ring-1 ring-line transition-all duration-200 hover:bg-accent-blue-soft hover:text-accent-blue disabled:cursor-not-allowed disabled:opacity-50"
           >

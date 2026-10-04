@@ -1,0 +1,34 @@
+name: Quality gate
+description: Lint, format, typecheck, and test.
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
+    - name: Lint
+      shell: bash
+      run: pnpm lint
+
+    - name: Check formatting
+      shell: bash
+      run: pnpm fmt:check
+
+    - name: Typecheck
+      shell: bash
+      run: pnpm typecheck
+
+    - name: Test
+      shell: bash
+      run: pnpm test
