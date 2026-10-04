@@ -7,27 +7,20 @@ runs:
     - name: Require Sanity environment
       shell: bash
       run: |
-        project_id="${SANITY_PROJECT_ID_VAR:-$SANITY_PROJECT_ID_SECRET}"
-        dataset="${SANITY_DATASET_VAR:-$SANITY_DATASET_SECRET}"
+        project_id="${SANITY_PROJECT_ID_VAR:-${SANITY_PROJECT_ID_SECRET:-${SANITY_STUDIO_PROJECT_ID_VAR:-$SANITY_STUDIO_PROJECT_ID_SECRET}}}"
+        dataset="${SANITY_DATASET_VAR:-${SANITY_DATASET_SECRET:-${SANITY_STUDIO_DATASET_VAR:-$SANITY_STUDIO_DATASET_SECRET}}}"
         if [ -z "$project_id" ] || [ -z "$dataset" ]; then
-          echo "SANITY_PROJECT_ID and SANITY_DATASET must be set on this job's GitHub environment." >&2
-          source_of() {
-            if [ -n "$1" ]; then
-              echo variable
-            elif [ -n "$2" ]; then
-              echo secret
-            else
-              echo missing
-            fi
-          }
-          echo "SANITY_PROJECT_ID: $(source_of "$SANITY_PROJECT_ID_VAR" "$SANITY_PROJECT_ID_SECRET")" >&2
-          echo "SANITY_DATASET: $(source_of "$SANITY_DATASET_VAR" "$SANITY_DATASET_SECRET")" >&2
-          echo "SANITY_STUDIO_PROJECT_ID: $(source_of "$SANITY_STUDIO_PROJECT_ID_VAR" "$SANITY_STUDIO_PROJECT_ID_SECRET")" >&2
-          echo "SANITY_STUDIO_DATASET: $(source_of "$SANITY_STUDIO_DATASET_VAR" "$SANITY_STUDIO_DATASET_SECRET")" >&2
+          echo "The selected GitHub environment must provide a Sanity project id and dataset." >&2
+          echo "Project id: SANITY_PROJECT_ID or SANITY_STUDIO_PROJECT_ID." >&2
+          echo "Dataset: SANITY_DATASET or SANITY_STUDIO_DATASET." >&2
           exit 1
         fi
-        printf 'SANITY_PROJECT_ID=%s\n' "$project_id" >> "$GITHUB_ENV"
-        printf 'SANITY_DATASET=%s\n' "$dataset" >> "$GITHUB_ENV"
+        {
+          printf 'SANITY_PROJECT_ID=%s\n' "$project_id"
+          printf 'SANITY_DATASET=%s\n' "$dataset"
+          printf 'SANITY_STUDIO_PROJECT_ID=%s\n' "$project_id"
+          printf 'SANITY_STUDIO_DATASET=%s\n' "$dataset"
+        } >> "$GITHUB_ENV"
 
     - name: Install pnpm
       uses: pnpm/action-setup@v4
