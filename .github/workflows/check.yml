@@ -8,12 +8,14 @@ on:
 
 permissions:
   contents: read
+  deployments: write
 
 jobs:
   check:
     name: Lint, format, typecheck, and test
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'pull_request' && 'Preview' || 'Production' }}
+    environment:
+      name: ${{ github.event_name == 'pull_request' && 'Preview' || 'Production' }}
     env:
       SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID || secrets.SANITY_PROJECT_ID }}
       SANITY_DATASET: ${{ vars.SANITY_DATASET || secrets.SANITY_DATASET }}
