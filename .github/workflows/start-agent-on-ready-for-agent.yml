@@ -13,10 +13,16 @@ jobs:
     steps:
       - name: Start the Cursor automation
         env:
-          WEBHOOK_URL: ${{ vars.CURSOR_ISSUES_AUTOMATION_WEBHOOK_URL }}
-          AUTH_HEADER: ${{ vars.CURSOR_ISSUES_AUTOMATION_AUTH_HEADER }}
+          WEBHOOK_URL: ${{ secrets.CURSOR_ISSUES_AUTOMATION_WEBHOOK_URL }}
+          AUTH_HEADER: ${{ secrets.CURSOR_ISSUES_AUTOMATION_AUTH_HEADER }}
         run: |
-          curl -fsS -X POST "$WEBHOOK_URL" \
-            -H "Authorization: $AUTH_HEADER" \
+          url=$(printf '%s' "$WEBHOOK_URL" | tr -d '[:space:]')
+          auth=$(printf '%s' "$AUTH_HEADER" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          if [ -z "$url" ] || [ -z "$auth" ]; then
+            echo "Webhook URL or auth header secret is empty." >&2
+            exit 1
+          fi
+          curl -fsS -X POST "$url" \
+            -H "Authorization: $auth" \
             -H "Content-Type: application/json" \
             -d "{\"issue_number\":${{ github.event.issue.number }},\"label\":\"ready-for-agent\"}"
