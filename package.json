@@ -12,7 +12,8 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "typecheck": "astro check",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@astrojs/netlify": "^7.0.13",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "babel-plugin-react-compiler": "^1.0.0",
+    "lefthook": "^2.1.16",
     "netlify-cli": "^27.10.0",
     "oxfmt": "^0.49.0",
     "oxlint": "^1.78.0",
