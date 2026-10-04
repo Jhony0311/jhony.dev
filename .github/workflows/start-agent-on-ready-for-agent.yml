@@ -1,0 +1,22 @@
+name: Start agent on ready-for-agent
+
+on:
+  issues:
+    types: [labeled]
+
+permissions: {}
+
+jobs:
+  start:
+    if: github.event.label.name == 'ready-for-agent'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start the Cursor automation
+        env:
+          WEBHOOK_URL: ${{ vars.CURSOR_ISSUES_AUTOMATION_WEBHOOK_URL }}
+          AUTH_HEADER: ${{ vars.CURSOR_ISSUES_AUTOMATION_AUTH_HEADER }}
+        run: |
+          curl -fsS -X POST "$WEBHOOK_URL" \
+            -H "Authorization: $AUTH_HEADER" \
+            -H "Content-Type: application/json" \
+            -d "{\"issue_number\":${{ github.event.issue.number }},\"label\":\"ready-for-agent\"}"
