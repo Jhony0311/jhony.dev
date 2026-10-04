@@ -55,6 +55,12 @@
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
       "computedHash": "35e62aa423aaeab6a414bcac273f56dfb17802ef2334b41b6a3b00f28196c8cf"
     },
+    "how": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "pstack/skills/how/SKILL.md",
+      "computedHash": "a81bf6a7aec190f01acf26df059899fc7bf655fa3e6873ee7449e7e802c47144"
+    },
     "maintain-verification-skill": {
       "source": "cursor/plugins",
       "sourceType": "github",
@@ -138,6 +144,12 @@
       "sourceType": "github",
       "skillPath": "pstack/skills/unslop/SKILL.md",
       "computedHash": "3b8676e7461f44026b4d555ff0f3369a761df6033b9b9e2cd5152693cb20fbb2"
+    },
+    "why": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "pstack/skills/why/SKILL.md",
+      "computedHash": "0e1f6acfce6fc2c54f059b16d1e2273639f59f828b59c57a6644f895c22d68b2"
     }
   }
 }
