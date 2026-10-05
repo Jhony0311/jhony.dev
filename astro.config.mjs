@@ -21,8 +21,8 @@ if (!SANITY_PROJECT_ID || !SANITY_DATASET) {
 export default defineConfig({
   integrations: [
     react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler", { target: "19" }]],
+      compiler: {
+        target: "19",
       },
     }),
     sanity({
