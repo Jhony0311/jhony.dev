@@ -27,4 +27,4 @@ Edit the right-hand column to match whatever vocabulary you actually use.
 - **Hand back** removes `in-progress`, adds `ready-for-human`, and comments what needs a person.
 - **Finish** leaves `in-progress` on the issue. The pull request body contains `Closes #<n>`. GitHub closes the issue on merge.
 
-Do not apply `in-progress` during triage. Triage ends at `ready-for-agent` or `ready-for-human`.
+Do not apply `in-progress` during triage. Promoting a ticket to `ready-for-agent` or `ready-for-human` follows `docs/agents/triage.md`: the maintainer validates the body and agrees on the agent brief first. An empty body takes `needs-info` on every triage session.
