@@ -2,6 +2,16 @@
 
 Rules for `/triage` and any session that files or triages tickets. Label strings live in `docs/agents/triage-labels.md`. Creating an issue and moving its project Status live in `docs/agents/issue-tracker.md`.
 
+## Docs override the installed skills
+
+`.agents/skills/` is upstream guidance. Leave those files unchanged. When a skill and `docs/agents/` disagree, follow `docs/agents/`.
+
+These skill lines do not apply in this repo:
+
+- `.agents/skills/to-tickets/SKILL.md` says to apply `ready-for-agent` when publishing a ticket. Publish through [Intake](issue-tracker.md#intake): `needs-triage` and Status `Backlog`.
+- `.agents/skills/triage/SKILL.md` says that "move #42 to ready-for-agent" applies the role directly, and that a brief is optional when there was no grilling. Follow [Making a ticket ready](#making-a-ticket-ready): the maintainer validates the body and agrees on the agent brief before the label and before Status `Ready`.
+- `.agents/skills/triage/SKILL.md` lists unlabeled, `needs-triage`, and `needs-info` as the attention buckets. Run [Empty body](#empty-body) and [Ready column](#ready-column) first, then those buckets.
+
 The board is the user project "Jhony.dev Project". **Backlog** is intake. **Ready** is the column a ticket may enter only after the gates below.
 
 Every comment posted during triage starts with:

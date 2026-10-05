@@ -10,7 +10,7 @@ Canonical roles map 1:1 to `needs-triage`, `needs-info`, `ready-for-agent`, `rea
 
 ### Ticket management
 
-New issues start in Backlog with `needs-triage`. Triage asks the maintainer to validate the body and agree on an agent brief before a ticket is marked ready. See `docs/agents/triage.md`.
+`docs/agents/` overrides `.agents/skills/` when they disagree. Leave the skill files unchanged. New issues start in Backlog with `needs-triage`. Triage asks the maintainer to validate the body and agree on an agent brief before a ticket is marked ready. See `docs/agents/triage.md`.
 
 ### Domain docs
 

@@ -97,7 +97,7 @@ GitHub shares one number space across issues and PRs, so a bare `#42` may be eit
 
 ## When a skill says "publish to the issue tracker"
 
-Create a GitHub issue through [Intake](#intake): `needs-triage`, Status `Backlog`. Skills that say to apply `ready-for-agent` on publish defer to this file.
+Create a GitHub issue through [Intake](#intake): `needs-triage`, Status `Backlog`. `.agents/skills/to-tickets/SKILL.md` says to apply `ready-for-agent` on publish. That line does not apply here. `docs/agents/` is the procedure; leave the skill file unchanged. See `docs/agents/triage.md`.
 
 ## When a skill says "fetch the relevant ticket"
 
