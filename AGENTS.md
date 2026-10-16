@@ -25,3 +25,7 @@ This file points at the standards. It does not contain them.
 - Visual language, tokens, and accessibility: `DESIGN.md`
 - Product intent: `BRIEF.md`
 - Local checks: `pnpm lint`, `pnpm fmt:check`, and `pnpm typecheck`
+
+### Commits and branches
+
+Commit messages and working branch names follow Conventional Commits. The notation and the pull request squash rule are in `docs/commits.md`. Agents open branches in that shape. `pnpm commitlint` checks a message. `pnpm branch:check` checks the current branch.

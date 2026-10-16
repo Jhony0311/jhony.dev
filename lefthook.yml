@@ -19,5 +19,15 @@ pre-commit:
 
     - name: test
       files: git diff --name-only --cached --diff-filter=ACMR
-      glob: "src/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"
+      glob:
+        - "src/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"
+        - "scripts/**/*.{js,mjs,cjs}"
       run: pnpm exec vitest related --run --passWithNoTests {files}
+
+    - name: branch
+      run: pnpm branch:check
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit {1}
