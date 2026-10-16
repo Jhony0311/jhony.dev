@@ -16,6 +16,16 @@ Canonical roles map 1:1 to `needs-triage`, `needs-info`, `ready-for-agent`, `rea
 
 Single-context: `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
 
+### Sources of truth
+
+This file points at the standards. It does not contain them.
+
+- Coding guidelines: `docs/coding-guidelines.md`
+- Bugbot: `.cursor/BUGBOT.md`
+- Visual language, tokens, and accessibility: `DESIGN.md`
+- Product intent: `BRIEF.md`
+- Local checks: `pnpm lint`, `pnpm fmt:check`, and `pnpm typecheck`
+
 ### Commits and branches
 
 Commit messages and working branch names follow Conventional Commits. The notation and the pull request squash rule are in `docs/commits.md`. Agents open branches in that shape. `pnpm commitlint` checks a message. `pnpm branch:check` checks the current branch.
