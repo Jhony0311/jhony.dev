@@ -1,0 +1,3 @@
+# Sanity selects the wrapper and the order
+
+Pages in this repo choose their sections in code, and visitor-facing copy lives in TypeScript modules. That is the current code, and it is not the target. A page document and a post document are different Sanity documents. The document type selects the wrapper, and the document orders the content inside that wrapper. The wrapper is where the two documents differ. A component may be shared by both wrappers, and most components stay exclusive to one. The rejected alternative is a page file that chooses which components appear and in which order while Sanity only supplies the strings.
