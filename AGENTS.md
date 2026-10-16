@@ -15,3 +15,13 @@ Canonical roles map 1:1 to `needs-triage`, `needs-info`, `ready-for-agent`, `rea
 ### Domain docs
 
 Single-context: `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+
+### Sources of truth
+
+This file points at the standards. It does not contain them.
+
+- Coding guidelines: `docs/coding-guidelines.md`
+- Bugbot: `.cursor/BUGBOT.md`
+- Visual language, tokens, and accessibility: `DESIGN.md`
+- Product intent: `BRIEF.md`
+- Local checks: `pnpm lint`, `pnpm fmt:check`, and `pnpm typecheck`
