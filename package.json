@@ -13,6 +13,8 @@
     "fmt:check": "oxfmt --check",
     "typecheck": "astro check",
     "test": "vitest run",
+    "commitlint": "commitlint",
+    "branch:check": "node scripts/check-branch-name.js --allow-default",
     "prepare": "lefthook install"
   },
   "dependencies": {
@@ -37,6 +39,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
     "lefthook": "^2.1.16",
     "netlify-cli": "^27.10.0",
     "oxc-transform-react": "^0.152.0",
