@@ -55,6 +55,7 @@ describe('page schema', () => {
   it('registers the page document and the three content objects', () => {
     expect(schemaTypes.map((type) => type.name)).toEqual([
       'post',
+      'tag',
       'author',
       'category',
       'blockContent',
@@ -62,6 +63,12 @@ describe('page schema', () => {
       'singleAndDoubleColumn',
       'directory',
       'gallery',
+      'quotes',
+      'imageGrid',
+      'imageWithCaption',
+      'twitterEmbed',
+      'youtubeEmbed',
+      'disclaimer',
     ])
     expect(schema.get('page')?.name).toBe('page')
     expect(schema.get('singleAndDoubleColumn')?.name).toBe('singleAndDoubleColumn')
@@ -69,25 +76,30 @@ describe('page schema', () => {
     expect(schema.get('gallery')?.name).toBe('gallery')
   })
 
-  it('keeps the post document fields unchanged', () => {
+  it('registers the Post document fields and the tag document', () => {
     expect(post.fields?.map((item) => item.name)).toEqual([
       'title',
       'slug',
-      'author',
-      'mainImage',
-      'categories',
-      'publishedAt',
+      'type',
+      'stage',
+      'summary',
+      'tags',
+      'seo',
       'body',
     ])
     expect(asObject(schema.get('post')).fields.map((item) => item.name)).toEqual([
       'title',
       'slug',
-      'author',
-      'mainImage',
-      'categories',
-      'publishedAt',
+      'type',
+      'stage',
+      'summary',
+      'tags',
+      'seo',
       'body',
     ])
+    expect(schema.get('tag')?.name).toBe('tag')
+    expect(schema.get('author')?.name).toBe('author')
+    expect(schema.get('category')?.name).toBe('category')
   })
 
   it('requires a title and a slug, and describes index as the home page', () => {
