@@ -4,7 +4,7 @@ These are the judgments a tool cannot make yet. Bugbot and review cite this file
 
 ## Scaffold
 
-A URL lives in `src/pages`. A complex feature that only one page mounts lives in `src/components/<feature>`. The site has two wrappers, the page wrapper and the garden note wrapper. A new wrapper is added only when a document type needs it. Wrappers live in `src/layouts`.
+A URL lives in `src/pages`. A complex feature that only one page mounts lives in `src/components/<feature>`. The site has two wrappers, the page wrapper and the post wrapper. A new wrapper is added only when a document type needs it. Wrappers live in `src/layouts`.
 
 ## Documents
 
