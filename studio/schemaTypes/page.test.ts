@@ -12,7 +12,7 @@ import {describe, expect, it, vi} from 'vitest'
 import directory from './directory'
 import gallery from './gallery'
 import {schemaTypes} from './index'
-import {isUniquePageSlug} from './pageSlug'
+import {isUniquePageSlug} from './page'
 import singleAndDoubleColumn from './singleAndDoubleColumn'
 
 const schema = createSchema({name: 'test', types: schemaTypes})

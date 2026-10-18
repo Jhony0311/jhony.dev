@@ -1,6 +1,8 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-import {isUniquePageSlug} from './pageSlug'
+import {isUniqueDocumentSlug} from './uniqueSlug'
+
+export const isUniquePageSlug = isUniqueDocumentSlug('page')
 
 export default defineType({
   name: 'page',
