@@ -16,6 +16,14 @@ _Avoid_: page type
 A Sanity document rendered with the post wrapper.
 _Avoid_: blog post, article, garden entry
 
+**Type**:
+The kind of a Post document. The values are Essay, Note, and Snippet.
+_Avoid_: content type, garden entry
+
+**Stage**:
+How mature a Post document is. The values are Seedling, Budding, and Evergreen.
+_Avoid_: maturity, status
+
 **Page wrapper**:
 The shell for a page document.
 _Avoid_: page layout, template

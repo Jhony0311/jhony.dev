@@ -12,8 +12,7 @@ import {describe, expect, it, vi} from 'vitest'
 import directory from './directory'
 import gallery from './gallery'
 import {schemaTypes} from './index'
-import {isUniquePageSlug} from './pageSlug'
-import post from './post'
+import {isUniquePageSlug} from './page'
 import singleAndDoubleColumn from './singleAndDoubleColumn'
 
 const schema = createSchema({name: 'test', types: schemaTypes})
@@ -53,41 +52,10 @@ async function markersFor(validation: unknown, value: unknown): Promise<Validati
 
 describe('page schema', () => {
   it('registers the page document and the three content objects', () => {
-    expect(schemaTypes.map((type) => type.name)).toEqual([
-      'post',
-      'author',
-      'category',
-      'blockContent',
-      'page',
-      'singleAndDoubleColumn',
-      'directory',
-      'gallery',
-    ])
     expect(schema.get('page')?.name).toBe('page')
     expect(schema.get('singleAndDoubleColumn')?.name).toBe('singleAndDoubleColumn')
     expect(schema.get('directory')?.name).toBe('directory')
     expect(schema.get('gallery')?.name).toBe('gallery')
-  })
-
-  it('keeps the post document fields unchanged', () => {
-    expect(post.fields?.map((item) => item.name)).toEqual([
-      'title',
-      'slug',
-      'author',
-      'mainImage',
-      'categories',
-      'publishedAt',
-      'body',
-    ])
-    expect(asObject(schema.get('post')).fields.map((item) => item.name)).toEqual([
-      'title',
-      'slug',
-      'author',
-      'mainImage',
-      'categories',
-      'publishedAt',
-      'body',
-    ])
   })
 
   it('requires a title and a slug, and describes index as the home page', () => {

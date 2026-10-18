@@ -5,10 +5,13 @@ import directory from './directory'
 import gallery from './gallery'
 import page from './page'
 import post from './post'
+import {postBodyBlocks} from './postBodyBlocks'
 import singleAndDoubleColumn from './singleAndDoubleColumn'
+import tag from './tag'
 
 export const schemaTypes = [
   post,
+  tag,
   author,
   category,
   blockContent,
@@ -16,4 +19,5 @@ export const schemaTypes = [
   singleAndDoubleColumn,
   directory,
   gallery,
+  ...postBodyBlocks,
 ]
