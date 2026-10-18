@@ -12,7 +12,7 @@ import {describe, expect, it, vi} from 'vitest'
 
 import {schemaTypes} from './index'
 import {postBodyBlocks} from './postBodyBlocks'
-import {isUniquePostSlug} from './post'
+import post, {isUniquePostSlug} from './post'
 import {isUniqueTagSlug} from './tag'
 
 const schema = createSchema({name: 'test', types: schemaTypes})
@@ -69,6 +69,14 @@ async function markersFor(validation: unknown, value: unknown): Promise<Validati
 }
 
 describe('post schema', () => {
+  it('registers the Post document fields and the tag document', () => {
+    expect(post.fields?.map((item) => item.name)).toEqual(POST_FIELDS)
+    expect(asObject(schema.get('post')).fields.map((item) => item.name)).toEqual(POST_FIELDS)
+    expect(schema.get('tag')?.name).toBe('tag')
+    expect(schema.get('author')?.name).toBe('author')
+    expect(schema.get('category')?.name).toBe('category')
+  })
+
   it('registers the Post document fields and keeps author and category', () => {
     expect(asObject(schema.get('post')).fields.map((item) => item.name)).toEqual(POST_FIELDS)
     expect(schemaTypes.find((item) => item.name === 'author')?.type).toBe('document')

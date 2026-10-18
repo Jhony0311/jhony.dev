@@ -13,7 +13,6 @@ import directory from './directory'
 import gallery from './gallery'
 import {schemaTypes} from './index'
 import {isUniquePageSlug} from './pageSlug'
-import post from './post'
 import singleAndDoubleColumn from './singleAndDoubleColumn'
 
 const schema = createSchema({name: 'test', types: schemaTypes})
@@ -74,32 +73,6 @@ describe('page schema', () => {
     expect(schema.get('singleAndDoubleColumn')?.name).toBe('singleAndDoubleColumn')
     expect(schema.get('directory')?.name).toBe('directory')
     expect(schema.get('gallery')?.name).toBe('gallery')
-  })
-
-  it('registers the Post document fields and the tag document', () => {
-    expect(post.fields?.map((item) => item.name)).toEqual([
-      'title',
-      'slug',
-      'type',
-      'stage',
-      'summary',
-      'tags',
-      'seo',
-      'body',
-    ])
-    expect(asObject(schema.get('post')).fields.map((item) => item.name)).toEqual([
-      'title',
-      'slug',
-      'type',
-      'stage',
-      'summary',
-      'tags',
-      'seo',
-      'body',
-    ])
-    expect(schema.get('tag')?.name).toBe('tag')
-    expect(schema.get('author')?.name).toBe('author')
-    expect(schema.get('category')?.name).toBe('category')
   })
 
   it('requires a title and a slug, and describes index as the home page', () => {
