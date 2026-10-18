@@ -127,7 +127,7 @@ describe('post schema', () => {
     expect(asReference(tags.of[0]).to.map((item) => item.name)).toEqual(['tag'])
   })
 
-  it('copies the page SEO object onto the Post document', () => {
+  it('reuses the shared SEO object on the Post document', () => {
     const seo = asObject(field('post', 'seo').type)
     const names = seo.fields.map((item) => item.name)
 

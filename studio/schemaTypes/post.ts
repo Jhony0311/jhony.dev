@@ -2,6 +2,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 
 import {textBlock} from './blockContent'
 import {postBodyBlocks} from './postBodyBlocks'
+import {documentTitleField, seoField} from './seoField'
 import {isUniqueDocumentSlug} from './uniqueSlug'
 
 export const isUniquePostSlug = isUniqueDocumentSlug('post')
@@ -23,13 +24,7 @@ export default defineType({
   title: 'Post',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      description: 'When the SEO title is empty, this title is the fallback.',
-      validation: (rule) => rule.required(),
-    }),
+    documentTitleField(),
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -77,48 +72,7 @@ export default defineType({
       description: 'References to tag documents. This array may be empty.',
       of: [defineArrayMember({type: 'reference', to: [{type: 'tag'}]})],
     }),
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'object',
-      description:
-        'The canonical URL and the Open Graph URL are the Post document URL. The Open Graph title and description reuse the SEO title and description.',
-      initialValue: {
-        noIndex: false,
-      },
-      fields: [
-        defineField({
-          name: 'title',
-          title: 'Title',
-          type: 'string',
-          validation: (rule) =>
-            rule.max(60).warning('SEO titles longer than 60 characters may be cut off.'),
-        }),
-        defineField({
-          name: 'description',
-          title: 'Description',
-          type: 'text',
-          rows: 3,
-          validation: (rule) =>
-            rule.max(160).warning('SEO descriptions longer than 160 characters may be cut off.'),
-        }),
-        defineField({
-          name: 'image',
-          title: 'Share image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-        }),
-        defineField({
-          name: 'noIndex',
-          title: 'No index',
-          type: 'boolean',
-          description: 'Hide this Post document from search engines.',
-          initialValue: false,
-        }),
-      ],
-    }),
+    seoField('post'),
     defineField({
       name: 'body',
       title: 'Body',
