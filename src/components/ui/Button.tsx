@@ -100,9 +100,6 @@ type AnchorProps = ContentProps &
 
 export type ButtonProps = ActionProps | AnchorProps;
 
-// tailwind-merge treats a bare `outline` utility as an outline width, so it
-// drops `focus-visible:outline` when `focus-visible:outline-2` is present.
-// Tailwind v4 uses that bare utility for outline style. Keep the style.
 const buttonStyles = tv(
   {
     slots: {
@@ -281,8 +278,6 @@ function LinkButton({
   const parts = describeButton({ children, icon, ariaLabel, variant, size, className });
   const ref = useRef<HTMLAnchorElement>(null);
 
-  // react-aria Link keeps download, rel, and target, and drops hrefLang before
-  // the DOM node is created. Set the attribute on the element it rendered.
   useLayoutEffect(() => {
     const node = ref.current;
 
