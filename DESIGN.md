@@ -69,7 +69,7 @@ Centralized in Tailwind theme CSS custom properties for responsive scaling:
 
 ## 4. Component Stylings
 
-* **Buttons & Tags:** Predominantly pill-shaped (`rounded-full`) with minimal borders and soft inset backgrounds. Tech stack tags use low-contrast borders and `bg-canvas-inset` fills. Primary action buttons transition from low-intensity accent washes to solid accent states on hover. Labels use monospace at `text-xs`-`text-sm` for semantic clarity.
+* **Buttons & Tags:** `Button` is the shared pill control (`rounded-full`). Variants are `blue` (default), `green`, and `subtle`. Sizes are `sm` and `md` (default). One optional icon sits on the left or the right, and the default side is the right. With no label, the icon is centered in a circle and `aria-label` is required. Disabled uses a not-allowed cursor and half opacity. While pending, the control stays focusable, shows a spinner in the current color, and keeps the label available to assistive tech at zero opacity. Tech stack tags use low-contrast borders and `bg-canvas-inset` fills. Primary actions move from a soft accent wash to a solid accent on hover. Labels use monospace at `text-xs`-`text-sm` for semantic clarity.
 
 * **Cards/Containers:** The system avoids heavy card stacking, instead relying on sectional background layers and subtle `border-t` separators for visual division. Containers are restrained with minimal corner rounding on chips and pills (`rounded-lg` to `rounded-full`). Elevation is semantic and understated:
 	- `shadow-nav` for floating navigation bars.
