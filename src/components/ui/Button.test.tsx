@@ -1,62 +1,41 @@
 // @vitest-environment happy-dom
 // @vitest-environment-options {"settings":{"navigation":{"disableMainFrameNavigation":true,"disableFallbackToSetURL":true}}}
 
-import { act, createElement, type ReactNode } from "react";
-import { createRoot, type Root } from "react-dom/client";
+import { createEvent, fireEvent, screen, within } from "@testing-library/dom";
+import { cleanup, render } from "@testing-library/react";
+import { createElement, type ReactNode } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Button, type ButtonProps } from "./Button";
 
-(globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
-
-const cleanups: Array<() => void> = [];
-
 afterEach(() => {
-  while (cleanups.length > 0) {
-    const cleanup = cleanups.pop();
-    cleanup?.();
-  }
+  cleanup();
 });
 
-function renderButton(node: ReactNode) {
-  const container = document.createElement("div");
-  document.body.append(container);
-  const root: Root = createRoot(container);
+function press(control: HTMLElement) {
+  const pointerInit = { button: 0, pointerId: 1 };
+  fireEvent.pointerDown(control, pointerInit);
+  fireEvent.pointerUp(control, pointerInit);
 
-  act(() => {
-    root.render(node);
-  });
-
-  cleanups.push(() => {
-    act(() => {
-      root.unmount();
-    });
-    container.remove();
-  });
-
-  return container;
-}
-
-function requireControl(container: HTMLElement) {
-  const control = container.querySelector("a, button");
-
-  if (!(control instanceof HTMLElement)) {
-    throw new Error("Expected Button to render a link or a button");
-  }
-
-  return control;
-}
-
-function dispatchClick(control: HTMLElement) {
-  const eventInit = { bubbles: true, cancelable: true, button: 0 };
-  const click = new MouseEvent("click", eventInit);
-
-  act(() => {
-    control.dispatchEvent(new PointerEvent("pointerdown", { ...eventInit, pointerId: 1 }));
-    control.dispatchEvent(new PointerEvent("pointerup", { ...eventInit, pointerId: 1 }));
-    control.dispatchEvent(click);
-  });
+  const click = createEvent.click(control, { button: 0 });
+  fireEvent(control, click);
 
   return click;
+}
+
+function requireButton(element: HTMLElement) {
+  if (!(element instanceof HTMLButtonElement)) {
+    throw new Error("Expected a button");
+  }
+
+  return element;
+}
+
+function requireAnchor(element: HTMLElement) {
+  if (!(element instanceof HTMLAnchorElement)) {
+    throw new Error("Expected an anchor");
+  }
+
+  return element;
 }
 
 function rejectedContracts(): ReactNode {
@@ -79,7 +58,7 @@ void rejectedContracts;
 describe("Button", () => {
   it("renders a link when href is set and follows that href", () => {
     let presses = 0;
-    const container = renderButton(
+    render(
       <Button
         href="/garden"
         download="notes.md"
@@ -93,11 +72,7 @@ describe("Button", () => {
         All entries
       </Button>,
     );
-    const link = container.querySelector("a");
-
-    if (!(link instanceof HTMLAnchorElement)) {
-      throw new Error("Expected an anchor");
-    }
+    const link = requireAnchor(screen.getByRole("link", { name: "All entries" }));
 
     expect(link.getAttribute("href")).toBe("/garden");
     expect(link.getAttribute("download")).toBe("notes.md");
@@ -106,7 +81,7 @@ describe("Button", () => {
     expect(link.getAttribute("target")).toBe("_blank");
     expect(link.textContent).toContain("All entries");
 
-    const click = dispatchClick(link);
+    const click = press(link);
 
     expect(click.defaultPrevented).toBe(false);
     expect(presses).toBe(1);
@@ -114,7 +89,7 @@ describe("Button", () => {
 
   it("renders a button when href is omitted", () => {
     let presses = 0;
-    const container = renderButton(
+    render(
       <Button
         type="submit"
         name="action"
@@ -130,11 +105,7 @@ describe("Button", () => {
         Save
       </Button>,
     );
-    const button = container.querySelector("button");
-
-    if (!(button instanceof HTMLButtonElement)) {
-      throw new Error("Expected a button");
-    }
+    const button = requireButton(screen.getByRole("button", { name: "Save" }));
 
     expect(button.type).toBe("submit");
     expect(button.name).toBe("action");
@@ -144,18 +115,14 @@ describe("Button", () => {
     expect(button.getAttribute("formMethod")).toBe("post");
     expect(button.getAttribute("formTarget")).toBe("_self");
 
-    dispatchClick(button);
+    press(button);
 
     expect(presses).toBe(1);
   });
 
   it("defaults to a blue md button", () => {
-    const container = renderButton(<Button>Save</Button>);
-    const button = requireControl(container);
-
-    if (!(button instanceof HTMLButtonElement)) {
-      throw new Error("Expected a button");
-    }
+    render(<Button>Save</Button>);
+    const button = requireButton(screen.getByRole("button", { name: "Save" }));
 
     expect(button.type).toBe("button");
     expect(button.className).toContain("bg-accent-blue-soft");
@@ -169,12 +136,12 @@ describe("Button", () => {
   });
 
   it("applies variant, size, and caller classes", () => {
-    const container = renderButton(
+    render(
       <Button variant="green" size="sm" className="mt-1">
         Read
       </Button>,
     );
-    const button = requireControl(container);
+    const button = screen.getByRole("button", { name: "Read" });
 
     expect(button.className).toContain("bg-accent-green-soft");
     expect(button.className).toContain("text-accent-green");
@@ -185,18 +152,18 @@ describe("Button", () => {
   });
 
   it("places one icon on the requested side", () => {
-    const right = renderButton(<Button icon={<span>icon-mark</span>}>Next</Button>);
-    const rightControl = requireControl(right);
+    const right = render(<Button icon={<span>icon-mark</span>}>Next</Button>);
+    const rightControl = within(right.container).getByRole("button", { name: "Next" });
     const rightHtml = rightControl.innerHTML;
 
     expect(rightHtml.indexOf("Next")).toBeLessThan(rightHtml.indexOf("icon-mark"));
 
-    const left = renderButton(
+    const left = render(
       <Button variant="subtle" iconPosition="left" icon={<span>icon-mark</span>}>
         Prev
       </Button>,
     );
-    const leftControl = requireControl(left);
+    const leftControl = within(left.container).getByRole("button", { name: "Prev" });
 
     expect(leftControl.className).toContain("bg-canvas-inset");
     expect(leftControl.innerHTML.indexOf("icon-mark")).toBeLessThan(
@@ -205,7 +172,7 @@ describe("Button", () => {
   });
 
   it("renders an icon-only circle and requires aria-label", () => {
-    const container = renderButton(
+    render(
       <Button
         variant="subtle"
         size="sm"
@@ -213,7 +180,7 @@ describe("Button", () => {
         icon={<span>icon</span>}
       />,
     );
-    const button = requireControl(container);
+    const button = screen.getByRole("button", { name: "Adjust tag filters" });
 
     expect(button.getAttribute("aria-label")).toBe("Adjust tag filters");
     expect(button.className).toContain("h-8");
@@ -222,15 +189,13 @@ describe("Button", () => {
     expect(button.textContent).toContain("Adjust tag filters");
 
     expect(() => {
-      renderButton(
-        createElement(Button, { icon: createElement("span") } as unknown as ButtonProps),
-      );
+      render(createElement(Button, { icon: createElement("span") } as unknown as ButtonProps));
     }).toThrow(/aria-label/);
   });
 
   it("shows a spinner while pending and keeps the label available", () => {
     let presses = 0;
-    const container = renderButton(
+    render(
       <Button
         isPending
         onPress={() => {
@@ -240,12 +205,8 @@ describe("Button", () => {
         Save
       </Button>,
     );
-    const button = requireControl(container);
-    const label = button.querySelector("span");
-
-    if (!(button instanceof HTMLButtonElement) || !(label instanceof HTMLSpanElement)) {
-      throw new Error("Expected a pending button with a label");
-    }
+    const button = requireButton(screen.getByRole("button", { name: "Save" }));
+    const label = within(button).getByText("Save");
 
     expect(button.type).toBe("button");
     expect(button.hasAttribute("disabled")).toBe(false);
@@ -255,39 +216,35 @@ describe("Button", () => {
     expect(label.getAttribute("aria-hidden")).toBeNull();
     expect(button.textContent).toContain("Save");
 
-    dispatchClick(button);
+    press(button);
 
     expect(presses).toBe(0);
   });
 
   it("disables both the button and the link", () => {
-    const buttonView = renderButton(<Button isDisabled>Save</Button>);
-    const button = requireControl(buttonView);
+    const buttonView = render(<Button isDisabled>Save</Button>);
+    const button = within(buttonView.container).getByRole("button", { name: "Save" });
 
     expect(button.getAttribute("data-disabled")).toBe("true");
     expect(button.className).toContain("cursor-not-allowed");
     expect(button.className).toContain("opacity-50");
 
-    const linkView = renderButton(
+    const linkView = render(
       <Button href="/garden" isDisabled>
         All entries
       </Button>,
     );
 
-    expect(linkView.querySelector("a")).toBeNull();
-    const link = linkView.querySelector("[data-disabled]");
-
-    if (!(link instanceof HTMLElement)) {
-      throw new Error("Expected a disabled link");
-    }
+    expect(linkView.container.querySelector("a")).toBeNull();
+    const link = within(linkView.container).getByRole("link", { name: "All entries" });
 
     expect(link.getAttribute("role")).toBe("link");
     expect(link.className).toContain("opacity-50");
   });
 
   it("uses a 40px circle for an icon-only md button", () => {
-    const container = renderButton(<Button aria-label="Close" icon={<span>icon</span>} />);
-    const button = requireControl(container);
+    render(<Button aria-label="Close" icon={<span>icon</span>} />);
+    const button = screen.getByRole("button", { name: "Close" });
 
     expect(button.className).toContain("h-10");
     expect(button.className).toContain("w-10");
