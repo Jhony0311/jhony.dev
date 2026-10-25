@@ -4,7 +4,7 @@ import {
   type ButtonProps as AriaButtonProps,
   type LinkProps as AriaLinkProps,
 } from "react-aria-components";
-import { useLayoutEffect, useRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { tv } from "tailwind-variants";
 
 type Variant = "green" | "blue" | "subtle";
@@ -49,7 +49,7 @@ type ButtonFields = Pick<
   "isPending" | "type" | "name" | "value" | "form" | "formAction" | "formMethod" | "formTarget"
 >;
 
-type LinkFields = Pick<AriaLinkProps, "download" | "hrefLang" | "rel" | "target">;
+type LinkFields = Pick<AriaLinkProps, "download" | "rel" | "target">;
 
 type SharedProps = {
   variant?: Variant;
@@ -78,7 +78,6 @@ type ActionProps = ContentProps &
   ButtonFields & {
     href?: never;
     download?: never;
-    hrefLang?: never;
     rel?: never;
     target?: never;
     onPressUp?: never;
@@ -250,7 +249,6 @@ function ButtonBody({
 function LinkButton({
   href,
   download,
-  hrefLang,
   rel,
   target,
   variant,
@@ -276,29 +274,11 @@ function LinkButton({
   onKeyUp,
 }: Extract<ButtonProps, { href: string }>) {
   const parts = describeButton({ children, icon, ariaLabel, variant, size, className });
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  useLayoutEffect(() => {
-    const node = ref.current;
-
-    if (!node) {
-      return;
-    }
-
-    if (hrefLang == null || hrefLang === "") {
-      node.removeAttribute("hreflang");
-      return;
-    }
-
-    node.setAttribute("hreflang", hrefLang);
-  }, [hrefLang]);
 
   return (
     <AriaLink
-      ref={ref}
       href={href}
       download={download}
-      hrefLang={hrefLang}
       rel={rel}
       target={target}
       isDisabled={isDisabled}

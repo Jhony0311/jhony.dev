@@ -62,7 +62,6 @@ describe("Button", () => {
       <Button
         href="/garden"
         download="notes.md"
-        hrefLang="en"
         rel="noreferrer"
         target="_blank"
         onPress={() => {
@@ -76,7 +75,6 @@ describe("Button", () => {
 
     expect(link.getAttribute("href")).toBe("/garden");
     expect(link.getAttribute("download")).toBe("notes.md");
-    expect(link.getAttribute("hreflang")).toBe("en");
     expect(link.getAttribute("rel")).toBe("noreferrer");
     expect(link.getAttribute("target")).toBe("_blank");
     expect(link.textContent).toContain("All entries");
