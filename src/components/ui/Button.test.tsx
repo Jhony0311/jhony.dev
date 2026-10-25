@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
 // @vitest-environment-options {"settings":{"navigation":{"disableMainFrameNavigation":true,"disableFallbackToSetURL":true}}}
 
+import "@testing-library/jest-dom/vitest";
 import { createEvent, fireEvent, screen, within } from "@testing-library/dom";
 import { cleanup, render } from "@testing-library/react";
 import { createElement, type ReactNode } from "react";
@@ -20,22 +21,6 @@ function press(control: HTMLElement) {
   fireEvent(control, click);
 
   return click;
-}
-
-function requireButton(element: HTMLElement) {
-  if (!(element instanceof HTMLButtonElement)) {
-    throw new Error("Expected a button");
-  }
-
-  return element;
-}
-
-function requireAnchor(element: HTMLElement) {
-  if (!(element instanceof HTMLAnchorElement)) {
-    throw new Error("Expected an anchor");
-  }
-
-  return element;
 }
 
 function rejectedContracts(): ReactNode {
@@ -71,13 +56,14 @@ describe("Button", () => {
         All entries
       </Button>,
     );
-    const link = requireAnchor(screen.getByRole("link", { name: "All entries" }));
+    const link = screen.getByRole("link", { name: "All entries" });
 
-    expect(link.getAttribute("href")).toBe("/garden");
-    expect(link.getAttribute("download")).toBe("notes.md");
-    expect(link.getAttribute("rel")).toBe("noreferrer");
-    expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.textContent).toContain("All entries");
+    expect(link).toBeInstanceOf(HTMLAnchorElement);
+    expect(link).toHaveAttribute("href", "/garden");
+    expect(link).toHaveAttribute("download", "notes.md");
+    expect(link).toHaveAttribute("rel", "noreferrer");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveTextContent("All entries");
 
     const click = press(link);
 
@@ -103,15 +89,16 @@ describe("Button", () => {
         Save
       </Button>,
     );
-    const button = requireButton(screen.getByRole("button", { name: "Save" }));
+    const button = screen.getByRole("button", { name: "Save" });
 
-    expect(button.type).toBe("submit");
-    expect(button.name).toBe("action");
-    expect(button.value).toBe("save");
-    expect(button.getAttribute("form")).toBe("profile");
-    expect(button.getAttribute("formAction")).toBe("/save");
-    expect(button.getAttribute("formMethod")).toBe("post");
-    expect(button.getAttribute("formTarget")).toBe("_self");
+    expect(button).toBeInstanceOf(HTMLButtonElement);
+    expect(button).toHaveAttribute("type", "submit");
+    expect(button).toHaveAttribute("name", "action");
+    expect(button).toHaveAttribute("value", "save");
+    expect(button).toHaveAttribute("form", "profile");
+    expect(button).toHaveAttribute("formAction", "/save");
+    expect(button).toHaveAttribute("formMethod", "post");
+    expect(button).toHaveAttribute("formTarget", "_self");
 
     press(button);
 
@@ -120,17 +107,20 @@ describe("Button", () => {
 
   it("defaults to a blue md button", () => {
     render(<Button>Save</Button>);
-    const button = requireButton(screen.getByRole("button", { name: "Save" }));
+    const button = screen.getByRole("button", { name: "Save" });
 
-    expect(button.type).toBe("button");
-    expect(button.className).toContain("bg-accent-blue-soft");
-    expect(button.className).toContain("text-accent-blue");
-    expect(button.className).toContain("px-4");
-    expect(button.className).toContain("text-sm");
-    expect(button.className).toContain("focus-visible:outline");
-    expect(button.className).toContain("focus-visible:outline-2");
-    expect(button.className).toContain("data-[pressed]:-translate-y-px");
-    expect(button.className).toContain("data-[disabled]:opacity-50");
+    expect(button).toBeInstanceOf(HTMLButtonElement);
+    expect(button).toHaveAttribute("type", "button");
+    expect(button).toHaveClass(
+      "bg-accent-blue-soft",
+      "text-accent-blue",
+      "px-4",
+      "text-sm",
+      "focus-visible:outline",
+      "focus-visible:outline-2",
+      "data-[pressed]:-translate-y-px",
+      "data-[disabled]:opacity-50",
+    );
   });
 
   it("applies variant, size, and caller classes", () => {
@@ -141,20 +131,23 @@ describe("Button", () => {
     );
     const button = screen.getByRole("button", { name: "Read" });
 
-    expect(button.className).toContain("bg-accent-green-soft");
-    expect(button.className).toContain("text-accent-green");
-    expect(button.className).toContain("px-3");
-    expect(button.className).toContain("text-xs");
-    expect(button.className).toContain("mt-1");
-    expect(button.className).not.toContain("px-4");
+    expect(button).toHaveClass(
+      "bg-accent-green-soft",
+      "text-accent-green",
+      "px-3",
+      "text-xs",
+      "mt-1",
+    );
+    expect(button).not.toHaveClass("px-4");
   });
 
   it("places one icon on the requested side", () => {
     const right = render(<Button icon={<span>icon-mark</span>}>Next</Button>);
     const rightControl = within(right.container).getByRole("button", { name: "Next" });
-    const rightHtml = rightControl.innerHTML;
 
-    expect(rightHtml.indexOf("Next")).toBeLessThan(rightHtml.indexOf("icon-mark"));
+    expect(within(rightControl).getByText("Next")).toAppearBefore(
+      within(rightControl).getByText("icon-mark"),
+    );
 
     const left = render(
       <Button variant="subtle" iconPosition="left" icon={<span>icon-mark</span>}>
@@ -163,9 +156,9 @@ describe("Button", () => {
     );
     const leftControl = within(left.container).getByRole("button", { name: "Prev" });
 
-    expect(leftControl.className).toContain("bg-canvas-inset");
-    expect(leftControl.innerHTML.indexOf("icon-mark")).toBeLessThan(
-      leftControl.innerHTML.indexOf("Prev"),
+    expect(leftControl).toHaveClass("bg-canvas-inset");
+    expect(within(leftControl).getByText("icon-mark")).toAppearBefore(
+      within(leftControl).getByText("Prev"),
     );
   });
 
@@ -180,11 +173,9 @@ describe("Button", () => {
     );
     const button = screen.getByRole("button", { name: "Adjust tag filters" });
 
-    expect(button.getAttribute("aria-label")).toBe("Adjust tag filters");
-    expect(button.className).toContain("h-8");
-    expect(button.className).toContain("w-8");
-    expect(button.className).toContain("p-0");
-    expect(button.textContent).toContain("Adjust tag filters");
+    expect(button).toHaveAttribute("aria-label", "Adjust tag filters");
+    expect(button).toHaveClass("h-8", "w-8", "p-0");
+    expect(button).toHaveTextContent("Adjust tag filters");
 
     expect(() => {
       render(createElement(Button, { icon: createElement("span") } as unknown as ButtonProps));
@@ -203,16 +194,17 @@ describe("Button", () => {
         Save
       </Button>,
     );
-    const button = requireButton(screen.getByRole("button", { name: "Save" }));
+    const button = screen.getByRole("button", { name: "Save" });
     const label = within(button).getByText("Save");
 
-    expect(button.type).toBe("button");
-    expect(button.hasAttribute("disabled")).toBe(false);
-    expect(button.getAttribute("aria-disabled")).toBe("true");
-    expect(button.querySelector("svg")).not.toBeNull();
-    expect(label.className).toContain("opacity-0");
-    expect(label.getAttribute("aria-hidden")).toBeNull();
-    expect(button.textContent).toContain("Save");
+    expect(button).toBeInstanceOf(HTMLButtonElement);
+    expect(button).toHaveAttribute("type", "button");
+    expect(button).toBeEnabled();
+    expect(button).toHaveAttribute("aria-disabled", "true");
+    expect(button.querySelector("svg")).toBeInTheDocument();
+    expect(label).toHaveClass("opacity-0");
+    expect(label).not.toHaveAttribute("aria-hidden");
+    expect(button).toHaveTextContent("Save");
 
     press(button);
 
@@ -223,9 +215,9 @@ describe("Button", () => {
     const buttonView = render(<Button isDisabled>Save</Button>);
     const button = within(buttonView.container).getByRole("button", { name: "Save" });
 
-    expect(button.getAttribute("data-disabled")).toBe("true");
-    expect(button.className).toContain("cursor-not-allowed");
-    expect(button.className).toContain("opacity-50");
+    expect(button).toBeDisabled();
+    expect(button).toHaveAttribute("data-disabled", "true");
+    expect(button).toHaveClass("data-[disabled]:cursor-not-allowed", "data-[disabled]:opacity-50");
 
     const linkView = render(
       <Button href="/garden" isDisabled>
@@ -233,19 +225,17 @@ describe("Button", () => {
       </Button>,
     );
 
-    expect(linkView.container.querySelector("a")).toBeNull();
+    expect(linkView.container.querySelector("a")).not.toBeInTheDocument();
     const link = within(linkView.container).getByRole("link", { name: "All entries" });
 
-    expect(link.getAttribute("role")).toBe("link");
-    expect(link.className).toContain("opacity-50");
+    expect(link).toHaveAttribute("role", "link");
+    expect(link).toHaveClass("data-[disabled]:opacity-50");
   });
 
   it("uses a 40px circle for an icon-only md button", () => {
     render(<Button aria-label="Close" icon={<span>icon</span>} />);
     const button = screen.getByRole("button", { name: "Close" });
 
-    expect(button.className).toContain("h-10");
-    expect(button.className).toContain("w-10");
-    expect(button.className).toContain("rounded-full");
+    expect(button).toHaveClass("h-10", "w-10", "rounded-full");
   });
 });
