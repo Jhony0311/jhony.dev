@@ -4,9 +4,9 @@
 import "@testing-library/jest-dom/vitest";
 import { createEvent, fireEvent, screen, within } from "@testing-library/dom";
 import { cleanup, render } from "@testing-library/react";
-import { createElement, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { afterEach, describe, expect, it } from "vitest";
-import { Button, type ButtonProps } from "./Button";
+import { Button } from "./Button";
 
 afterEach(() => {
   cleanup();
@@ -178,7 +178,8 @@ describe("Button", () => {
     expect(button).toHaveTextContent("Adjust tag filters");
 
     expect(() => {
-      render(createElement(Button, { icon: createElement("span") } as unknown as ButtonProps));
+      // @ts-expect-error icon-only buttons require aria-label
+      render(<Button icon={<span />} />);
     }).toThrow(/aria-label/);
   });
 
