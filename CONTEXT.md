@@ -35,3 +35,7 @@ _Avoid_: article layout, garden layout
 **Content**:
 The ordered set of components inside a wrapper.
 _Avoid_: copy, page data, hardcoded module
+
+**Fact**:
+A short statement about Jonathan. Facts are shown together, in order.
+_Avoid_: card, bio bullet, snippet

@@ -7,6 +7,7 @@ pre-commit:
     - name: lint
       files: git diff --name-only --cached --diff-filter=ACMR
       glob: "**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,astro}"
+      exclude: ".agents/skills/**"
       run: pnpm exec oxlint {files}
 
     - name: format
@@ -15,6 +16,7 @@ pre-commit:
         - "src/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json,jsonc,css,md,mdx}"
         - "scripts/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json,jsonc,css,md,mdx}"
         - "lib/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json,jsonc,css,md,mdx}"
+      exclude: ".agents/skills/**"
       run: pnpm exec oxfmt --check {files}
 
     - name: test
