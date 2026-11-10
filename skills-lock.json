@@ -61,6 +61,12 @@
       "skillPath": "pstack/skills/how/SKILL.md",
       "computedHash": "a81bf6a7aec190f01acf26df059899fc7bf655fa3e6873ee7449e7e802c47144"
     },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "731d7fbd8800a9ad70a04c8834c25304370b4c3310866ff26bfd14e0c3b12975"
+    },
     "maintain-verification-skill": {
       "source": "cursor/plugins",
       "sourceType": "github",
